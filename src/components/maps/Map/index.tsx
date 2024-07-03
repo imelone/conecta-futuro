@@ -18,7 +18,7 @@ import "leaflet-draw/dist/leaflet.draw.css";
 import { statesData } from "./data";
 import { MapContextProvider, useMapContext } from "../mapContext";
 import RoutingMachine from "../RoutingMachine";
-import "./MapStyles.css";
+import "./mapStyles.css";
 import { Layers } from "./Layers";
 import Sidebar from "../../sidenav";
 import TownList from "../../regions/page"; // Corrected import path
