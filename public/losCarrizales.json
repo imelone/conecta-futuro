@@ -1,0 +1,23 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [[[-3.062473, 38.302069]]]
+  },
+  "properties": {
+    "leyenda": {
+      "name": "losCarrizales",
+      "label": "Los Carrizales",
+      "color": "#3C20EE",
+      "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
+    },
+    "catastrales": {
+      "text": "Para",
+      "image": ""
+    },
+    "analisis": {
+      "text": "Para",
+      "image": ""
+    }
+  }
+}

@@ -1,0 +1,14 @@
+
+
+/* MapStyles.css */
+.leaflet-control-scale {
+  margin-bottom: 40px; /* Adjust to prevent overlapping with Google logo */
+  margin-left: 10px;   /* Adjust to place it correctly */
+}
+
+.leaflet-control-container .leaflet-control-scale {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 5px;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}

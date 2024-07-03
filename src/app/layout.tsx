@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+// eslint-disable-next-line @next/next/no-document-import-in-page
+import { Head } from "next/document";
+import { ReactElement } from "react";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const inter = Inter({ subsets: ["latin"] });
 

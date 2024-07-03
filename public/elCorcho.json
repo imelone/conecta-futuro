@@ -1,0 +1,36 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-2.924985, 38.471293],
+        [-2.9346, 38.450854],
+        [-2.937347, 38.427179],
+        [-2.916744, 38.412648],
+        [-2.889959, 38.425027],
+        [-2.891333, 38.448702],
+        [-2.883778, 38.454619],
+        [-2.899574, 38.463764],
+        [-2.907129, 38.470218],
+        [-2.924985, 38.471293]
+      ]
+    ]
+  },
+  "properties": {
+    "leyenda": {
+      "name": "elCorcho",
+      "label": "El Corcho",
+      "color": "#EE20B3",
+      "text": "En el marco de dicho acuerdo y en muestra de un total compromiso con el programa” “Conecta cuida tu Bosque”, hemos asumido de forma exclusiva el patrocinio del bosque El Corcho. Ya se han iniciado las labores de análisis de impacto para evaluar exactamente la cantidad de CO2 almacenado y el desarrollo del plan de mantenimiento. Adicionalmente, en el marco de los festejos del Día de la Tierra, a celebrarse el próximo 22 de abril, se efectuará una jornada lúdico-festiva, donde se iniciará la fase I del plan de reforestación de la parcela, plantando 100 nuevos árboles. Dicha actividad se realizará en el marco del programa “Conecta nuevos Bosques”, que prevé en las dos fases siguientes la plantación de 150 árboles en cada una, completando un total de 400 nuevos árboles en la parcela. De esta forma, El Corcho se constituye en la primera parcela en la provincia de Jaén que combina ambos programas. Una vez finalizada la plantación de la fase I, será lanzado el programa \"Conecta apadrina un árbol\" como otra alternativa de participación de diferentes colectivos en la lucha contra el cambio climático y la reducción de la huella de CO2. El programa estará orientado a la ciudadanía, establecimientos educativos y pequeñas empresas, las que por su participación, recibirán un certificado de apadrinamiento personalizado."
+    },
+    "catastrales": {
+      "text": "Para",
+      "image": ""
+    },
+    "analisis": {
+      "text": "Para",
+      "image": ""
+    }
+  }
+}

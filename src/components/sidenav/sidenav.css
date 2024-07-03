@@ -1,0 +1,238 @@
+/* sidenav.css */
+
+.leaflet-sidebar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  max-width: 80%;
+  height: 100%;
+  z-index: 1000;
+  background: #fff;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaflet-sidebar.collapsed {
+  width: 80px;
+}
+
+.leaflet-sidebar .leaflet-sidebar-tabs {
+  width: 80px;
+  background: #333;
+  color: #fff;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaflet-sidebar .leaflet-sidebar-tabs ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.leaflet-sidebar .leaflet-sidebar-tabs li a {
+  text-align: center;
+  padding: 1px 0;
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  width: 100%;
+}
+
+.leaflet-sidebar .leaflet-sidebar-tabs li a {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  text-align: center;
+  padding: 1rem 0;
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+  height: 100%;
+}
+
+.leaflet-sidebar .leaflet-sidebar-tabs li a.active {
+  background: #444;
+}
+
+.leaflet-sidebar-tabs > li,
+.leaflet-sidebar-tabs > ul > li {
+  height: auto;
+}
+
+.section-title{
+  display:flex;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+
+}
+.separator-line{
+  border-top: 1px  solid #ddd;
+  border-bottom: 1px  solid #ddd;
+}
+
+.sidebar-content {
+  margin-left: 80px;
+ 
+  flex-grow: 1; /* Allows content to grow and take up remaining space */
+  overflow-y: auto; /* Ensures the sidebar content can scroll if necessary */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #888 #f1f1f1; /* Firefox */
+}
+
+.sidebar-content::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounding the corners of the scrollbar thumb */
+  border: 2px solid #f1f1f1; /* Adds a little space around the scrollbar thumb */
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb when hovered */
+}
+.sidebar-pane{
+  padding:1rem;
+}
+.sidebar-content .sidebar-pane {
+  display: none;
+  height: 100%; /* Ensure each pane takes up full height */
+}
+
+.sidebar-content .sidebar-pane.active {
+  display: block;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-close {
+  cursor: pointer;
+}
+
+.toggle-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 1rem;
+}
+
+
+
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.toggle-switch .slider {
+  width: 30px; /* Adjusted width */
+  height: 15px; /* Adjusted height */
+  background: #ccc;
+  border-radius: 34px;
+  position: relative;
+  transition: background 0.2s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.toggle-switch .slider:before {
+  content: "";
+  position: absolute;
+  width: 11px; /* Adjusted width */
+  height: 11px; /* Adjusted height */
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(15px); /* Adjusted for new size */
+}
+
+.label {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.sidebar-logo {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.sidebar-logo-image {
+  max-width: 100%;
+  height: auto;
+}
+.sidebar-content .sidebar-pane ul {
+  list-style-type: none; /* Remove default list-style dots */
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-content .sidebar-pane ul li {
+  padding: 3px 0; /* Adjust padding as needed */
+ 
+}
+
+.sidebar-content .sidebar-pane ul li:last-child {
+  border-bottom: none; /* Remove border bottom for the last li element */
+}
+
+.info-list {
+  list-style: none; /* Remove the dots */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.info-list li {
+  padding: 10px 0; /* Add some padding for better spacing */
+  text-align: center; /* Center the text inside the list */
+}
+
+.info-list li:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+.li-content {
+  display: inline-block; /* Centering block element */
+  width: 100%; /* Ensure it takes full width */
+  text-align: center; /* Center the text inside */
+}
+
+.info {
+  color: #007BFF; /* Change to your desired color */
+  margin-top: 5px; /* Add some space above the info text */
+  display: inline-block; /* Centering block element */
+  width: 100%; /* Ensure it takes full width */
+  text-align: center; /* Center the text inside */
+  margin: 5px;
+}
