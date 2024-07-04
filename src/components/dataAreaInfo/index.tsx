@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 interface AreaInfoComponentProps {
-  id: string | number;
   areaLabel: string;
   areaName: string;
   areaText: string;
@@ -16,7 +15,6 @@ interface AreaInfoComponentProps {
 }
 
 const AreaInfoComponent: React.FC<AreaInfoComponentProps> = ({
-  id,
   areaLabel,
   areaName,
   areaText,

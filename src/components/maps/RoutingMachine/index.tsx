@@ -1,28 +1,29 @@
-import React, { useEffect, useRef } from "react";
-import L from "leaflet";
-import "leaflet-routing-machine";
+import React, { useRef, useEffect } from "react";
 import { useMap } from "react-leaflet";
-import routingOptions from "./routingOptions";
+import L, { LatLngExpression } from "leaflet";
 
-const RoutingMachine = ({ startPoint, endPoint }) => {
+interface RoutingMachineProps {
+  startPoint: LatLngExpression; // Define the type explicitly
+  endPoint: LatLngExpression; // Define the type explicitly
+}
+
+const RoutingMachine: React.FC<RoutingMachineProps> = ({
+  startPoint,
+  endPoint,
+}) => {
   const map = useMap();
   const routingControlRef = useRef<L.Routing.Control | null>(null);
 
   useEffect(() => {
-    const routingControl = L.Routing.control(routingOptions).addTo(map);
-    routingControlRef.current = routingControl;
-  }, [map]);
-
-  useEffect(() => {
     if (routingControlRef.current && startPoint && endPoint) {
       routingControlRef.current.setWaypoints([
-        L.latLng(startPoint.lat, startPoint.lng),
-        L.latLng(endPoint.lat, endPoint.lng),
+        L.latLng(startPoint),
+        L.latLng(endPoint),
       ]);
     }
   }, [startPoint, endPoint]);
 
-  return null;
+  return null; // Replace with your actual JSX
 };
 
 export default RoutingMachine;

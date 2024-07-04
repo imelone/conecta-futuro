@@ -1,8 +1,15 @@
-// src/components/regions/TownList.js
 import Link from "next/link";
 import styles from "./region.module.css";
 
-const TownList = ({ citiesData, onTownClick }) => {
+interface TownListProps {
+  citiesData: {
+    town: string[];
+    // Add any other required properties with their types
+  };
+  onTownClick: (town: string) => void;
+}
+
+const TownList: React.FC<TownListProps> = ({ citiesData, onTownClick }) => {
   console.log("onTownClick: ", onTownClick);
   const { town } = citiesData;
   return (
@@ -10,14 +17,14 @@ const TownList = ({ citiesData, onTownClick }) => {
       <h2 className={styles.title}>Distritos</h2>
       <div className={styles.scrollContainer}>
         <ul className={styles.menu}>
-          {town.map((town, index) => (
+          {town.map((townName, index) => (
             <li key={index} className={styles.menuItem}>
-              {town === "Chiclana de Segura" ? (
-                <a href="#" onClick={() => onTownClick(town)}>
-                  {town}
+              {townName === "Chiclana de Segura" ? (
+                <a href="#" onClick={() => onTownClick(townName)}>
+                  {townName}
                 </a>
               ) : (
-                <span className={styles.disabledLink}>{town}</span>
+                <span className={styles.disabledLink}>{townName}</span>
               )}
             </li>
           ))}

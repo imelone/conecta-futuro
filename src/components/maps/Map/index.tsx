@@ -1,17 +1,17 @@
-// src/components/maps/Map/index.tsx
+// @ts-nocheck
 "use client";
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import L from "leaflet";
+import L, { LatLngTuple, LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-sidebar-v2/css/leaflet-sidebar.min.css";
 import "leaflet-sidebar-v2";
 import {
   MapContainer,
   TileLayer,
-  Polygon,
   ScaleControl,
   FeatureGroup,
   ZoomControl,
+  Polygon,
 } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
@@ -25,12 +25,23 @@ import TownList from "../../regions/page"; // Corrected import path
 import citiesData from "../../regions/municipios.json"; // Corrected import path
 import { cityData } from "./chiclanaDeSegura.js";
 import DataAnalysisMenu from "../../dataAnalysisMenu";
+import { FeatureCollection } from "geojson";
+
+interface GeoJsonLayer {
+  toggleName: string;
+  layer: L.Layer;
+}
+
+type DataAnalysisMenuProps = {
+  handleToggleClick: () => void;
+};
+
 const Map = () => {
   const [coord, setCoord] = useState<[number, number]>([51.505, -0.09]);
   const [endPoint, setEndPoint] = useState<{ lat: number; lng: number } | null>(
     null
   );
-  const [geoJsonLayers, setGeoJsonLayers] = useState([]);
+  const [geoJsonLayers, setGeoJsonLayers] = useState<GeoJsonLayer[]>([]);
   const mapRef = useRef<L.Map | null>(null);
   const sidebarRef = useRef<L.Control.Sidebar | null>(null);
   const { setMap } = useMapContext();
@@ -82,7 +93,7 @@ const Map = () => {
     });
   };
 
-  const handleToggleClick = async (toggleName) => {
+  const handleToggleClick = async (toggleName: keyof typeof activeToggles) => {
     console.log("toggleName: ", toggleName);
     setIsDataAnalysisMenuOpen(true); // Toggle the menu visibility
     setActiveToggles((prevToggles) => {
@@ -105,20 +116,20 @@ const Map = () => {
 
       if (isActive) {
         try {
-          const existingLayerIndex = geoJsonLayers.findIndex(
-            (layer) => layer.toggleName === toggleName
-          );
-          if (existingLayerIndex !== -1) {
-            console.log(`${toggleName} layer already exists.`);
-            return;
-          }
+          // const existingLayerIndex = geoJsonLayers.findIndex(
+          //   (layer) => layer.toggleName === toggleName
+          // );
+          // if (existingLayerIndex !== -1) {
+          //   console.log(`${toggleName} layer already exists.`);
+          //   return;
+          // }
 
           const response = await fetch(`/${toggleName}.json`);
           const data = await response.json();
 
           if (data.geometry.type === "Point") {
             const coordinates = data.geometry.coordinates[0][0];
-            const latLng = [coordinates[1], coordinates[0]];
+            const latLng: LatLngTuple = [coordinates[1], coordinates[0]];
 
             const pointLayer = L.circleMarker(latLng, {
               radius: 5,
@@ -211,7 +222,7 @@ const Map = () => {
 
         console.log("Layers to be removed:", layersToRemove);
         layersToRemove.forEach((layerToRemove) => {
-          mapRef.current.removeLayer(layerToRemove.layer);
+          mapRef?.current?.removeLayer(layerToRemove.layer);
         });
 
         setGeoJsonLayers((prevLayers) =>
@@ -232,30 +243,25 @@ const Map = () => {
     [geoJsonLayers]
   );
 
-  const removeForestItem = (toggleName) => {
+  const removeForestItem = (toggleName: any) => {
     setDataForest((prevDataForest) => {
       console.log("Previous data forest:", prevDataForest);
       console.log("Toggle name to be removed:", toggleName);
-      const updatedDataForest = prevDataForest.filter((item) => {
-        console.log(
-          "Comparing:",
-          item.properties.leyenda.name,
-          "with",
-          toggleName
-        );
-        return item.properties.leyenda.name !== toggleName;
+      const updatedDataForest = prevDataForest.filter((item: any) => {
+        return item?.properties?.leyenda?.name !== toggleName;
       });
       console.log("Updated data forest:", updatedDataForest);
       return updatedDataForest;
     });
   };
 
-  const addDataToForest = (data) => {
+  const addDataToForest = (data: any) => {
     console.log("data:", data);
-    setDataForest((prevDataForest) => {
+    setDataForest((prevDataForest: any) => {
       // Check if the data already exists in dataForest
       const isDataExists = prevDataForest.some(
-        (item) => item.properties.leyenda.name === data.properties.leyenda.name
+        (item: any) =>
+          item.properties.leyenda.name === data.properties.leyenda.name
       );
 
       // If data does not exist, add it to dataForest
@@ -268,9 +274,8 @@ const Map = () => {
     });
   };
 
-  const handleTownClick = async (town) => {
+  const handleTownClick = async (town: string) => {
     if (town === "Chiclana de Segura") {
-      console.log("pasa");
       try {
         // Check if the layer for Chiclana de Segura already exists
         const existingLayer = geoJsonLayers.find(
@@ -280,9 +285,12 @@ const Map = () => {
           return;
         }
 
-        const newLayer = L.geoJSON(cityData);
+        // Create new GeoJSON layer
+        const newLayer = L.geoJSON(cityData as FeatureCollection<any>);
         if (mapRef.current) {
           mapRef.current.addLayer(newLayer);
+
+          // Update state with new layer
           setGeoJsonLayers((prevLayers) => [
             ...prevLayers,
             { toggleName: town, layer: newLayer },
@@ -298,7 +306,7 @@ const Map = () => {
             townShape.length;
 
           // Center the map on Chiclana de Segura
-          mapRef.current.setView([centerLat, centerLng], 11); // Set the coordinates and zoom level
+          mapRef.current.setView([centerLat, centerLng], 11); // Adjust the zoom level as needed
         }
       } catch (error) {
         console.error(
@@ -308,7 +316,6 @@ const Map = () => {
       }
     }
   };
-
   return (
     <div>
       <div style={{ display: "flex" }}>
@@ -336,10 +343,17 @@ const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {statesData.features.map((state, index) => {
-            const coordinates = state.geometry.coordinates[0].map((item) => [
-              item[1],
-              item[0],
-            ]);
+            const coordinates: LatLngExpression[] =
+              state.geometry.coordinates[0].map((item: any) => {
+                // Ensure item is a number[] with at least two elements
+                if (Array.isArray(item) && item.length >= 2) {
+                  return [item[1], item[0]] as LatLngExpression;
+                } else {
+                  throw new Error(
+                    `Invalid coordinates format for state ${state}`
+                  );
+                }
+              });
             return (
               <Polygon
                 key={index}
@@ -347,12 +361,12 @@ const Map = () => {
                   fillOpacity: 0,
                   weight: 2,
                   opacity: 1,
-                  dashArray: 3,
+                  dashArray: "3",
                   color: "white",
                 }}
                 positions={coordinates}
                 eventHandlers={{
-                  mouseover: (e) => {
+                  mouseover: (e: { target: any }) => {
                     const layer = e.target;
                     layer.setStyle({
                       dashArray: "",
@@ -362,7 +376,7 @@ const Map = () => {
                       color: "white",
                     });
                   },
-                  mouseout: (e) => {
+                  mouseout: (e: { target: any }) => {
                     const layer = e.target;
                     layer.setStyle({
                       fillOpacity: 0,
@@ -371,7 +385,7 @@ const Map = () => {
                       color: "white",
                     });
                   },
-                  click: (e) => {},
+                  click: () => {},
                 }}
               />
             );

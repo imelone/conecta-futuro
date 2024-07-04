@@ -1,3 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
+// src/components/sidenav/index.tsx
+
 import React, { useState } from "react";
 import "./sidenav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,22 +15,39 @@ import TownList from "../regions/page"; // Ensure this path is correct
 import citiesData from "../regions/municipios.json";
 import logo from "../../../public/logo.png"; // Ensure this path is correct
 
-const Sidebar = ({
+interface SidebarProps {
+  onToggle: (toggleName: string, isActive: boolean) => void;
+  handleTownClick: (town: string) => void;
+  setIsDataAnalysisMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleToggleClick: (toggleName: string) => void;
+  activeToggles: {
+    [key: string]: boolean;
+    elCorcho: boolean;
+    losCarrizales: boolean;
+    cerroBallestero1: boolean;
+    cerroBallestero2: boolean;
+    laHerencia: boolean;
+  };
+}
+
+const Sidebar: React.FC<SidebarProps> = ({
   onToggle,
   handleTownClick,
   setIsDataAnalysisMenuOpen,
   handleToggleClick,
   activeToggles,
 }) => {
-  const [optionOpen, setOptionOpen] = useState(null);
-  const [selectedTown, setSelectedTown] = useState(null);
+  const [optionOpen, setOptionOpen] = useState<string | null>(null);
+  const [selectedTown, setSelectedTown] = useState<string | null>(null);
 
-  const handleOptionClick = (optionName) => {
-    setOptionOpen(optionName === optionOpen ? null : optionName);
+  const handleOptionClick = (optionName: string) => {
+    setOptionOpen((prevOption) =>
+      optionName === prevOption ? null : optionName
+    );
     setSelectedTown(null); // Reset selected town when switching options
   };
 
-  const handleTownSelection = (town) => {
+  const handleTownSelection = (town: string) => {
     setSelectedTown(town);
     handleTownClick(town);
   };

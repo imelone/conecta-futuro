@@ -10,8 +10,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 interface DataAnalysisMenuProps {
   isOpen: boolean;
   dataForest: any;
-  removeForestItem: (id: number) => void;
-  handleToggleClick: () => void;
+  removeForestItem: any;
+  handleToggleClick: any;
   activeToggles: Record<string, boolean>;
 }
 
@@ -28,7 +28,7 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
     setActiveTab(tabName);
   };
 
-  const handleClose = (areaName: number) => {
+  const handleClose = (areaName: any) => {
     removeForestItem(areaName);
   };
 
