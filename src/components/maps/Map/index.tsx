@@ -26,6 +26,7 @@ import citiesData from "../../regions/municipios.json"; // Corrected import path
 import { cityData } from "./chiclanaDeSegura.js";
 import DataAnalysisMenu from "../../dataAnalysisMenu";
 import { FeatureCollection } from "geojson";
+import Image from "next/image";
 
 interface GeoJsonLayer {
   toggleName: string;
@@ -140,18 +141,26 @@ const Map = () => {
               fillOpacity: 0.8,
             });
 
-            const leyenda = data.properties?.leyenda;
             let popupContent = "";
-            if (leyenda) {
-              const leyendaKeys = Object.keys(leyenda);
-              popupContent += `<div class="leyenda-container">`;
-              leyendaKeys.forEach((key) => {
-                if (key !== "image") {
-                  popupContent += `<p><b>${key}:</b> ${leyenda[key]}</p>`;
-                } else if (leyenda[key]) {
-                  popupContent += `<img src="${leyenda[key]}" alt="${key} image" />`;
-                }
-              });
+            // if (leyenda) {
+            //   const leyendaKeys = Object.keys(leyenda);
+            //   popupContent += `<div class="leyenda-container">`;
+            //   leyendaKeys.forEach((key) => {
+            //     if (key !== "image") {
+            //       popupContent += `<p><b>${key}:</b> ${leyenda[key]}</p>`;
+            //     } else if (leyenda[key]) {
+            //       popupContent += `<img src="${leyenda[key]}" alt="${key} image" />`;
+            //     }
+            //   });
+            //   popupContent += `</div>`;
+            // }
+            const image = data.properties?.catastrales?.image;
+            const title = data.properties?.leyenda?.label;
+
+            if (image) {
+              popupContent += `<div class="image-container">`;
+              popupContent += `<h3>${title}</h3>`; // Add your title here
+              popupContent += `<img src="${image}" alt="Catastrales image" class="popup-image" />`;
               popupContent += `</div>`;
             }
             pointLayer.bindPopup(popupContent);

@@ -153,14 +153,46 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
               activeTab === "Tab3" ? styles.active : ""
             }`}
           >
-            <div className={styles.chartContainer}>
-              <h3>El Corcho</h3>
-              <Pie data={pieData1} />
-            </div>
-            <div className={styles.chartContainer}>
-              <h3>Cerro Ballestero 1</h3>
-              <Pie data={pieData2} />
-            </div>
+            {/* {dataForest?.map(
+              (
+                areaData: {
+                  type: string;
+                  geometry: {
+                    type: string;
+                    coordinates: number[][][];
+                  };
+                  properties: {
+                    leyenda: {
+                      name: string;
+                      label: string;
+                      text: string;
+                      color: string;
+                    };
+                    catastrales: {
+                      text: string;
+                      image: string;
+                    };
+                    analisis: {
+                      text: string;
+                      image: string;
+                    };
+                  };
+                },
+                index: React.Key | null | undefined
+              ) => (
+                <div className={styles.chartContainer} key={index}>
+                  <div className={styles.imageContainer}>
+                    <Image
+                      width={1000} // Adjust the width and height to match your image's aspect ratio
+                      height={600}
+                      layout="responsive"
+                      src={`/${areaData.properties.catastrales.image}`}
+                      alt={areaData.properties.leyenda.name}
+                    />
+                  </div>
+                </div>
+              )
+            )} */}
           </div>
         </div>
       </div>

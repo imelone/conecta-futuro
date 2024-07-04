@@ -145,20 +145,40 @@ const Sidebar: React.FC<SidebarProps> = ({
               <div className="section">
                 <h2 className="section-title">{selectedTown}</h2>
                 <div className="nested-options">
-                  <h3 className="section-title">
+                  <p className="text">
+                    Chiclana de Segura está situado a 128 km de Jaén, en la
+                    comarca de El Condado. Tiene una superficie de 236 km2, una
+                    altitud de 900 m y una población de 1.194 habitantes. Está
+                    incluida en el Parque Natural de las Sierras de Cazorla,
+                    Segura y Las Villas. Su territorio es forestal,
+                    principalmente en la zona norte, ocupando dos terceras
+                    partes de su extensión, el tercio sur es fundamentalmente
+                    olivarero. Sus bosques se encuentran repoblados de
+                    coníferas, coexistiendo con zonas de matorral, y encierran
+                    gran interés natural debido a sus parajes y a la flora y
+                    fauna autóctonas, destacando el entorno del río y del
+                    embalse del Guadalmena. Chiclana de Segura es rica también
+                    en recursos cinegéticos de caza mayor y menor.
+                  </p>
+
+                  {/* <h3 className="section-title">
                     Sostenibilidad del municipio
                   </h3>
                   <ul className="info-list">
                     <li>
-                      Superficie arbolada
-                      <div className="info">15 Km2</div>
+                      Superficie
+                      <div className="info">4 ha.</div>
                     </li>
                     <li>
-                      Huella de CO2
-                      <div className="info">0.01 tCO2e</div>
+                      Número árboles:
+                      <div className="info">4.000</div>
                     </li>
                     <li>
-                      Árboles x especie
+                      Toneladas CO2 acumuladas:
+                      <div className="info">570 t.</div>
+                    </li>
+                    <li>
+                      Toneladas CO2 acumuladas:
                       <div className="info">15% Robles</div>
                       <div className="info">35% Algarrobo</div>
                       <div className="info">50% Madroño</div>
@@ -171,7 +191,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       T. x captar en los próximos 4 años
                       <div className="info">1.12 tCO2e</div>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
               <div className="separator-line"></div>
