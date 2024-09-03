@@ -14,6 +14,7 @@ import {
 import TownList from "../regions/page"; // Ensure this path is correct
 import citiesData from "../regions/municipios.json";
 import chiclanaLogo from "../../../public/chiclana-logo.png";
+import styled from "@emotion/styled";
 
 interface SidebarProps {
   onToggle: (toggleName: string, isActive: boolean) => void;
@@ -29,6 +30,10 @@ interface SidebarProps {
     laHerencia: boolean;
   };
 }
+
+const CustomIcon = styled(FontAwesomeIcon)`
+  font-size: 1.5rem; /* Adjust the size here as needed */
+`;
 
 const Sidebar: React.FC<SidebarProps> = ({
   onToggle,
@@ -69,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => handleOptionClick("home")}
               className={optionOpen === "home" ? "active" : ""}
             >
-              <FontAwesomeIcon icon={faHouse} size="2x" />
+              <CustomIcon icon={faHouse} size="2x" />
             </a>
           </li>
           <li>
@@ -79,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => handleOptionClick("profile")}
               className={optionOpen === "profile" ? "active" : ""}
             >
-              <FontAwesomeIcon icon={faRecycle} size="2x" />
+              <CustomIcon icon={faRecycle} size="2x" />
             </a>
           </li>
           <li>
@@ -89,7 +94,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => handleOptionClick("district")}
               className={optionOpen === "district" ? "active" : ""}
             >
-              <FontAwesomeIcon icon={faMap} size="2x" />
+              <CustomIcon icon={faMap} size="2x" />
             </a>
           </li>
           <li>
@@ -99,7 +104,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => handleOptionClick("sustainability")}
               className={optionOpen === "sustainability" ? "active" : ""}
             >
-              <FontAwesomeIcon icon={faUser} size="2x" />
+              <CustomIcon icon={faUser} size="2x" />
             </a>
           </li>
           <li>
@@ -109,7 +114,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => handleOptionClick("settings")}
               className={optionOpen === "settings" ? "active" : ""}
             >
-              <FontAwesomeIcon icon={faCog} size="2x" />
+              <CustomIcon icon={faCog} size="2x" />
             </a>
           </li>
         </ul>
