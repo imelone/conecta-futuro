@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TownList from "../regions/page"; // Ensure this path is correct
 import citiesData from "../regions/municipios.json";
-import logo from "../../../public/logo.png"; // Ensure this path is correct
+import chiclanaLogo from "../../../public/chiclana-logo.png";
 
 interface SidebarProps {
   onToggle: (toggleName: string, isActive: boolean) => void;
@@ -143,7 +143,14 @@ const Sidebar: React.FC<SidebarProps> = ({
           ) : (
             <div>
               <div className="section">
-                <h2 className="section-title">{selectedTown}</h2>
+                <div className="header-container">
+                  <img
+                    src={"/chiclana-logo.png"}
+                    alt="Chiclana de Segura"
+                    className="town-image"
+                  />
+                  <h2 className="section-title">{selectedTown}</h2>
+                </div>
                 <div className="nested-options">
                   <p className="text">
                     Chiclana de Segura está situado a 128 km de Jaén, en la

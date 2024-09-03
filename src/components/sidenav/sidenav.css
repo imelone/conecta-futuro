@@ -238,3 +238,18 @@ input:checked + .slider:before {
   text-align: center; /* Center the text inside */
   margin: 5px;
 }
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.section-title {
+  margin: 0; /* Remove any default margin */
+  font-size: 24px;
+  flex: 1; /* Optional: Make the title take up available space */
+}
+
+.town-image {
+  margin-left: 15px; /* Adjust the space between title and image */
+  max-height: 60px; /* Adjust the image size if necessary */
+}
