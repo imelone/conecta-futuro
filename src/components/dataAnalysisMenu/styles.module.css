@@ -11,7 +11,7 @@
   display: flex;
   flex-flow: column;
   max-height: calc(100vh - 70px);
-  width: 18.125rem;
+  width: 30.125rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
   background: #fff;
   transition: transform .3s linear;
@@ -55,4 +55,29 @@
 .chartContainer {
   text-align: center;
   margin: 1rem 0;
+}
+.gridContainer {
+  .MuiDataGrid-root {
+    border: 1px solid #ddd;
+  }
+  .MuiDataGrid-cell {
+    border-bottom: 1px solid #ddd;
+  }
+  .MuiDataGrid-columnSeparator {
+    display: none; /* Hide the column separator */
+  }
+}
+
+.gridContainer {
+  height: 100%; /* Ensure the container takes up 100% of its parent */
+  display: flex;
+  flex-direction: column;
+}
+
+.dataGrid {
+  flex: 1; /* Allow DataGrid to grow and fill the container */
+  height: 100%;
+}
+.coordenadas-cell {
+  white-space: pre-line; /* Ensures line breaks are respected */
 }

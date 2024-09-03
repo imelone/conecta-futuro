@@ -13,7 +13,12 @@
     },
     "catastrales": {
       "text": "Para",
-      "image": "cerro-ballestero-1.png"
+      "image": "cerro-ballestero-1.png",
+      "refCat": "23029A03000409 LZ",
+      "poligono": "30",
+      "parcela": "409",
+      "coordenadasX": "X:494.684,578560",
+      "coordenadasY": "Y:4.239.308,101280"
     },
     "analisis": {
       "text": "Para",

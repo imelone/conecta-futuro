@@ -197,7 +197,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               <div className="separator-line"></div>
               <div className="nested-options">
                 <div className="toggle-container">
-                  <h3 className="section-title">Bosques</h3>
+                  <h3 className="section-title">Programas</h3>
                   {/* Added title for toggles */}
                   <label className="toggle-switch">
                     <input

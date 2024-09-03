@@ -26,7 +26,12 @@
     },
     "catastrales": {
       "text": "Para",
-      "image": "el-corcho-parcela.png"
+      "image": "el-corcho-parcela.png",
+      "refCat": "-",
+      "poligono": "-",
+      "parcela": "-",
+      "coordenadasX": "X:-",
+      "coordenadasY": "Y:-"
     },
     "analisis": {
       "text": "Para",

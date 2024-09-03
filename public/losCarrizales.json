@@ -13,7 +13,12 @@
     },
     "catastrales": {
       "text": "Para",
-      "image": "los-carrizales-parcela.png"
+      "image": "los-carrizales-parcela.png",
+      "refCat": "-",
+      "poligono": "-",
+      "parcela": "-",
+      "coordenadasX": "X:-",
+      "coordenadasY": "Y:-"
     },
     "analisis": {
       "text": "Para",

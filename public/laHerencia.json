@@ -13,7 +13,12 @@
     },
     "catastrales": {
       "text": "Para",
-      "image": "la-herencia-parcela.png"
+      "image": "la-herencia-parcela.png",
+      "refCat": "23029A03000429 LO",
+      "poligono": "30",
+      "parcela": "429",
+      "coordenadasX": "X:495.338,822140",
+      "coordenadasY": "Y:4.239.393,692370"
     },
     "analisis": {
       "text": "Para",

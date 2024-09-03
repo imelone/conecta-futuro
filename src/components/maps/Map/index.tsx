@@ -131,6 +131,7 @@ const Map = () => {
           if (data.geometry.type === "Point") {
             const coordinates = data.geometry.coordinates[0][0];
             const latLng: LatLngTuple = [coordinates[1], coordinates[0]];
+            console.log("latLng: ", latLng);
 
             const pointLayer = L.circleMarker(latLng, {
               radius: 5,
@@ -170,7 +171,9 @@ const Map = () => {
               ...prevLayers,
               { toggleName, layer: pointLayer },
             ]);
+
             mapRef.current.setView(latLng, 15); // Adjust zoom level as needed
+
             // Add data to forest
             addDataToForest(data);
           } else if (data.geometry.type === "Polygon") {
@@ -273,12 +276,10 @@ const Map = () => {
           item.properties.leyenda.name === data.properties.leyenda.name
       );
 
-      // If data does not exist, add it to dataForest
       if (!isDataExists) {
         return [data, ...prevDataForest];
       }
 
-      // If data already exists, return the previous state without adding it again
       return prevDataForest;
     });
   };
