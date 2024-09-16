@@ -20,7 +20,7 @@ import { MapContextProvider, useMapContext } from "../mapContext";
 import RoutingMachine from "../RoutingMachine";
 import "./mapStyles.css";
 import { Layers } from "./Layers";
-import Sidebar from "../../sidenav";
+import Sidebar from "../../sidenav/sidenav";
 import TownList from "../../regions/page"; // Corrected import path
 import citiesData from "../../regions/municipios.json"; // Corrected import path
 import { cityData } from "./chiclanaDeSegura.js";
@@ -125,7 +125,7 @@ const Map = () => {
           //   return;
           // }
 
-          const response = await fetch(`/${toggleName}.json`);
+          const response = await fetch(`/data/${toggleName}.json`);
           const data = await response.json();
 
           if (data.geometry.type === "Point") {

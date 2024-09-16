@@ -37,7 +37,8 @@
     "react-leaflet-draw": "^0.20.4",
     "react-leaflet-google-layer": "^2.2.0",
     "react-leaflet-kml": "^2.1.2",
-    "react-leaflet-routing-machine": "^0.0.5"
+    "react-leaflet-routing-machine": "^0.0.5",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.12",

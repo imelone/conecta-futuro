@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-// src/components/sidenav/index.tsx
+// src/components/sidenav/Sidebar.tsx
 
-import React, { useState } from "react";
+import React from "react";
 import "./sidenav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,9 +13,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TownList from "../regions/page"; // Ensure this path is correct
 import citiesData from "../regions/municipios.json";
-import chiclanaLogo from "../../../public/chiclana-logo.png";
+import chiclanaLogo from "../../../public/images/icons/chiclana-logo.png";
 import styled from "@emotion/styled";
-
+import { useSidebarViewModel } from "./sidenav_view_model";
+import Image from "next/image";
 interface SidebarProps {
   onToggle: (toggleName: string, isActive: boolean) => void;
   handleTownClick: (town: string) => void;
@@ -35,27 +36,9 @@ const CustomIcon = styled(FontAwesomeIcon)`
   font-size: 1.5rem; /* Adjust the size here as needed */
 `;
 
-const Sidebar: React.FC<SidebarProps> = ({
-  onToggle,
-  handleTownClick,
-  setIsDataAnalysisMenuOpen,
-  handleToggleClick,
-  activeToggles,
-}) => {
-  const [optionOpen, setOptionOpen] = useState<string | null>(null);
-  const [selectedTown, setSelectedTown] = useState<string | null>(null);
-
-  const handleOptionClick = (optionName: string) => {
-    setOptionOpen((prevOption) =>
-      optionName === prevOption ? null : optionName
-    );
-    setSelectedTown(null); // Reset selected town when switching options
-  };
-
-  const handleTownSelection = (town: string) => {
-    setSelectedTown(town);
-    handleTownClick(town);
-  };
+const Sidebar: React.FC<SidebarProps> = (props) => {
+  const { optionOpen, selectedTown, handleOptionClick, handleTownSelection } =
+    useSidebarViewModel(props);
 
   return (
     <div
@@ -65,10 +48,13 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className="leaflet-sidebar-tabs">
         <ul role="tablist">
           <div className="sidebar-logo">
-            <img
-              src="images/icons/logo.png"
+            <Image
+              src="/images/icons/logo.png"
               alt="Logo"
               className="sidebar-logo-image"
+              layout="intrinsic" // Layout for the image
+              width={100} // Width of the image
+              height={100} // Height of the image
             />
           </div>
           <li>
@@ -153,8 +139,8 @@ const Sidebar: React.FC<SidebarProps> = ({
             <div>
               <div className="section">
                 <div className="header-container">
-                  <img
-                    src={"/chiclana-logo.png"}
+                  <Image
+                    src={chiclanaLogo}
                     alt="Chiclana de Segura"
                     className="town-image"
                   />
@@ -176,50 +162,17 @@ const Sidebar: React.FC<SidebarProps> = ({
                     embalse del Guadalmena. Chiclana de Segura es rica también
                     en recursos cinegéticos de caza mayor y menor.
                   </p>
-
-                  {/* <h3 className="section-title">
-                    Sostenibilidad del municipio
-                  </h3>
-                  <ul className="info-list">
-                    <li>
-                      Superficie
-                      <div className="info">4 ha.</div>
-                    </li>
-                    <li>
-                      Número árboles:
-                      <div className="info">4.000</div>
-                    </li>
-                    <li>
-                      Toneladas CO2 acumuladas:
-                      <div className="info">570 t.</div>
-                    </li>
-                    <li>
-                      Toneladas CO2 acumuladas:
-                      <div className="info">15% Robles</div>
-                      <div className="info">35% Algarrobo</div>
-                      <div className="info">50% Madroño</div>
-                    </li>
-                    <li>
-                      T. CO2 guardadas
-                      <div className="info">0.71 tCO2e</div>
-                    </li>
-                    <li>
-                      T. x captar en los próximos 4 años
-                      <div className="info">1.12 tCO2e</div>
-                    </li>
-                  </ul> */}
                 </div>
               </div>
               <div className="separator-line"></div>
               <div className="nested-options">
                 <div className="toggle-container">
                   <h3 className="section-title">Programas</h3>
-                  {/* Added title for toggles */}
                   <label className="toggle-switch">
                     <input
                       type="checkbox"
-                      checked={activeToggles.elCorcho}
-                      onChange={() => handleToggleClick("elCorcho")}
+                      checked={props.activeToggles.elCorcho}
+                      onChange={() => props.handleToggleClick("elCorcho")}
                     />
                     <span className="slider"></span>
                     <span className="label">El Corcho</span>
@@ -227,8 +180,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <label className="toggle-switch">
                     <input
                       type="checkbox"
-                      checked={activeToggles.losCarrizales}
-                      onChange={() => handleToggleClick("losCarrizales")}
+                      checked={props.activeToggles.losCarrizales}
+                      onChange={() => props.handleToggleClick("losCarrizales")}
                     />
                     <span className="slider"></span>
                     <span className="label">Los Carrizales</span>
@@ -236,8 +189,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <label className="toggle-switch">
                     <input
                       type="checkbox"
-                      checked={activeToggles.cerroBallestero1}
-                      onChange={() => handleToggleClick("cerroBallestero1")}
+                      checked={props.activeToggles.cerroBallestero1}
+                      onChange={() =>
+                        props.handleToggleClick("cerroBallestero1")
+                      }
                     />
                     <span className="slider"></span>
                     <span className="label">Cerro Ballestero 1</span>
@@ -245,8 +200,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <label className="toggle-switch">
                     <input
                       type="checkbox"
-                      checked={activeToggles.cerroBallestero2}
-                      onChange={() => handleToggleClick("cerroBallestero2")}
+                      checked={props.activeToggles.cerroBallestero2}
+                      onChange={() =>
+                        props.handleToggleClick("cerroBallestero2")
+                      }
                     />
                     <span className="slider"></span>
                     <span className="label">Cerro Ballestero 2</span>
@@ -254,8 +211,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <label className="toggle-switch">
                     <input
                       type="checkbox"
-                      checked={activeToggles.laHerencia}
-                      onChange={() => handleToggleClick("laHerencia")}
+                      checked={props.activeToggles.laHerencia}
+                      onChange={() => props.handleToggleClick("laHerencia")}
                     />
                     <span className="slider"></span>
                     <span className="label">La Herencia</span>
@@ -267,12 +224,12 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
         <div
           className={`sidebar-pane ${
-            optionOpen === "messages" ? "active" : ""
+            optionOpen === "sustainability" ? "active" : ""
           }`}
-          id="messages"
+          id="sustainability"
         >
-          <h1 className="sidebar-header">Messages</h1>
-          <p>Messages content goes here...</p>
+          <h1 className="sidebar-header">Sustainability</h1>
+          <p></p>
         </div>
         <div
           className={`sidebar-pane ${
@@ -280,7 +237,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           }`}
           id="settings"
         >
-          <h1 className="sidebar-header"></h1>
+          <h1 className="sidebar-header">Settings</h1>
           <p></p>
         </div>
       </div>
