@@ -24,9 +24,10 @@ import Sidebar from "../../sidenav/sidenav";
 import TownList from "../../regions/page"; // Corrected import path
 import citiesData from "../../regions/municipios.json"; // Corrected import path
 import { cityData } from "./chiclanaDeSegura.js";
-import DataAnalysisMenu from "../../dataAnalysisMenu";
+//import DataAnalysisMenu from "../../data_analisis";
 import { FeatureCollection } from "geojson";
 import Image from "next/image";
+import DataAnalysisMenu from "@/components/data_analisis/data_analisis_screen";
 
 interface GeoJsonLayer {
   toggleName: string;
@@ -423,6 +424,13 @@ const Map = () => {
           <ScaleControl position="bottomright" />
         </MapContainer>
       </div>
+      {/* <DataAnalysisMenu
+        isOpen={isDataAnalysisMenuOpen}
+        dataForest={dataForest}
+        removeForestItem={removeForestItem}
+        handleToggleClick={handleToggleClick} // Pass removeForestItem function
+        activeToggles={activeToggles}
+      /> */}
       <DataAnalysisMenu
         isOpen={isDataAnalysisMenuOpen}
         dataForest={dataForest}

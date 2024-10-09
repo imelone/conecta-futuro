@@ -2,7 +2,7 @@
 // import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 // import { Pie } from "react-chartjs-2";
 // import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
-// //import styles from "./styles.module.css";
+// import styles from "./styles.module.css";
 // import AreaInfoComponent from "../dataAreaInfo";
 
 // ChartJS.register(ArcElement, Tooltip, Legend);
