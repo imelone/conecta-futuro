@@ -58,3 +58,33 @@
 .menuItem a:hover {
   background-color: #eaeaea;
 }
+.town {
+  margin-bottom: 1rem;
+}
+
+.townTitle {
+  cursor: pointer;
+  color: #007bff; /* Example color */
+  font-size: 1.2rem;
+}
+
+.accordionContent {
+  padding-left: 1rem; /* Indent for district list */
+}
+
+.menu {
+  list-style-type: none; /* Remove default list styles */
+  padding: 0; /* Remove padding */
+}
+
+.districtButton {
+  background: none;
+  border: none;
+  color: #007bff; /* Example color */
+  cursor: pointer;
+  text-align: left; /* Align text to the left */
+}
+
+.districtButton:hover {
+  text-decoration: underline; /* Underline on hover for feedback */
+}

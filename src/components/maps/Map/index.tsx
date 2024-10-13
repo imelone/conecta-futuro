@@ -21,8 +21,8 @@ import RoutingMachine from "../RoutingMachine";
 import "./mapStyles.css";
 import { Layers } from "./Layers";
 import Sidebar from "../../sidenav/sidenav";
-import TownList from "../../regions/page"; // Corrected import path
-import citiesData from "../../regions/municipios.json"; // Corrected import path
+import TownList from "../../ui-components/regions/page"; // Corrected import path
+import citiesData from "../../ui-components/regions/municipios.json"; // Corrected import path
 import { cityData } from "./chiclanaDeSegura.js";
 //import DataAnalysisMenu from "../../data_analisis";
 import { FeatureCollection } from "geojson";

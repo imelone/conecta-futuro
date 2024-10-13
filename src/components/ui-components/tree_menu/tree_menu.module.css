@@ -1,0 +1,39 @@
+
+.container {
+  margin-bottom: 0.1rem; /* Space between sections */
+}
+.header {
+  display: flex; /* Use flex for horizontal alignment */
+  align-items: center; /* Center items vertically */
+  cursor: pointer; /* Pointer cursor for clickable header */
+  padding: 0.1rem 1rem; /* Padding for spacing */
+
+}
+.icon {
+  margin-right: 0.5rem; /* Space between icon and title */
+  display: flex; /* Ensure icon is centered vertically */
+  align-items: center; /* Center the icon vertically */
+  font-size: 0.875rem; /* Smaller icon size */
+}
+.title {
+  margin: 0; /* Remove default margin from h3 */
+  font-size: 1rem; /* Adjust title font size as needed */
+}
+.content {
+  padding: 0.1rem 1rem; /* Padding for the content area */
+  border: none; /* Ensure there's no border */
+  margin-left: 1rem; /* Indent content to show hierarchy */
+  display: block; /* Always display the content section */
+}
+/* Level Indentation */
+.level-0 {
+  margin-left: 0; /* No indentation */
+}
+.level-1 {
+  margin-left: 1rem; /* Slight indentation for level 1 */
+}
+.level-2 {
+  margin-left: 2rem; /* Slightly more indentation for level 2 */
+}
+
+

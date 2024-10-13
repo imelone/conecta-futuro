@@ -8,13 +8,13 @@ import {
   faCog,
   faMap,
 } from "@fortawesome/free-solid-svg-icons";
-import TownList from "../regions/page";
-import citiesData from "../regions/municipios.json";
+import TownList from "../ui-components/regions/page";
+import citiesData from "../ui-components/regions/municipios.json";
 import chiclanaLogo from "../../../public/images/icons/chiclana-logo.png";
 import styled from "@emotion/styled";
 import { useSidebarViewModel } from "./sidenav_view_model";
 import Image from "next/image";
-interface SidebarProps {
+interface SidebarViewModelProps {
   onToggle: (toggleName: string, isActive: boolean) => void;
   handleTownClick: (town: string) => void;
   setIsDataAnalysisMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,13 +27,17 @@ interface SidebarProps {
     cerroBallestero2: boolean;
     laHerencia: boolean;
   };
+  handleProvinceClick: (province: string) => void; // New handler for provinces
+  handleDistrictClick: (district: string) => void; // New handler for districts
 }
 
 const CustomIcon = styled(FontAwesomeIcon)`
   font-size: 1.5rem; /* Adjust the size here as needed */
 `;
-
-const Sidebar: React.FC<SidebarProps> = (props) => {
+const handleDistrictSelection = (district: string) => {
+  // Handle district selection logic
+};
+const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
   const { optionOpen, selectedTown, handleOptionClick, handleTownSelection } =
     useSidebarViewModel(props);
 
@@ -128,9 +132,13 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           id="district"
         >
           {!selectedTown ? (
+            // <TownList
+            //   citiesData={citiesData}
+            //   onDistrictClick={handleTownSelection}
+            // />
             <TownList
-              citiesData={citiesData}
-              onTownClick={handleTownSelection}
+              communitiesData={citiesData} // Ensure this now contains the new structure
+              onParcelClick={handleDistrictSelection}
             />
           ) : (
             <div>

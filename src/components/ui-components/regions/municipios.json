@@ -1,0 +1,30 @@
+[
+  {
+    "comunidad": "Andalucía",
+    "provincias": [
+      {
+        "provincia": "Jaén",
+        "municipios": [
+          {
+            "municipio": "Chiclana de Segura",
+            "parcelas": [{ "parcela": "Parcela 1" }, { "parcela": "Parcela 2" }]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "comunidad": "Cataluña",
+    "provincias": [
+      {
+        "provincia": "Barcelona",
+        "municipios": [
+          {
+            "municipio": "Barcelona",
+            "parcelas": [{ "parcela": "Parcela 1" }, { "parcela": "Parcela 2" }]
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -253,3 +253,4 @@ input:checked + .slider:before {
   margin-left: 15px; /* Adjust the space between title and image */
   max-height: 60px; /* Adjust the image size if necessary */
 }
+
