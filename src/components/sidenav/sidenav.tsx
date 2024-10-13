@@ -1,6 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-// src/components/sidenav/Sidebar.tsx
-
 import React from "react";
 import "./sidenav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +8,7 @@ import {
   faCog,
   faMap,
 } from "@fortawesome/free-solid-svg-icons";
-import TownList from "../regions/page"; // Ensure this path is correct
+import TownList from "../regions/page";
 import citiesData from "../regions/municipios.json";
 import chiclanaLogo from "../../../public/images/icons/chiclana-logo.png";
 import styled from "@emotion/styled";
