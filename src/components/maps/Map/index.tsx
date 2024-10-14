@@ -22,12 +22,14 @@ import "./mapStyles.css";
 import { Layers } from "./Layers";
 import Sidebar from "../../sidenav/sidenav";
 import TownList from "../../ui-components/regions/page"; // Corrected import path
-import citiesData from "../../ui-components/regions/municipios.json"; // Corrected import path
+//import citiesData from "../../ui-components/regions/municipios.json"; // Corrected import path
 import { cityData } from "./chiclanaDeSegura.js";
 //import DataAnalysisMenu from "../../data_analisis";
 import { FeatureCollection } from "geojson";
 import Image from "next/image";
 import DataAnalysisMenu from "@/components/data_analisis/data_analisis_screen";
+//import  from "../../../ui-components/regions/municipios.json"; // Corrected path
+import programsData from "../../ui-components/regions/programs.json";
 
 interface GeoJsonLayer {
   toggleName: string;
@@ -331,6 +333,8 @@ const Map = () => {
     <div>
       <div style={{ display: "flex" }}>
         <Sidebar
+          programsData={programsData}
+          // towns={towns}
           onToggle={handleToggle}
           handleTownClick={handleTownClick}
           setIsDataAnalysisMenuOpen={setIsDataAnalysisMenuOpen}
@@ -343,7 +347,7 @@ const Map = () => {
             width: "100%",
           }}
           center={coord}
-          zoom={7}
+          zoom={6.4}
           zoomControl={false}
           scrollWheelZoom={false}
           ref={mapRef}

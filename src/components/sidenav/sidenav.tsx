@@ -13,9 +13,10 @@ import chiclanaLogo from "../../../public/images/icons/chiclana-logo.png";
 import styled from "@emotion/styled";
 import { useSidebarViewModel } from "./sidenav_view_model";
 import Image from "next/image";
-import programsData from "../ui-components/regions/programs.json";
+//import programsData from "../ui-components/regions/programs.json";
 
 interface SidebarViewModelProps {
+  programsData: any;
   onToggle: (toggleName: string, isActive: boolean) => void;
   handleTownClick: (town: string) => void;
   setIsDataAnalysisMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,8 +38,14 @@ const CustomIcon = styled(FontAwesomeIcon)`
 `;
 
 const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
-  const { optionOpen, selectedTown, handleOptionClick, handleTownSelection } =
-    useSidebarViewModel(props);
+  const {
+    programsData,
+    optionOpen,
+    selectedTown,
+    handleOptionClick,
+    handleTownSelection,
+    handleToggleClick,
+  } = useSidebarViewModel(props);
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
   const [townsData, setTownsData] = useState<any>(null);
 
@@ -190,6 +197,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
             <TownList
               communitiesData={townsData}
               onParcelClick={handleTownSelection}
+              handleToggleClick={handleToggleClick}
             />
           )}
         </div>

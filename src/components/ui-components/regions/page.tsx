@@ -4,6 +4,7 @@ import styles from "./region.module.css";
 
 interface Parcel {
   parcela: string;
+  properties?: { leyenda?: { name: string; label: string } };
 }
 
 interface Municipio {
@@ -24,13 +25,16 @@ interface Community {
 interface TownListProps {
   communitiesData: Community[];
   onParcelClick: (parcel: string) => void;
+  handleToggleClick: (leyendaName: string) => void;
 }
 
 const TownList: React.FC<TownListProps> = ({
   communitiesData,
   onParcelClick,
+  handleToggleClick,
 }) => {
   console.log("Communities Data:", communitiesData);
+
   return (
     <div>
       {communitiesData.map((communityData, index) => (
@@ -44,16 +48,27 @@ const TownList: React.FC<TownListProps> = ({
                     title={municipio.municipio}
                   >
                     <ul className={styles.parcelList}>
-                      {municipio.parcelas.map((parcel) => (
-                        <li key={parcel.parcela}>
-                          <button
-                            className={styles.districtButton}
-                            onClick={() => onParcelClick(parcel.parcela)}
-                          >
-                            {parcel.parcela}
-                          </button>
-                        </li>
-                      ))}
+                      {municipio.parcelas.map((parcel) => {
+                        // Check if leyenda exists before rendering its values
+                        const leyenda = parcel.properties?.leyenda;
+
+                        return (
+                          <li key={leyenda?.name || parcel.parcela}>
+                            <label className={styles.toggleSwitch}>
+                              <input
+                                type="checkbox"
+                                onChange={() =>
+                                  leyenda && handleToggleClick(leyenda.name)
+                                }
+                              />
+                              <span className={styles.slider}></span>
+                              <span className={styles.label}>
+                                {leyenda?.label || "Unnamed Parcel"}
+                              </span>
+                            </label>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </TreeMenu>
                 ))}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 interface SidebarViewModelProps {
+  programsData: any;
   onToggle: (toggleName: string, isActive: boolean) => void;
   handleTownClick: (town: string) => void;
   setIsDataAnalysisMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +19,7 @@ interface SidebarViewModelProps {
 }
 
 export const useSidebarViewModel = ({
+  programsData,
   onToggle,
   handleTownClick,
   setIsDataAnalysisMenuOpen,
@@ -59,6 +61,7 @@ export const useSidebarViewModel = ({
   };
 
   return {
+    programsData,
     optionOpen,
     selectedTown,
     selectedProvince, // Expose province state
@@ -67,5 +70,6 @@ export const useSidebarViewModel = ({
     handleTownSelection,
     handleProvinceSelection, // Expose province selection handler
     handleDistrictSelection, // Expose district selection handler
+    handleToggleClick,
   };
 };

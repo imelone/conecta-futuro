@@ -88,3 +88,58 @@
 .districtButton:hover {
   text-decoration: underline; /* Underline on hover for feedback */
 }
+
+.toggle-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 1rem;
+}
+
+.toggleSwitch {
+  display: flex; /* Use flexbox to align items in a row */
+  align-items: center; /* Center items vertically */
+  margin-right: 10px; /* Space between toggles */
+}
+
+.toggleSwitch input {
+  opacity: 0; /* Hide the default checkbox */
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: relative;
+  cursor: pointer;
+  width: 30px; /* Width of the toggle */
+  height: 16px; /* Height of the toggle */
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px; /* Height of the toggle knob */
+  width: 12px; /* Width of the toggle knob */
+  left: 2px; /* Positioning of the knob */
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3; /* Color when checked */
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px); /* Move the knob when checked */
+}
+
+.label {
+  font-size: 12px; /* Smaller font for label */
+  color: #333; /* Color for label */
+  margin-left: 8px; /* Space between the slider and label */
+}
