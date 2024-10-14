@@ -26,12 +26,14 @@ interface TownListProps {
   communitiesData: Community[];
   onParcelClick: (parcel: string) => void;
   handleToggleClick: (leyendaName: string) => void;
+  activeToggles: any;
 }
 
 const TownList: React.FC<TownListProps> = ({
   communitiesData,
   onParcelClick,
   handleToggleClick,
+  activeToggles,
 }) => {
   console.log("Communities Data:", communitiesData);
 
@@ -57,6 +59,9 @@ const TownList: React.FC<TownListProps> = ({
                             <label className={styles.toggleSwitch}>
                               <input
                                 type="checkbox"
+                                checked={
+                                  activeToggles[leyenda?.name || ""] || false
+                                }
                                 onChange={() =>
                                   leyenda && handleToggleClick(leyenda.name)
                                 }

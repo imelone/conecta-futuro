@@ -45,6 +45,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
     handleOptionClick,
     handleTownSelection,
     handleToggleClick,
+    activeToggles,
   } = useSidebarViewModel(props);
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
   const [townsData, setTownsData] = useState<any>(null);
@@ -198,6 +199,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
               communitiesData={townsData}
               onParcelClick={handleTownSelection}
               handleToggleClick={handleToggleClick}
+              activeToggles={activeToggles}
             />
           )}
         </div>

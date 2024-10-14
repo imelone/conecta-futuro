@@ -30,6 +30,7 @@ import Image from "next/image";
 import DataAnalysisMenu from "@/components/data_analisis/data_analisis_screen";
 //import  from "../../../ui-components/regions/municipios.json"; // Corrected path
 import programsData from "../../ui-components/regions/programs.json";
+import comunidades from "../../ui-components/regions/cuida-tu-bosque.json";
 
 interface GeoJsonLayer {
   toggleName: string;
@@ -52,14 +53,40 @@ const Map = () => {
   const [dataForest, setDataForest] = useState([]);
   const [analysisData, setAnalysisData] = useState<{ [key: string]: any }>({});
   const [isDataAnalysisMenuOpen, setIsDataAnalysisMenuOpen] = useState(false);
+  const [anyActiveToggle, setAnyActiveToggle] = useState(false);
 
-  const [activeToggles, setActiveToggles] = useState({
-    elCorcho: false,
-    losCarrizales: false,
-    cerroBallestero1: false,
-    cerroBallestero2: false,
-    laHerencia: false,
+  // const [activeToggles, setActiveToggles] = useState({
+  //   elCorcho: false,
+  //   losCarrizales: false,
+  //   cerroBallestero1: false,
+  //   cerroBallestero2: false,
+  //   laHerencia: false,
+  // });
+  const toggleNames = comunidades.flatMap((comunidad) =>
+    comunidad.provincias.flatMap((provincia) =>
+      provincia.municipios.flatMap((municipio) =>
+        municipio.parcelas.map((parcela) => parcela?.properties?.leyenda?.name)
+      )
+    )
+  );
+
+  // Initializing state dynamically
+  const [activeToggles, setActiveToggles] = useState(() =>
+    toggleNames.reduce((acc, name) => {
+      acc[name] = false; // Initialize each toggle to false
+      return acc;
+    }, {})
+  );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const hasActiveToggles = useCallback(() => {
+    const result = Object.values(activeToggles).some((value) => value === true);
+    console.log("Active Toggles:", result); // Check the output
+    return result;
   });
+  useEffect(() => {
+    const active = hasActiveToggles();
+    setAnyActiveToggle(active); // Update state based on the result
+  }, [activeToggles, hasActiveToggles]);
 
   useEffect(() => {
     if (mapRef.current && !sidebarRef.current) {
@@ -435,13 +462,15 @@ const Map = () => {
         handleToggleClick={handleToggleClick} // Pass removeForestItem function
         activeToggles={activeToggles}
       /> */}
-      <DataAnalysisMenu
-        isOpen={isDataAnalysisMenuOpen}
-        dataForest={dataForest}
-        removeForestItem={removeForestItem}
-        handleToggleClick={handleToggleClick} // Pass removeForestItem function
-        activeToggles={activeToggles}
-      />
+      {anyActiveToggle && ( // Check if activeToggles is defined
+        <DataAnalysisMenu
+          isOpen={isDataAnalysisMenuOpen}
+          dataForest={dataForest}
+          removeForestItem={removeForestItem}
+          handleToggleClick={handleToggleClick} // Pass removeForestItem function
+          activeToggles={activeToggles}
+        />
+      )}
     </div>
   );
 };

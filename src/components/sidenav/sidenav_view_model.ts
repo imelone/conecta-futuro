@@ -71,5 +71,6 @@ export const useSidebarViewModel = ({
     handleProvinceSelection, // Expose province selection handler
     handleDistrictSelection, // Expose district selection handler
     handleToggleClick,
+    activeToggles,
   };
 };
