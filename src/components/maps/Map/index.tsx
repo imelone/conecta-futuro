@@ -39,7 +39,7 @@ type DataAnalysisMenuProps = {
 };
 
 const Map = () => {
-  const [coord, setCoord] = useState<[number, number]>([51.505, -0.09]);
+  const [coord, setCoord] = useState<[number, number]>([40.4637, -3.7492]);
   const [endPoint, setEndPoint] = useState<{ lat: number; lng: number } | null>(
     null
   );
@@ -343,7 +343,7 @@ const Map = () => {
             width: "100%",
           }}
           center={coord}
-          zoom={13}
+          zoom={7}
           zoomControl={false}
           scrollWheelZoom={false}
           ref={mapRef}

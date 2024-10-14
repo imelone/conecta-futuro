@@ -254,3 +254,10 @@ input:checked + .slider:before {
   max-height: 60px; /* Adjust the image size if necessary */
 }
 
+.home-background {
+  background-image: url('/cerro-ballestero-1.png'); /* Update with the path to your image */
+  background-size: cover;
+  background-position: center;
+  height: 100%; /* Ensure the container takes the full height */
+  width: 100%; /* Ensure the container takes the full width */
+}

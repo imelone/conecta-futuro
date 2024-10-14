@@ -30,6 +30,7 @@ const TownList: React.FC<TownListProps> = ({
   communitiesData,
   onParcelClick,
 }) => {
+  console.log("Communities Data:", communitiesData);
   return (
     <div>
       {communitiesData.map((communityData, index) => (

@@ -25,7 +25,6 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
     useDataAnalysisViewModel(
       isOpen,
       dataForest,
-
       handleToggleClick,
       removeForestItem
     );
