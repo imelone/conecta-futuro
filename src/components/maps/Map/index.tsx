@@ -28,9 +28,8 @@ import { cityData } from "./chiclanaDeSegura.js";
 import { FeatureCollection } from "geojson";
 import Image from "next/image";
 import DataAnalysisMenu from "@/components/data_analisis/data_analisis_screen";
-//import  from "../../../ui-components/regions/municipios.json"; // Corrected path
-import programsData from "../../ui-components/regions/programs.json";
-import comunidades from "../../ui-components/regions/cuida-tu-bosque.json";
+import programsData from "../../../app/data/programs.json";
+import comunidades from "../../../app/data/cuida-tu-bosque.json";
 
 interface GeoJsonLayer {
   toggleName: string;
@@ -55,7 +54,7 @@ const Map = () => {
   const [isDataAnalysisMenuOpen, setIsDataAnalysisMenuOpen] = useState(false);
   const [anyActiveToggle, setAnyActiveToggle] = useState(false);
 
-  const toggleNames = comunidades.flatMap((comunidad) =>
+  const toggleNames = comunidades?.flatMap((comunidad) =>
     comunidad.provincias.flatMap((provincia) =>
       provincia.municipios.flatMap((municipio) =>
         municipio.parcelas.map((parcela) => parcela?.properties?.leyenda?.name)

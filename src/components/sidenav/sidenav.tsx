@@ -52,9 +52,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
 
   const loadTownsData = async (comunidadArchivo: string) => {
     try {
-      const towns = await import(
-        `../ui-components/regions/${comunidadArchivo}.json`
-      );
+      const towns = await import(`../../app/data/${comunidadArchivo}.json`);
       setTownsData(towns.default); // Access the default export from the JSON file
     } catch (error) {
       console.error("Error loading towns data:", error);
