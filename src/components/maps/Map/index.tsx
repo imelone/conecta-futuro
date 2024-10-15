@@ -55,13 +55,6 @@ const Map = () => {
   const [isDataAnalysisMenuOpen, setIsDataAnalysisMenuOpen] = useState(false);
   const [anyActiveToggle, setAnyActiveToggle] = useState(false);
 
-  // const [activeToggles, setActiveToggles] = useState({
-  //   elCorcho: false,
-  //   losCarrizales: false,
-  //   cerroBallestero1: false,
-  //   cerroBallestero2: false,
-  //   laHerencia: false,
-  // });
   const toggleNames = comunidades.flatMap((comunidad) =>
     comunidad.provincias.flatMap((provincia) =>
       provincia.municipios.flatMap((municipio) =>
@@ -201,8 +194,9 @@ const Map = () => {
               ...prevLayers,
               { toggleName, layer: pointLayer },
             ]);
-
-            mapRef.current.setView(latLng, 15); // Adjust zoom level as needed
+            console.log("pasa punto");
+            //   mapRef.current.setView(latLng, 15); // Adjust zoom level as needed
+            mapRef.current.setView([latLng[0], latLng[1] - 0.02], 15);
 
             // Add data to forest
             addDataToForest(data);
