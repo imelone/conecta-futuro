@@ -4,7 +4,7 @@ import styles from "./region.module.css";
 
 interface Parcel {
   parcela: string;
-  properties?: { leyenda?: { name: string; label: string } };
+  properties?: { leyenda?: { name: string; label: string; color: string } };
 }
 
 interface Municipio {
@@ -53,7 +53,8 @@ const TownList: React.FC<TownListProps> = ({
                       {municipio.parcelas.map((parcel) => {
                         // Check if leyenda exists before rendering its values
                         const leyenda = parcel.properties?.leyenda;
-
+                        const isChecked =
+                          activeToggles[leyenda?.name || ""] || false;
                         return (
                           <li key={leyenda?.name || parcel.parcela}>
                             <label className={styles.toggleSwitch}>
@@ -66,7 +67,14 @@ const TownList: React.FC<TownListProps> = ({
                                   leyenda && handleToggleClick(leyenda.name)
                                 }
                               />
-                              <span className={styles.slider}></span>
+                              <span
+                                className={styles.slider}
+                                style={{
+                                  backgroundColor: isChecked
+                                    ? leyenda?.color
+                                    : "#ccc", // Use leyenda color when checked, otherwise gray
+                                }}
+                              ></span>
                               <span className={styles.label}>
                                 {leyenda?.label || "Unnamed Parcel"}
                               </span>
