@@ -33,17 +33,17 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
 
   if (!isOpen) return null;
 
-  const columns: GridColDef[] = [
+  const columnsDatosCatastrales: GridColDef[] = [
     { field: "bosque", headerName: "BOSQUE", width: 150 },
-    { field: "refCat", headerName: "REF. CAT", width: 150 },
+    { field: "refCat", headerName: "REF. CATASTRAL", width: 150 },
     { field: "poligono", headerName: "POLÍGONO", width: 150 },
     { field: "parcela", headerName: "PARCELA", width: 150 },
-    {
-      field: "coordenadas",
-      headerName: "COORDENADAS",
-      width: 300,
-      cellClassName: "coordenadas-cell",
-    },
+    // {
+    //   field: "coordenadas",
+    //   headerName: "COORDENADAS",
+    //   width: 300,
+    //   cellClassName: "coordenadas-cell",
+    // },
   ];
 
   const shouldShowGrid = rows.length > 0;
@@ -86,7 +86,7 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
               onClick={() => handleTabClick("Tab3")}
             >
               <p style={{ fontWeight: "700", fontSize: "14px" }}>
-                DATOS CATASTRO
+                DATOS CATASTRALES
               </p>
             </button>
           </div>
@@ -137,7 +137,7 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
                 <div className={styles.gridContainer}>
                   <DataGrid
                     rows={rows}
-                    columns={columns.map((col) => ({
+                    columns={columnsDatosCatastrales.map((col) => ({
                       ...col,
                       width:
                         col.field === "poligono" || col.field === "parcela"

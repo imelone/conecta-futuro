@@ -83,7 +83,7 @@ export const useDataAnalysisViewModel = (
       refCat: areaData.properties.catastrales.refCat,
       poligono: areaData.properties.catastrales.poligono,
       parcela: areaData.properties.catastrales.parcela,
-      coordenadas: `${areaData.properties.catastrales.coordenadasX} ${areaData.properties.catastrales.coordenadasY}`,
+      //  coordenadas: `${areaData.properties.catastrales.coordenadasX} ${areaData.properties.catastrales.coordenadasY}`,
     })) || [];
 
   return {

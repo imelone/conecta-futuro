@@ -66,7 +66,7 @@ const Map = () => {
   // Initializing state dynamically
   const [activeToggles, setActiveToggles] = useState(() =>
     toggleNames.reduce((acc, name) => {
-      acc[name] = false; // Initialize each toggle to false
+      acc[name] = false;
       return acc;
     }, {})
   );
@@ -118,7 +118,6 @@ const Map = () => {
   };
 
   const handleToggleClick = async (toggleName: keyof typeof activeToggles) => {
-    console.log("toggleName: ", toggleName);
     setIsDataAnalysisMenuOpen(true); // Toggle the menu visibility
     setActiveToggles((prevToggles) => {
       const newToggles = {
@@ -134,120 +133,119 @@ const Map = () => {
   const handleToggle = useCallback(
     async (toggleName: string, isActive: boolean) => {
       if (!mapRef.current) {
-        console.error("mapRef.current is null");
         return;
       }
 
       if (isActive) {
         try {
-          // const existingLayerIndex = geoJsonLayers.findIndex(
-          //   (layer) => layer.toggleName === toggleName
-          // );
-          // if (existingLayerIndex !== -1) {
-          //   console.log(`${toggleName} layer already exists.`);
-          //   return;
-          // }
+          console.log("toggleName: ", toggleName);
 
-          const response = await fetch(`/data/${toggleName}.json`);
-          const data = await response.json();
+          // Find the relevant parcela by the name from toggleName
+          const foundParcela = comunidades.reduce((acc, comunidad) => {
+            if (acc) return acc; // If found, skip further searching
+            return comunidad.provincias.reduce((accProv, provincia) => {
+              if (accProv) return accProv; // If found, skip further searching
+              return provincia.municipios.reduce((accMun, municipio) => {
+                if (accMun) return accMun; // If found, skip further searching
+                return municipio.parcelas.find(
+                  (parcela) => parcela.properties?.leyenda?.name === toggleName
+                );
+              }, null);
+            }, null);
+          }, null);
 
-          if (data.geometry.type === "Point") {
-            const coordinates = data.geometry.coordinates[0][0];
-            const latLng: LatLngTuple = [coordinates[1], coordinates[0]];
-            console.log("latLng: ", latLng);
+          console.log("foundParcela: ", foundParcela);
 
-            const pointLayer = L.circleMarker(latLng, {
-              radius: 5,
-              fillColor: data.properties?.leyenda?.color || "#3388ff",
-              color: "#000",
-              weight: 1,
-              opacity: 1,
-              fillOpacity: 0.8,
-            });
+          if (foundParcela) {
+            const data = foundParcela; // Use the found parcela as data
 
-            let popupContent = "";
-            // if (leyenda) {
-            //   const leyendaKeys = Object.keys(leyenda);
-            //   popupContent += `<div class="leyenda-container">`;
-            //   leyendaKeys.forEach((key) => {
-            //     if (key !== "image") {
-            //       popupContent += `<p><b>${key}:</b> ${leyenda[key]}</p>`;
-            //     } else if (leyenda[key]) {
-            //       popupContent += `<img src="${leyenda[key]}" alt="${key} image" />`;
-            //     }
-            //   });
-            //   popupContent += `</div>`;
-            // }
-            const image = data.properties?.catastrales?.image;
-            const title = data.properties?.leyenda?.label;
+            if (data.geometry.type === "Point") {
+              const coordinates = data.geometry.coordinates[0][0];
+              const latLng: LatLngTuple = [coordinates[1], coordinates[0]];
 
-            if (image) {
-              popupContent += `<div class="image-container">`;
-              popupContent += `<h3>${title}</h3>`; // Add your title here
-              popupContent += `<img src="${image}" alt="Catastrales image" class="popup-image" />`;
-              popupContent += `</div>`;
+              const pointLayer = L.circleMarker(latLng, {
+                radius: 5,
+                fillColor: data.properties?.leyenda?.color || "#3388ff",
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8,
+              });
+
+              let popupContent = "";
+
+              const image = data.properties?.catastrales?.image;
+              const title = data.properties?.leyenda?.label;
+
+              if (image) {
+                popupContent += `<div class="image-container">`;
+                popupContent += `<h3>${title}</h3>`;
+                popupContent += `<img src="/images/maps/${image}" alt="Catastrales image" class="popup-image" />`;
+                popupContent += `</div>`;
+              }
+              pointLayer.bindPopup(popupContent);
+              pointLayer.addTo(mapRef.current);
+
+              setGeoJsonLayers((prevLayers) => [
+                ...prevLayers,
+                { toggleName, layer: pointLayer },
+              ]);
+
+              mapRef.current.setView([latLng[0], latLng[1] - 0.02], 15);
+
+              // Add data to forest
+              addDataToForest(data);
+            } else if (data.geometry.type === "Polygon") {
+              const style = {
+                color: data.properties?.leyenda?.color || "#3388ff",
+                weight: 2,
+                opacity: 0.3,
+              };
+
+              const highlightStyle = {
+                weight: 3,
+                color: "#ebf1f1",
+                dashArray: "",
+                fillOpacity: 0.7,
+              };
+
+              const newLayer = L.geoJSON(data, {
+                style,
+                onEachFeature: (feature, layer) => {
+                  layer.on({
+                    mouseover: (e) => {
+                      const layer = e.target;
+                      layer.setStyle(highlightStyle);
+                      layer.bindTooltip(toggleName).openTooltip(e.latlng);
+                    },
+                    mouseout: (e) => {
+                      const layer = e.target;
+                      layer.setStyle(style);
+                      layer.closeTooltip();
+                    },
+                    click: (e) => {
+                      const layer = e.target;
+                      layer.setStyle(highlightStyle);
+                      layer.bindTooltip(toggleName).openTooltip(e.latlng);
+                    },
+                  });
+                },
+              });
+
+              mapRef.current.addLayer(newLayer);
+              setGeoJsonLayers((prevLayers) => [
+                ...prevLayers,
+                { toggleName, layer: newLayer },
+              ]);
+
+              // Add data to forest
+              addDataToForest(data);
             }
-            pointLayer.bindPopup(popupContent);
-            pointLayer.addTo(mapRef.current);
-
-            setGeoJsonLayers((prevLayers) => [
-              ...prevLayers,
-              { toggleName, layer: pointLayer },
-            ]);
-            console.log("pasa punto");
-            //   mapRef.current.setView(latLng, 15); // Adjust zoom level as needed
-            mapRef.current.setView([latLng[0], latLng[1] - 0.02], 15);
-
-            // Add data to forest
-            addDataToForest(data);
-          } else if (data.geometry.type === "Polygon") {
-            const style = {
-              color: data.properties?.leyenda?.color || "#3388ff",
-              weight: 2,
-              opacity: 0.3,
-            };
-
-            const highlightStyle = {
-              weight: 3,
-              color: "#ebf1f1",
-              dashArray: "",
-              fillOpacity: 0.7,
-            };
-
-            const newLayer = L.geoJSON(data, {
-              style,
-              onEachFeature: (feature, layer) => {
-                layer.on({
-                  mouseover: (e) => {
-                    const layer = e.target;
-                    layer.setStyle(highlightStyle);
-                    layer.bindTooltip(toggleName).openTooltip(e.latlng);
-                  },
-                  mouseout: (e) => {
-                    const layer = e.target;
-                    layer.setStyle(style);
-                    layer.closeTooltip();
-                  },
-                  click: (e) => {
-                    const layer = e.target;
-                    layer.setStyle(highlightStyle);
-                    layer.bindTooltip(toggleName).openTooltip(e.latlng);
-                  },
-                });
-              },
-            });
-
-            mapRef.current.addLayer(newLayer);
-            setGeoJsonLayers((prevLayers) => [
-              ...prevLayers,
-              { toggleName, layer: newLayer },
-            ]);
-
-            // Add data to forest
-            addDataToForest(data);
+          } else {
+            console.warn(`No parcel found for toggleName: ${toggleName}`);
           }
         } catch (error) {
-          console.error("Error fetching GeoJSON:", error);
+          console.error("Error processing data:", error);
         }
       } else {
         console.log("Layer to be removed:", toggleName);
@@ -281,18 +279,14 @@ const Map = () => {
 
   const removeForestItem = (toggleName: any) => {
     setDataForest((prevDataForest) => {
-      console.log("Previous data forest:", prevDataForest);
-      console.log("Toggle name to be removed:", toggleName);
       const updatedDataForest = prevDataForest.filter((item: any) => {
         return item?.properties?.leyenda?.name !== toggleName;
       });
-      console.log("Updated data forest:", updatedDataForest);
       return updatedDataForest;
     });
   };
 
   const addDataToForest = (data: any) => {
-    console.log("data:", data);
     setDataForest((prevDataForest: any) => {
       // Check if the data already exists in dataForest
       const isDataExists = prevDataForest.some(
@@ -449,19 +443,13 @@ const Map = () => {
           <ScaleControl position="bottomright" />
         </MapContainer>
       </div>
-      {/* <DataAnalysisMenu
-        isOpen={isDataAnalysisMenuOpen}
-        dataForest={dataForest}
-        removeForestItem={removeForestItem}
-        handleToggleClick={handleToggleClick} // Pass removeForestItem function
-        activeToggles={activeToggles}
-      /> */}
-      {anyActiveToggle && ( // Check if activeToggles is defined
+
+      {anyActiveToggle && (
         <DataAnalysisMenu
           isOpen={isDataAnalysisMenuOpen}
           dataForest={dataForest}
           removeForestItem={removeForestItem}
-          handleToggleClick={handleToggleClick} // Pass removeForestItem function
+          handleToggleClick={handleToggleClick}
           activeToggles={activeToggles}
         />
       )}
