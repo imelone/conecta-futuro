@@ -50,7 +50,14 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
   const [townsData, setTownsData] = useState<any>(null);
 
+  useEffect(() => {
+    if (selectedProgram) {
+      loadTownsData(selectedProgram);
+    }
+  }, [selectedProgram]);
+
   const loadTownsData = async (comunidadArchivo: string) => {
+    console.log("comunidadArchivo: ", comunidadArchivo);
     try {
       const towns = await import(`../../app/data/${comunidadArchivo}.json`);
       setTownsData(towns.default); // Access the default export from the JSON file
@@ -59,12 +66,6 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
       setTownsData(null); // Reset towns data on error
     }
   };
-
-  useEffect(() => {
-    if (selectedProgram) {
-      loadTownsData(selectedProgram);
-    }
-  }, [selectedProgram]);
 
   const handleProgramSelection = (comunidadArchivo: string) => {
     setSelectedProgram(comunidadArchivo);

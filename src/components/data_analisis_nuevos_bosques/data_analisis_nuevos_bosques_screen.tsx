@@ -3,7 +3,10 @@ import { Pie } from "react-chartjs-2";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import styles from "./styles.module.css";
 import AreaInfoComponent from "../dataAreaInfo";
-import { AreaData, useDataAnalysisViewModel } from "./data_analisis_view_model"; // Adjust the import path as necessary
+import {
+  AreaData,
+  useDataAnalysisViewModel,
+} from "./data_analisis_nuevos_bosques_view_model"; // Adjust the import path as necessary
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 //import Draggable from "react-draggable";
 import dynamic from "next/dynamic";

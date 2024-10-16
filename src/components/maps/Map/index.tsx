@@ -27,7 +27,7 @@ import { cityData } from "./chiclanaDeSegura.js";
 //import DataAnalysisMenu from "../../data_analisis";
 import { FeatureCollection } from "geojson";
 import Image from "next/image";
-import DataAnalysisMenu from "@/components/data_analisis/data_analisis_screen";
+import DataAnalysisMenuCuidaTuBosque from "@/components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
 import programsData from "../../../app/data/programs.json";
 import comunidades from "../../../app/data/cuida-tu-bosque.json";
 
@@ -444,7 +444,7 @@ const Map = () => {
       </div>
 
       {anyActiveToggle && (
-        <DataAnalysisMenu
+        <DataAnalysisMenuCuidaTuBosque
           isOpen={isDataAnalysisMenuOpen}
           dataForest={dataForest}
           removeForestItem={removeForestItem}
