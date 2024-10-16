@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./tree_menu.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
@@ -7,14 +7,20 @@ interface AccordionProps {
   title: string;
   children: React.ReactNode;
   level?: number;
+  selectedProgram?: string;
 }
 
 export const TreeMenu: React.FC<AccordionProps> = ({
   title,
   children,
   level = 0,
+  selectedProgram,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    // console.log("children: ", children);
+    setIsOpen(false);
+  }, [selectedProgram]);
 
   const toggleContent = () => {
     setIsOpen((prev) => !prev);

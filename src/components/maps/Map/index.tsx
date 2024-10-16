@@ -63,10 +63,13 @@ const Map = () => {
 
   useEffect(() => {
     console.log("selectedProgram: ", selectedProgram);
+    setSelectedTown(null);
+    setSelectedProvince(null);
+    setSelectedDistrict(null);
     if (selectedProgram) {
       loadTownsData(selectedProgram);
     }
-  }, [selectedProgram]);
+  }, [selectedDistrict, selectedProgram, selectedProvince]);
 
   const loadTownsData = async (selectedProgram: string) => {
     console.log("comunidadArchivo: ", selectedProgram);
@@ -81,6 +84,7 @@ const Map = () => {
 
   const handleProgramSelection = (comunidadArchivo: string) => {
     setSelectedProgram(comunidadArchivo);
+
     // Hide the district pane and show the towns pane
     handleOptionClick("towns");
   };

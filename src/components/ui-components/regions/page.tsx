@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TreeMenu } from "../tree_menu/tree_menu"; // Adjust the import path
 import styles from "./region.module.css";
 
@@ -27,6 +27,7 @@ interface TownListProps {
   onParcelClick: (parcel: string) => void;
   handleToggleClick: (leyendaName: string) => void;
   activeToggles: any;
+  selectedProgram: any;
 }
 
 const TownList: React.FC<TownListProps> = ({
@@ -34,13 +35,56 @@ const TownList: React.FC<TownListProps> = ({
   onParcelClick,
   handleToggleClick,
   activeToggles,
+  selectedProgram,
 }) => {
-  console.log("Communities Data:", communitiesData);
+  const [selectedProgramName, setSelectedProgamName] = useState("");
+
+  const loadTownsData = async (selectedProgram: string) => {
+    try {
+      const data = await import(`../../../app/data/programs.json`);
+
+      // Check if the imported data is an object with a 'default' array
+      const programData = data.default || data;
+
+      // Find the program that matches the selectedProgram (comunidadArchivo)
+      const selectedProgramData = programData.find(
+        (program: any) => program.comunidadArchivo === selectedProgram
+      );
+
+      if (selectedProgramData) {
+        setSelectedProgamName(selectedProgramData.programa);
+        // You can now use selectedProgramData.programa where needed
+      } else {
+        console.log("No matching program found for:", selectedProgram);
+      }
+    } catch (error) {
+      console.error("Error loading towns data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedProgram) {
+      loadTownsData(selectedProgram);
+    }
+  }, [selectedProgram]);
 
   return (
     <div>
+      <h3
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "1rem",
+        }}
+      >
+        {selectedProgramName}
+      </h3>
       {communitiesData.map((communityData, index) => (
-        <TreeMenu key={index} title={communityData.comunidad}>
+        <TreeMenu
+          key={index}
+          title={communityData.comunidad}
+          selectedProgram={selectedProgram}
+        >
           {communityData.provincias.map((province) => (
             <TreeMenu key={province.provincia} title={province.provincia}>
               <ul className={styles.menu}>

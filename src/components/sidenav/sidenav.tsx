@@ -216,6 +216,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
               onParcelClick={handleTownSelection}
               handleToggleClick={handleToggleClick}
               activeToggles={activeToggles}
+              selectedProgram={selectedProgram}
             />
           )}
         </div>
