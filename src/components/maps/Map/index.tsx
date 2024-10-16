@@ -15,22 +15,19 @@ import {
 } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
-import { statesData } from "./data";
 import { MapContextProvider, useMapContext } from "../mapContext";
 import RoutingMachine from "../RoutingMachine";
 import "./mapStyles.css";
 import { Layers } from "./Layers";
 import Sidebar from "../../sidenav/sidenav";
 import TownList from "../../ui-components/regions/page"; // Corrected import path
-//import citiesData from "../../ui-components/regions/municipios.json"; // Corrected import path
-import { cityData } from "./chiclanaDeSegura.js";
-//import DataAnalysisMenu from "../../data_analisis";
+import { cityData } from "../../../app/data/coordenadas_municipios/chiclanaDeSegura.js";
 import { FeatureCollection } from "geojson";
 import Image from "next/image";
 import DataAnalysisMenuCuidaTuBosque from "@/components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
 import DataAnalysisMenuNuevosBosques from "@/components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
-import programsData from "../../../app/data/programs.json";
-import comunidades from "../../../app/data/cuida-tu-bosque.json";
+import programsData from "../../../app/data/listado_de_programas/programs.json";
+//import comunidades from "../../../app/data/cuida-tu-bosque.json";
 
 interface GeoJsonLayer {
   toggleName: string;
@@ -60,21 +57,42 @@ const Map = () => {
   const [selectedTown, setSelectedTown] = useState<string | null>(null);
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null); // State for the selected province
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null); // State for the selected district
-
+  const [activeToggles, setActiveToggles] = useState<Record<string, boolean>>(
+    {}
+  );
   useEffect(() => {
     console.log("selectedProgram: ", selectedProgram);
+
+    // Cleanup function to remove all circleMarkers from the map
+    if (mapRef.current) {
+      geoJsonLayers.forEach((geoJsonLayer) => {
+        if (geoJsonLayer.layer instanceof L.CircleMarker) {
+          mapRef.current.removeLayer(geoJsonLayer.layer);
+        }
+      });
+    }
+
+    // Reset the geoJsonLayers state without affecting the map
+    setGeoJsonLayers([]);
+
+    // Reset other related states
     setSelectedTown(null);
     setSelectedProvince(null);
     setSelectedDistrict(null);
+
     if (selectedProgram) {
       loadTownsData(selectedProgram);
     }
-  }, [selectedDistrict, selectedProgram, selectedProvince]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedProgram]);
 
   const loadTownsData = async (selectedProgram: string) => {
     console.log("comunidadArchivo: ", selectedProgram);
+    setDataForest([]);
     try {
-      const towns = await import(`../../../app/data/${selectedProgram}.json`);
+      const towns = await import(
+        `../../../app/data/programas/${selectedProgram}.json`
+      );
       setTownsData(towns.default); // Access the default export from the JSON file
     } catch (error) {
       console.error("Error loading towns data:", error);
@@ -115,30 +133,36 @@ const Map = () => {
     setSelectedTown(null); // Reset town when district changes
   };
 
-  const toggleNames = comunidades?.flatMap((comunidad) =>
-    comunidad.provincias.flatMap((provincia) =>
-      provincia.municipios.flatMap((municipio) =>
-        municipio.parcelas.map((parcela) => parcela?.properties?.leyenda?.name)
-      )
-    )
-  );
+  useEffect(() => {
+    if (townsData) {
+      const toggleNames = townsData?.flatMap((comunidad) =>
+        comunidad.provincias.flatMap((provincia) =>
+          provincia.municipios.flatMap((municipio) =>
+            municipio.parcelas.map(
+              (parcela) => parcela?.properties?.leyenda?.name
+            )
+          )
+        )
+      );
+      console.log("toggleNames: ", toggleNames);
+      // Update activeToggles based on toggleNames
+      const newActiveToggles = toggleNames.reduce((acc, name) => {
+        acc[name] = false;
+        return acc;
+      }, {} as Record<string, boolean>);
 
-  // Initializing state dynamically
-  const [activeToggles, setActiveToggles] = useState(() =>
-    toggleNames.reduce((acc, name) => {
-      acc[name] = false;
-      return acc;
-    }, {})
-  );
+      setActiveToggles(newActiveToggles); // Set the new state
+    }
+  }, [townsData, selectedProgram]); // Re-run effect when townsData changes
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const hasActiveToggles = useCallback(() => {
     const result = Object.values(activeToggles).some((value) => value === true);
-    console.log("Active Toggles:", result); // Check the output
+    console.log("Active Toggles:", result);
     return result;
-  });
+  }, [activeToggles]);
   useEffect(() => {
     const active = hasActiveToggles();
-    setAnyActiveToggle(active); // Update state based on the result
+    setAnyActiveToggle(active);
   }, [activeToggles, hasActiveToggles]);
 
   useEffect(() => {
@@ -179,6 +203,7 @@ const Map = () => {
 
   const handleToggleClick = async (toggleName: keyof typeof activeToggles) => {
     setIsDataAnalysisMenuOpen(true); // Toggle the menu visibility
+
     setActiveToggles((prevToggles) => {
       const newToggles = {
         ...prevToggles,
@@ -201,7 +226,7 @@ const Map = () => {
           console.log("toggleName: ", toggleName);
 
           // Find the relevant parcela by the name from toggleName
-          const foundParcela = comunidades.reduce((acc, comunidad) => {
+          const foundParcela = townsData.reduce((acc, comunidad) => {
             if (acc) return acc; // If found, skip further searching
             return comunidad.provincias.reduce((accProv, provincia) => {
               if (accProv) return accProv; // If found, skip further searching
@@ -334,7 +359,7 @@ const Map = () => {
         });
       }
     },
-    [geoJsonLayers]
+    [geoJsonLayers, townsData]
   );
 
   const removeForestItem = (toggleName: any) => {
@@ -443,7 +468,7 @@ const Map = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {statesData.features.map((state, index) => {
+          {/* {statesData.features.map((state, index) => {
             const coordinates: LatLngExpression[] =
               state.geometry.coordinates[0].map((item: any) => {
                 // Ensure item is a number[] with at least two elements
@@ -490,7 +515,7 @@ const Map = () => {
                 }}
               />
             );
-          })}
+          })} */}
           {endPoint && (
             <RoutingMachine startPoint={coord} endPoint={endPoint} />
           )}

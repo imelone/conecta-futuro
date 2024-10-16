@@ -41,7 +41,9 @@ const TownList: React.FC<TownListProps> = ({
 
   const loadTownsData = async (selectedProgram: string) => {
     try {
-      const data = await import(`../../../app/data/programs.json`);
+      const data = await import(
+        `../../../app/data/listado_de_programas/programs.json`
+      );
 
       // Check if the imported data is an object with a 'default' array
       const programData = data.default || data;
