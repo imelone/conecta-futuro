@@ -37,3 +37,15 @@
   object-fit: cover;
   margin-top:1rem;
 }
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
+}
+.leaflet-control-attribution.leaflet-control {
+  display: none;
+}
