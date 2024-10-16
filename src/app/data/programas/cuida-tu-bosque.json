@@ -30,6 +30,14 @@
                     "coordenadasX": "X:494.684,578560",
                     "coordenadasY": "Y:4.239.308,101280"
                   },
+                  "indicadores": {
+                    "superficie": "1,12",
+                    "arboles": "672",
+                    "co2Capturado": "100,80",
+                    "co2PorCapturar": "1.68",
+                    "factorHidrologico": ""
+                  },
+                  "Copernico": {},
                   "analisis": {
                     "text": "Para",
                     "image": ""
@@ -57,6 +65,13 @@
                     "parcela": "437",
                     "coordenadasX": "X:495.108,670890",
                     "coordenadasY": "Y:4.239.477,276590"
+                  },
+                  "indicadores": {
+                    "superficie": "3,11",
+                    "arboles": "187",
+                    "co2Capturado": "27,09",
+                    "co2PorCapturar": "0,47",
+                    "factorHidrologico": ""
                   },
                   "analisis": {
                     "text": "Para",
@@ -93,11 +108,18 @@
                   "catastrales": {
                     "text": "Para",
                     "image": "el-corcho-parcela.png",
-                    "refCat": "-",
-                    "poligono": "-",
-                    "parcela": "-",
+                    "refCat": "23029A03000201 LP",
+                    "poligono": "30",
+                    "parcela": "201",
                     "coordenadasX": "X:-",
                     "coordenadasY": "Y:-"
+                  },
+                  "indicadores": {
+                    "superficie": "0,70",
+                    "arboles": "77",
+                    "co2Capturado": "11,58",
+                    "co2PorCapturar": "0,19",
+                    "factorHidrologico": ""
                   },
                   "analisis": {
                     "text": "Para",
@@ -127,6 +149,13 @@
                     "coordenadasX": "X:495.338,822140",
                     "coordenadasY": "Y:4.239.393,692370"
                   },
+                  "indicadores": {
+                    "superficie": "3,27",
+                    "arboles": "1472",
+                    "co2Capturado": "220,73",
+                    "co2PorCapturar": "3,68",
+                    "factorHidrologico": ""
+                  },
                   "analisis": {
                     "text": "Para",
                     "image": ""
@@ -149,11 +178,18 @@
                   "catastrales": {
                     "text": "Para",
                     "image": "los-carrizales-parcela.png",
-                    "refCat": "-",
-                    "poligono": "-",
-                    "parcela": "-",
+                    "refCat": "23029A03000408 LS",
+                    "poligono": "30",
+                    "parcela": "408",
                     "coordenadasX": "X:-",
                     "coordenadasY": "Y:-"
+                  },
+                  "indicadores": {
+                    "superficie": "4,87",
+                    "arboles": "1364",
+                    "co2Capturado": "204,54",
+                    "co2PorCapturar": "3,41",
+                    "factorHidrologico": ""
                   },
                   "analisis": {
                     "text": "Para",

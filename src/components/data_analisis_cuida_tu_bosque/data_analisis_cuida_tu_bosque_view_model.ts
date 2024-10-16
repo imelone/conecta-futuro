@@ -42,7 +42,7 @@ export const useDataAnalysisCuidaTuBosqueViewModel = (
   handleToggleClick: any,
   removeForestItem: (areaName: string) => void
 ) => {
-  const [activeTab, setActiveTab] = useState("Tab1");
+  const [activeTab, setActiveTab] = useState("descripcion");
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
@@ -74,7 +74,7 @@ export const useDataAnalysisCuidaTuBosqueViewModel = (
   };
 
   // Extract rows from dataForest
-  const rows =
+  const rowsCatastrales =
     dataForest?.map((areaData: AreaData, index: number) => ({
       id: index + 1,
       bosque: areaData.properties.leyenda.label,
@@ -84,13 +84,23 @@ export const useDataAnalysisCuidaTuBosqueViewModel = (
       //  coordenadas: `${areaData.properties.catastrales.coordenadasX} ${areaData.properties.catastrales.coordenadasY}`,
     })) || [];
 
+  const rowsIndicadores =
+    dataForest?.map((areaData: any, index: number) => ({
+      id: index + 1,
+      bosque: areaData.properties.leyenda.label,
+      superficie: areaData.properties.indicadores.superficie,
+      arboles: areaData.properties.indicadores.arboles,
+      co2Capturado: areaData.properties.indicadores.co2Capturado,
+      co2PorCapturar: areaData.properties.indicadores.co2PorCapturar,
+      factorHidrologico: areaData.properties.indicadores.factorHidrologico,
+    })) || [];
+
   return {
     activeTab,
     handleTabClick,
     handleClose,
-    rows,
-    pieData1,
-    pieData2,
+    rowsCatastrales,
+    rowsIndicadores,
     handleToggleClick,
     removeForestItem,
   };

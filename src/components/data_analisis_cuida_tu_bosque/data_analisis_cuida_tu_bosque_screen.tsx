@@ -26,13 +26,18 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
   removeForestItem,
   handleToggleClick,
 }) => {
-  const { activeTab, handleTabClick, handleClose, rows, pieData1, pieData2 } =
-    useDataAnalysisCuidaTuBosqueViewModel(
-      isOpen,
-      dataForest,
-      handleToggleClick,
-      removeForestItem
-    );
+  const {
+    activeTab,
+    handleTabClick,
+    handleClose,
+    rowsCatastrales,
+    rowsIndicadores,
+  } = useDataAnalysisCuidaTuBosqueViewModel(
+    isOpen,
+    dataForest,
+    handleToggleClick,
+    removeForestItem
+  );
 
   if (!isOpen) return null;
 
@@ -48,8 +53,27 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
     //   cellClassName: "coordenadas-cell",
     // },
   ];
+  const columnsIndicadores: GridColDef[] = [
+    { field: "bosque", headerName: "BOSQUE", width: 150 },
+    { field: "superficie", headerName: "SUPERFICIE", width: 20 },
+    { field: "arboles", headerName: "ÁRBOLES", width: 20 },
+    { field: "co2Capturado", headerName: "CO2 CAPTURADO (t.)", width: 20 },
+    { field: "co2PorCapturar", headerName: "CO2 X CAPTURAR (t.)", width: 20 },
+    {
+      field: "factorHidrologico",
+      headerName: "FACTOR HIDROLÓGICO",
+      width: 150,
+    },
 
-  const shouldShowGrid = rows.length > 0;
+    // {
+    //   field: "coordenadas",
+    //   headerName: "COORDENADAS",
+    //   width: 300,
+    //   cellClassName: "coordenadas-cell",
+    // },
+  ];
+
+  const shouldShowGrid = rowsCatastrales.length > 0;
 
   return (
     <Draggable handle=".draggable-handle" bounds="parent">
@@ -66,38 +90,36 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
           <div className={styles.tabHeader}>
             <button
               className={`${styles.tabLink} ${
-                activeTab === "Tab1" ? styles.active : ""
+                activeTab === "descripcion" ? styles.active : ""
               }`}
-              onClick={() => handleTabClick("Tab1")}
+              onClick={() => handleTabClick("descripcion")}
             >
-              <p style={{ fontWeight: "700", fontSize: "14px" }}>
-                PROGRAMA CUIDA TU BOSQUE
-              </p>
+              <p style={{ fontWeight: "700", fontSize: "14px" }}>DESCRIPCION</p>
             </button>
             <button
               className={`${styles.tabLink} ${
-                activeTab === "Tab2" ? styles.active : ""
+                activeTab === "datos_catastrales" ? styles.active : ""
               }`}
-              onClick={() => handleTabClick("Tab2")}
-            >
-              <p style={{ fontWeight: "700", fontSize: "14px" }}>INDICADORES</p>
-            </button>
-            <button
-              className={`${styles.tabLink} ${
-                activeTab === "Tab3" ? styles.active : ""
-              }`}
-              onClick={() => handleTabClick("Tab3")}
+              onClick={() => handleTabClick("datos_catastrales")}
             >
               <p style={{ fontWeight: "700", fontSize: "14px" }}>
                 DATOS CATASTRALES
               </p>
             </button>
+            <button
+              className={`${styles.tabLink} ${
+                activeTab === "indicadores" ? styles.active : ""
+              }`}
+              onClick={() => handleTabClick("indicadores")}
+            >
+              <p style={{ fontWeight: "700", fontSize: "14px" }}>INDICADORES</p>
+            </button>
           </div>
           <div className={styles.tabContent}>
             <div
-              id="Tab1"
+              id="descripcion"
               className={`${styles.tabPane} ${
-                activeTab === "Tab1" ? styles.active : ""
+                activeTab === "descripcion" ? styles.active : ""
               }`}
             >
               {dataForest?.map((areaData: AreaData, index: any) => (
@@ -114,32 +136,16 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
                 />
               ))}
             </div>
-
             <div
-              id="Tab2"
+              id="datos_catastrales"
               className={`${styles.tabPane} ${
-                activeTab === "Tab2" ? styles.active : ""
-              }`}
-            >
-              <div className={styles.chartContainer}>
-                <h3>El Corcho</h3>
-                <Pie data={pieData1} />
-              </div>
-              <div className={styles.chartContainer}>
-                <h3>Cerro Ballestero 1</h3>
-                <Pie data={pieData2} />
-              </div>
-            </div>
-            <div
-              id="Tab3"
-              className={`${styles.tabPane} ${
-                activeTab === "Tab3" ? styles.active : ""
+                activeTab === "datos_catastrales" ? styles.active : ""
               }`}
             >
               {shouldShowGrid && (
                 <div className={styles.gridContainer}>
                   <DataGrid
-                    rows={rows}
+                    rows={rowsCatastrales}
                     columns={columnsDatosCatastrales.map((col) => ({
                       ...col,
                       width:
@@ -148,6 +154,50 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
                           : col.field === "coordenadas"
                           ? 300
                           : 200,
+                      sortable: false,
+                      filterable: false,
+                      disableColumnMenu: true,
+                    }))}
+                    pagination={undefined}
+                    hideFooterPagination={true}
+                    hideFooter={true}
+                    sx={{
+                      boxShadow: 2,
+                      border: 2,
+                      borderColor: "primary.light",
+                      "& .MuiDataGrid-root": {
+                        border: "1px solid #ddd",
+                        borderCollapse: "collapse",
+                      },
+                      "& .MuiDataGrid-cell": {
+                        borderBottom: "1px solid #ddd",
+                        whiteSpace: "pre-line",
+                        overflowWrap: "break-word",
+                      },
+                      "& .MuiDataGrid-columnSeparator": {
+                        display: "block",
+                      },
+                      "& .MuiDataGrid-footer": {
+                        display: "none",
+                      },
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+            <div
+              id="indicadores"
+              className={`${styles.tabPane} ${
+                activeTab === "indicadores" ? styles.active : ""
+              }`}
+            >
+              {shouldShowGrid && (
+                <div className={styles.gridContainer}>
+                  <DataGrid
+                    rows={rowsIndicadores}
+                    columns={columnsIndicadores.map((col) => ({
+                      ...col,
+                      width: 160,
                       sortable: false,
                       filterable: false,
                       disableColumnMenu: true,

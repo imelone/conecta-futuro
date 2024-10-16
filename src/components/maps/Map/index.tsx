@@ -558,6 +558,15 @@ const Map = () => {
           activeToggles={activeToggles}
         />
       )}
+      {anyActiveToggle && selectedProgram === "sostenibilidad" && (
+        <DataAnalysisMenuNuevosBosques
+          isOpen={isDataAnalysisMenuOpen}
+          dataForest={dataForest}
+          removeForestItem={removeForestItem}
+          handleToggleClick={handleToggleClick}
+          activeToggles={activeToggles}
+        />
+      )}
     </div>
   );
 };
