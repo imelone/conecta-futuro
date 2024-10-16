@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 import AreaInfoComponent from "../dataAreaInfo";
 import {
   AreaData,
-  useDataAnalysisViewModel,
+  useDataAnalysisNuevosBosquesViewModel,
 } from "./data_analisis_nuevos_bosques_view_model"; // Adjust the import path as necessary
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 //import Draggable from "react-draggable";
@@ -20,14 +20,14 @@ interface DataAnalysisMenuProps {
   activeToggles: Record<string, boolean>;
 }
 const Draggable = dynamic(() => import("react-draggable"), { ssr: false });
-const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
+const DataAnalysisNuevosBosquesMenu: React.FC<DataAnalysisMenuProps> = ({
   isOpen,
   dataForest,
   removeForestItem,
   handleToggleClick,
 }) => {
   const { activeTab, handleTabClick, handleClose, rows, pieData1, pieData2 } =
-    useDataAnalysisViewModel(
+    useDataAnalysisNuevosBosquesViewModel(
       isOpen,
       dataForest,
       handleToggleClick,
@@ -186,4 +186,4 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
   );
 };
 
-export default DataAnalysisMenu;
+export default DataAnalysisNuevosBosquesMenu;

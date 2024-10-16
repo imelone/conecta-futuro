@@ -38,7 +38,7 @@ export interface AreaData {
     };
   };
 }
-export const useDataAnalysisViewModel = (
+export const useDataAnalysisNuevosBosquesViewModel = (
   isOpen: any,
   dataForest: AreaData[],
   handleToggleClick: any,

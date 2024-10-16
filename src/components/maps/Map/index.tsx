@@ -28,6 +28,7 @@ import { cityData } from "./chiclanaDeSegura.js";
 import { FeatureCollection } from "geojson";
 import Image from "next/image";
 import DataAnalysisMenuCuidaTuBosque from "@/components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
+import DataAnalysisMenuNuevosBosques from "@/components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
 import programsData from "../../../app/data/programs.json";
 import comunidades from "../../../app/data/cuida-tu-bosque.json";
 
@@ -53,6 +54,62 @@ const Map = () => {
   const [analysisData, setAnalysisData] = useState<{ [key: string]: any }>({});
   const [isDataAnalysisMenuOpen, setIsDataAnalysisMenuOpen] = useState(false);
   const [anyActiveToggle, setAnyActiveToggle] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
+  const [townsData, setTownsData] = useState<any>(null);
+  const [optionOpen, setOptionOpen] = useState<string | null>(null);
+  const [selectedTown, setSelectedTown] = useState<string | null>(null);
+  const [selectedProvince, setSelectedProvince] = useState<string | null>(null); // State for the selected province
+  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null); // State for the selected district
+
+  useEffect(() => {
+    console.log("selectedProgram: ", selectedProgram);
+    if (selectedProgram) {
+      loadTownsData(selectedProgram);
+    }
+  }, [selectedProgram]);
+
+  const loadTownsData = async (selectedProgram: string) => {
+    console.log("comunidadArchivo: ", selectedProgram);
+    try {
+      const towns = await import(`../../../app/data/${selectedProgram}.json`);
+      setTownsData(towns.default); // Access the default export from the JSON file
+    } catch (error) {
+      console.error("Error loading towns data:", error);
+      setTownsData(null); // Reset towns data on error
+    }
+  };
+
+  const handleProgramSelection = (comunidadArchivo: string) => {
+    setSelectedProgram(comunidadArchivo);
+    // Hide the district pane and show the towns pane
+    handleOptionClick("towns");
+  };
+  const handleOptionClick = (optionName: string) => {
+    setOptionOpen((prevOption) =>
+      optionName === prevOption ? null : optionName
+    );
+    setSelectedTown(null); // Reset selected town when switching options
+    setSelectedProvince(null); // Reset selected province
+    setSelectedDistrict(null); // Reset selected district
+  };
+
+  const handleTownSelection = (town: string) => {
+    setSelectedTown(town);
+    handleTownClick(town);
+  };
+
+  const handleProvinceSelection = (province: string) => {
+    setSelectedProvince(province);
+    handleProvinceClick(province);
+    setSelectedDistrict(null); // Reset district selection when province changes
+    setSelectedTown(null); // Reset town selection when province changes
+  };
+
+  const handleDistrictSelection = (district: string) => {
+    setSelectedDistrict(district);
+    handleDistrictClick(district);
+    setSelectedTown(null); // Reset town when district changes
+  };
 
   const toggleNames = comunidades?.flatMap((comunidad) =>
     comunidad.provincias.flatMap((provincia) =>
@@ -354,6 +411,17 @@ const Map = () => {
           setIsDataAnalysisMenuOpen={setIsDataAnalysisMenuOpen}
           handleToggleClick={handleToggleClick}
           activeToggles={activeToggles}
+          handleProgramSelection={handleProgramSelection}
+          selectedProgram={selectedProgram}
+          townsData={townsData}
+          handleDistrictSelection={handleDistrictSelection}
+          selectedTown={selectedTown}
+          selectedProvince={selectedProvince}
+          selectedDistrict={selectedDistrict}
+          optionOpen={optionOpen}
+          handleProvinceSelection={handleProvinceSelection}
+          handleTownSelection={handleTownSelection}
+          handleOptionClick={handleOptionClick}
         />
         <MapContainer
           style={{
@@ -443,8 +511,17 @@ const Map = () => {
         </MapContainer>
       </div>
 
-      {anyActiveToggle && (
+      {anyActiveToggle && selectedProgram === "cuida-tu-bosque" && (
         <DataAnalysisMenuCuidaTuBosque
+          isOpen={isDataAnalysisMenuOpen}
+          dataForest={dataForest}
+          removeForestItem={removeForestItem}
+          handleToggleClick={handleToggleClick}
+          activeToggles={activeToggles}
+        />
+      )}
+      {anyActiveToggle && selectedProgram === "nuevos-bosques" && (
+        <DataAnalysisMenuNuevosBosques
           isOpen={isDataAnalysisMenuOpen}
           dataForest={dataForest}
           removeForestItem={removeForestItem}
