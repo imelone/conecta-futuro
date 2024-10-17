@@ -148,7 +148,7 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
                   hideFooter={true}
                   sx={{
                     boxShadow: 2,
-                    border: 2,
+                    border: 0,
                     borderColor: "primary.light",
                     "& .MuiDataGrid-root": {
                       border: "1px solid #ddd",
@@ -193,12 +193,13 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
                   hideFooter={true}
                   sx={{
                     boxShadow: 2,
-                    border: 2,
+                    border: 0,
                     borderColor: "primary.light",
                     "& .MuiDataGrid-root": {
                       border: "1px solid #ddd",
                       borderCollapse: "collapse",
                     },
+
                     "& .MuiDataGrid-cell": {
                       borderBottom: "1px solid #ddd",
                       whiteSpace: "pre-line",
