@@ -45,7 +45,7 @@ export const useDataAnalysisNuevosBosquesViewModel = (
   removeForestItem: (areaName: string) => void
 ) => {
   const [activeTab, setActiveTab] = useState("Tab1");
-
+  const [isMinimized, setIsMinimized] = useState(false);
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
@@ -104,5 +104,7 @@ export const useDataAnalysisNuevosBosquesViewModel = (
     rowsIndicadores,
     handleToggleClick,
     removeForestItem,
+    isMinimized,
+    setIsMinimized,
   };
 };
