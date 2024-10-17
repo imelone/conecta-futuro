@@ -81,3 +81,30 @@
 .coordenadas-cell {
   white-space: pre-line; /* Ensures line breaks are respected */
 }
+.draggableHandle {
+  display: flex;
+  justify-content: end;
+  cursor: move;
+  background-color: #fff;
+  padding: 0.1rem;
+}
+
+.minimizeButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  font-size: 1.8rem; /* Increased font size for larger icons */
+  font-family: monospace; /* Ensuring consistent width */
+  width: 2.4rem; /* Adjusted width for a larger button */
+  height: 1.2rem; /* Adjusted height for a larger button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: grey;
+}
+
+.minimizeButton:hover {
+  color: darkgrey;
+}

@@ -18,6 +18,8 @@ interface DataAnalysisMenuProps {
   removeForestItem: any;
   handleToggleClick: any;
   activeToggles: Record<string, boolean>;
+  setIsMinimized: any;
+  sMinimized: boolean;
 }
 const Draggable = dynamic(() => import("react-draggable"), { ssr: false });
 const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
@@ -32,6 +34,8 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
     handleClose,
     rowsCatastrales,
     rowsIndicadores,
+    setIsMinimized,
+    isMinimized,
   } = useDataAnalysisCuidaTuBosqueViewModel(
     isOpen,
     dataForest,
@@ -39,6 +43,7 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
     removeForestItem
   );
 
+  const shouldShowGrid = rowsCatastrales.length > 0;
   if (!isOpen) return null;
 
   const columnsDatosCatastrales: GridColDef[] = [
@@ -73,163 +78,176 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
     // },
   ];
 
-  const shouldShowGrid = rowsCatastrales.length > 0;
-
   return (
     <Draggable handle=".draggable-handle" bounds="parent">
       <div className={styles.cMapMain}>
         <div className={styles.dataAnalysisMenu}>
-          <div
-            className="draggable-handle"
-            style={{
-              cursor: "move",
-              backgroundColor: "#FFFFF",
-              padding: "0.5rem",
-            }}
-          ></div>
-          <div className={styles.tabHeader}>
+          <div className={`draggable-handle ${styles.draggableHandle}`}>
             <button
-              className={`${styles.tabLink} ${
-                activeTab === "descripcion" ? styles.active : ""
-              }`}
-              onClick={() => handleTabClick("descripcion")}
+              onClick={() => setIsMinimized(!isMinimized)}
+              className={styles.minimizeButton} // Using CSS for styling
             >
-              <p style={{ fontWeight: "700", fontSize: "14px" }}>DESCRIPCION</p>
-            </button>
-            <button
-              className={`${styles.tabLink} ${
-                activeTab === "datos_catastrales" ? styles.active : ""
-              }`}
-              onClick={() => handleTabClick("datos_catastrales")}
-            >
-              <p style={{ fontWeight: "700", fontSize: "14px" }}>
-                DATOS CATASTRALES
-              </p>
-            </button>
-            <button
-              className={`${styles.tabLink} ${
-                activeTab === "indicadores" ? styles.active : ""
-              }`}
-              onClick={() => handleTabClick("indicadores")}
-            >
-              <p style={{ fontWeight: "700", fontSize: "14px" }}>INDICADORES</p>
+              {isMinimized ? "+" : "-"}
             </button>
           </div>
-          <div className={styles.tabContent}>
-            <div
-              id="descripcion"
-              className={`${styles.tabPane} ${
-                activeTab === "descripcion" ? styles.active : ""
-              }`}
-            >
-              {dataForest?.map((areaData: AreaData, index: any) => (
-                <AreaInfoComponent
-                  key={index}
-                  areaLabel={areaData.properties.leyenda.label}
-                  areaName={areaData.properties.leyenda.name}
-                  areaText={areaData.properties.leyenda.text}
-                  areaColor={areaData.properties.leyenda.color}
-                  onClose={handleClose}
-                  removeForestItem={removeForestItem}
-                  toggleName={areaData.properties.leyenda.name}
-                  handleToggleClick={handleToggleClick} // Pass the handleToggleClick function
-                />
-              ))}
-            </div>
-            <div
-              id="datos_catastrales"
-              className={`${styles.tabPane} ${
-                activeTab === "datos_catastrales" ? styles.active : ""
-              }`}
-            >
-              {shouldShowGrid && (
-                <div className={styles.gridContainer}>
-                  <DataGrid
-                    rows={rowsCatastrales}
-                    columns={columnsDatosCatastrales.map((col) => ({
-                      ...col,
-                      width:
-                        col.field === "poligono" || col.field === "parcela"
-                          ? 100
-                          : col.field === "coordenadas"
-                          ? 300
-                          : 200,
-                      sortable: false,
-                      filterable: false,
-                      disableColumnMenu: true,
-                    }))}
-                    pagination={undefined}
-                    hideFooterPagination={true}
-                    hideFooter={true}
-                    sx={{
-                      boxShadow: 2,
-                      border: 2,
-                      borderColor: "primary.light",
-                      "& .MuiDataGrid-root": {
-                        border: "1px solid #ddd",
-                        borderCollapse: "collapse",
-                      },
-                      "& .MuiDataGrid-cell": {
-                        borderBottom: "1px solid #ddd",
-                        whiteSpace: "pre-line",
-                        overflowWrap: "break-word",
-                      },
-                      "& .MuiDataGrid-columnSeparator": {
-                        display: "block",
-                      },
-                      "& .MuiDataGrid-footer": {
-                        display: "none",
-                      },
-                    }}
-                  />
+
+          {/* Toggle Minimize/Maximize Button */}
+
+          {/* Conditionally render content based on isMinimized */}
+          {!isMinimized && (
+            <>
+              <div className={styles.tabHeader}>
+                <button
+                  className={`${styles.tabLink} ${
+                    activeTab === "descripcion" ? styles.active : ""
+                  }`}
+                  onClick={() => handleTabClick("descripcion")}
+                >
+                  <p style={{ fontWeight: "700", fontSize: "14px" }}>
+                    DESCRIPCION
+                  </p>
+                </button>
+                <button
+                  className={`${styles.tabLink} ${
+                    activeTab === "datos_catastrales" ? styles.active : ""
+                  }`}
+                  onClick={() => handleTabClick("datos_catastrales")}
+                >
+                  <p style={{ fontWeight: "700", fontSize: "14px" }}>
+                    DATOS CATASTRALES
+                  </p>
+                </button>
+                <button
+                  className={`${styles.tabLink} ${
+                    activeTab === "indicadores" ? styles.active : ""
+                  }`}
+                  onClick={() => handleTabClick("indicadores")}
+                >
+                  <p style={{ fontWeight: "700", fontSize: "14px" }}>
+                    INDICADORES
+                  </p>
+                </button>
+              </div>
+
+              <div className={styles.tabContent}>
+                <div
+                  id="descripcion"
+                  className={`${styles.tabPane} ${
+                    activeTab === "descripcion" ? styles.active : ""
+                  }`}
+                >
+                  {dataForest?.map((areaData: AreaData, index: any) => (
+                    <AreaInfoComponent
+                      key={index}
+                      areaLabel={areaData.properties.leyenda.label}
+                      areaName={areaData.properties.leyenda.name}
+                      areaText={areaData.properties.leyenda.text}
+                      areaColor={areaData.properties.leyenda.color}
+                      onClose={handleClose}
+                      removeForestItem={removeForestItem}
+                      toggleName={areaData.properties.leyenda.name}
+                      handleToggleClick={handleToggleClick}
+                    />
+                  ))}
                 </div>
-              )}
-            </div>
-            <div
-              id="indicadores"
-              className={`${styles.tabPane} ${
-                activeTab === "indicadores" ? styles.active : ""
-              }`}
-            >
-              {shouldShowGrid && (
-                <div className={styles.gridContainer}>
-                  <DataGrid
-                    rows={rowsIndicadores}
-                    columns={columnsIndicadores.map((col) => ({
-                      ...col,
-                      width: 160,
-                      sortable: false,
-                      filterable: false,
-                      disableColumnMenu: true,
-                    }))}
-                    pagination={undefined}
-                    hideFooterPagination={true}
-                    hideFooter={true}
-                    sx={{
-                      boxShadow: 2,
-                      border: 2,
-                      borderColor: "primary.light",
-                      "& .MuiDataGrid-root": {
-                        border: "1px solid #ddd",
-                        borderCollapse: "collapse",
-                      },
-                      "& .MuiDataGrid-cell": {
-                        borderBottom: "1px solid #ddd",
-                        whiteSpace: "pre-line",
-                        overflowWrap: "break-word",
-                      },
-                      "& .MuiDataGrid-columnSeparator": {
-                        display: "block",
-                      },
-                      "& .MuiDataGrid-footer": {
-                        display: "none",
-                      },
-                    }}
-                  />
+
+                <div
+                  id="datos_catastrales"
+                  className={`${styles.tabPane} ${
+                    activeTab === "datos_catastrales" ? styles.active : ""
+                  }`}
+                >
+                  {shouldShowGrid && (
+                    <div className={styles.gridContainer}>
+                      <DataGrid
+                        rows={rowsCatastrales}
+                        columns={columnsDatosCatastrales.map((col) => ({
+                          ...col,
+                          width:
+                            col.field === "poligono" || col.field === "parcela"
+                              ? 100
+                              : col.field === "coordenadas"
+                              ? 300
+                              : 200,
+                          sortable: false,
+                          filterable: false,
+                          disableColumnMenu: true,
+                        }))}
+                        pagination={undefined}
+                        hideFooterPagination={true}
+                        hideFooter={true}
+                        sx={{
+                          boxShadow: 2,
+                          border: 2,
+                          borderColor: "primary.light",
+                          "& .MuiDataGrid-root": {
+                            border: "1px solid #ddd",
+                            borderCollapse: "collapse",
+                          },
+                          "& .MuiDataGrid-cell": {
+                            borderBottom: "1px solid #ddd",
+                            whiteSpace: "pre-line",
+                            overflowWrap: "break-word",
+                          },
+                          "& .MuiDataGrid-columnSeparator": {
+                            display: "block",
+                          },
+                          "& .MuiDataGrid-footer": {
+                            display: "none",
+                          },
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          </div>
+
+                <div
+                  id="indicadores"
+                  className={`${styles.tabPane} ${
+                    activeTab === "indicadores" ? styles.active : ""
+                  }`}
+                >
+                  {shouldShowGrid && (
+                    <div className={styles.gridContainer}>
+                      <DataGrid
+                        rows={rowsIndicadores}
+                        columns={columnsIndicadores.map((col) => ({
+                          ...col,
+                          width: 160,
+                          sortable: false,
+                          filterable: false,
+                          disableColumnMenu: true,
+                        }))}
+                        pagination={undefined}
+                        hideFooterPagination={true}
+                        hideFooter={true}
+                        sx={{
+                          boxShadow: 2,
+                          border: 2,
+                          borderColor: "primary.light",
+                          "& .MuiDataGrid-root": {
+                            border: "1px solid #ddd",
+                            borderCollapse: "collapse",
+                          },
+                          "& .MuiDataGrid-cell": {
+                            borderBottom: "1px solid #ddd",
+                            whiteSpace: "pre-line",
+                            overflowWrap: "break-word",
+                          },
+                          "& .MuiDataGrid-columnSeparator": {
+                            display: "block",
+                          },
+                          "& .MuiDataGrid-footer": {
+                            display: "none",
+                          },
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </Draggable>

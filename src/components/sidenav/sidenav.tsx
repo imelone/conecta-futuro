@@ -189,7 +189,15 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
                     handleProgramSelection(program.comunidadArchivo)
                   }
                 >
-                  {program.programa}
+                  <h3
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    {program.programa}
+                  </h3>
                 </a>
               </li>
             ))}
@@ -202,12 +210,12 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
           {selectedTown || !townsData ? (
             <div>
               {/* Handle selected town content here */}
-              <h2>{selectedTown}</h2>
+              {/* <h2>{selectedTown}</h2>
               <Image
                 src={chiclanaLogo}
                 alt="Chiclana de Segura"
                 className="town-image"
-              />
+              /> */}
               {/* Additional town details here */}
             </div>
           ) : (

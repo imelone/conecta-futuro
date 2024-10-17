@@ -76,7 +76,8 @@ export const useDataAnalysisNuevosBosquesViewModel = (
   };
 
   // Extract rows from dataForest
-  const rows =
+  // Extract rows from dataForest
+  const rowsCatastrales =
     dataForest?.map((areaData: AreaData, index: number) => ({
       id: index + 1,
       bosque: areaData.properties.leyenda.label,
@@ -86,13 +87,21 @@ export const useDataAnalysisNuevosBosquesViewModel = (
       //  coordenadas: `${areaData.properties.catastrales.coordenadasX} ${areaData.properties.catastrales.coordenadasY}`,
     })) || [];
 
+  const rowsIndicadores =
+    dataForest?.map((areaData: any, index: number) => ({
+      id: index + 1,
+      bosque: areaData.properties.leyenda.label,
+      superficie: areaData.properties.indicadores.superficie,
+      arboles_nuevos: areaData.properties.indicadores.arbolesNuevos,
+      co2PorCapturar: areaData.properties.indicadores.co2PorCapturar,
+    })) || [];
+
   return {
     activeTab,
     handleTabClick,
     handleClose,
-    rows,
-    pieData1,
-    pieData2,
+    rowsCatastrales,
+    rowsIndicadores,
     handleToggleClick,
     removeForestItem,
   };
