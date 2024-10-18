@@ -1,124 +1,140 @@
 [
   {
-    "comunidad": "Andalucía",
-    "provincias": [
+    "descripcion": [
+      "Especies a sembrar",
+      "Materiales y recursos necesarios",
+      "Adecuación de la zona",
+      "Plantación",
+      "Control de estado y crecimiento",
+      "Reposición de ejemplares",
+      "Evolución de la plantación",
+      "Prevención de incendios"
+    ]
+  },
+  {
+    "distritos": [
       {
-        "provincia": "Jaén",
-        "municipios": [
+        "comunidad": "Andalucía",
+        "provincias": [
           {
-            "municipio": "Chiclana de Segura",
-            "parcelas": [
+            "provincia": "Jaén",
+            "municipios": [
               {
-                "type": "Feature",
-                "geometry": {
-                  "type": "Point",
-                  "coordinates": [[[-3.062473, 38.302069]]]
-                },
-                "properties": {
-                  "leyenda": {
-                    "name": "losLlanos",
-                    "label": "Los Llanos",
-                    "color": "#C1BE13",
-                    "text": ""
+                "municipio": "Chiclana de Segura",
+                "parcelas": [
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[[-3.062473, 38.302069]]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "losLlanos",
+                        "label": "Los Llanos",
+                        "color": "#C1BE13",
+                        "text": ""
+                      },
+                      "catastrales": {
+                        "text": "Para",
+                        "image": "",
+                        "refCat": "23029A05500059 LU",
+                        "poligono": "55",
+                        "parcela": "59",
+                        "coordenadasX": "",
+                        "coordenadasY": ""
+                      },
+                      "indicadores": {
+                        "superficie": "22,15",
+                        "arbolesNuevos": "22820",
+                        "co2PorCapturar": "1711,50"
+                      },
+                      "analisis": {
+                        "text": "Para",
+                        "image": ""
+                      }
+                    }
                   },
-                  "catastrales": {
-                    "text": "Para",
-                    "image": "",
-                    "refCat": "23029A05500059 LU",
-                    "poligono": "55",
-                    "parcela": "59",
-                    "coordenadasX": "",
-                    "coordenadasY": ""
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[[]]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "miteco",
+                        "label": "MITECO",
+                        "color": "#736BA9",
+                        "text": ""
+                      },
+                      "catastrales": {
+                        "text": "Para",
+                        "image": "",
+                        "refCat": "23029A03200022LY",
+                        "poligono": "32",
+                        "parcela": "22",
+                        "coordenadasX": "",
+                        "coordenadasY": ""
+                      },
+                      "indicadores": {
+                        "superficie": "20,82",
+                        "arbolesNuevos": "20000",
+                        "co2PorCapturar": "37002,44"
+                      },
+                      "analisis": {
+                        "text": "Para",
+                        "image": ""
+                      }
+                    }
                   },
-                  "indicadores": {
-                    "superficie": "22,15",
-                    "arbolesNuevos": "22820",
-                    "co2PorCapturar": "1711,50"
-                  },
-                  "analisis": {
-                    "text": "Para",
-                    "image": ""
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Polygon",
+                      "coordinates": [
+                        [
+                          [-2.924985, 38.471293],
+                          [-2.9346, 38.450854],
+                          [-2.937347, 38.427179],
+                          [-2.916744, 38.412648],
+                          [-2.889959, 38.425027],
+                          [-2.891333, 38.448702],
+                          [-2.883778, 38.454619],
+                          [-2.899574, 38.463764],
+                          [-2.907129, 38.470218],
+                          [-2.924985, 38.471293]
+                        ]
+                      ]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "elCorcho",
+                        "label": "El Corcho",
+                        "color": "#EE20B3",
+                        "text": ""
+                      },
+                      "catastrales": {
+                        "text": "Para",
+                        "image": "el-corcho-parcela.png",
+                        "refCat": "23029A03000201 LP",
+                        "poligono": "30",
+                        "parcela": "201",
+                        "coordenadasX": "X:-",
+                        "coordenadasY": "Y:-"
+                      },
+                      "indicadores": {
+                        "superficie": "0,70",
+                        "arbolesNuevos": "625",
+                        "co2PorCapturar": "46,86"
+                      },
+                      "analisis": {
+                        "text": "Para",
+                        "image": ""
+                      }
+                    }
                   }
-                }
-              },
-              {
-                "type": "Feature",
-                "geometry": {
-                  "type": "Point",
-                  "coordinates": [[[]]]
-                },
-                "properties": {
-                  "leyenda": {
-                    "name": "miteco",
-                    "label": "MITECO",
-                    "color": "#736BA9",
-                    "text": ""
-                  },
-                  "catastrales": {
-                    "text": "Para",
-                    "image": "",
-                    "refCat": "23029A03200022LY",
-                    "poligono": "32",
-                    "parcela": "22",
-                    "coordenadasX": "",
-                    "coordenadasY": ""
-                  },
-                  "indicadores": {
-                    "superficie": "20,82",
-                    "arbolesNuevos": "20000",
-                    "co2PorCapturar": "37002,44"
-                  },
-                  "analisis": {
-                    "text": "Para",
-                    "image": ""
-                  }
-                }
-              },
-              {
-                "type": "Feature",
-                "geometry": {
-                  "type": "Polygon",
-                  "coordinates": [
-                    [
-                      [-2.924985, 38.471293],
-                      [-2.9346, 38.450854],
-                      [-2.937347, 38.427179],
-                      [-2.916744, 38.412648],
-                      [-2.889959, 38.425027],
-                      [-2.891333, 38.448702],
-                      [-2.883778, 38.454619],
-                      [-2.899574, 38.463764],
-                      [-2.907129, 38.470218],
-                      [-2.924985, 38.471293]
-                    ]
-                  ]
-                },
-                "properties": {
-                  "leyenda": {
-                    "name": "elCorcho",
-                    "label": "El Corcho",
-                    "color": "#EE20B3",
-                    "text": ""
-                  },
-                  "catastrales": {
-                    "text": "Para",
-                    "image": "el-corcho-parcela.png",
-                    "refCat": "23029A03000201 LP",
-                    "poligono": "30",
-                    "parcela": "201",
-                    "coordenadasX": "X:-",
-                    "coordenadasY": "Y:-"
-                  },
-                  "indicadores": {
-                    "superficie": "0,70",
-                    "arbolesNuevos": "625",
-                    "co2PorCapturar": "46,86"
-                  },
-                  "analisis": {
-                    "text": "Para",
-                    "image": ""
-                  }
-                }
+                ]
               }
             ]
           }

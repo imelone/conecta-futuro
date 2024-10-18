@@ -53,6 +53,7 @@ const Map = () => {
   const [anyActiveToggle, setAnyActiveToggle] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
   const [townsData, setTownsData] = useState<any>(null);
+  const [programsInfo, setProgramsInfo] = useState<any>(null);
   const [optionOpen, setOptionOpen] = useState<string | null>(null);
   const [selectedTown, setSelectedTown] = useState<string | null>(null);
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null); // State for the selected province
@@ -93,7 +94,8 @@ const Map = () => {
       const towns = await import(
         `../../../app/data/programas/${selectedProgram}.json`
       );
-      setTownsData(towns.default); // Access the default export from the JSON file
+      setTownsData(towns[1].distritos);
+      setProgramsInfo(towns[0].descripcion); // Access the default export from the JSON file
     } catch (error) {
       console.error("Error loading towns data:", error);
       setTownsData(null); // Reset towns data on error
@@ -134,6 +136,7 @@ const Map = () => {
   };
 
   useEffect(() => {
+    console.log("townsData: ", townsData);
     if (townsData) {
       const toggleNames = townsData?.flatMap((comunidad) =>
         comunidad.provincias.flatMap((provincia) =>
@@ -224,9 +227,9 @@ const Map = () => {
       if (isActive) {
         try {
           console.log("toggleName: ", toggleName);
-
+          const townsList = townsData;
           // Find the relevant parcela by the name from toggleName
-          const foundParcela = townsData.reduce((acc, comunidad) => {
+          const foundParcela = townsList.reduce((acc, comunidad) => {
             if (acc) return acc; // If found, skip further searching
             return comunidad.provincias.reduce((accProv, provincia) => {
               if (accProv) return accProv; // If found, skip further searching
@@ -249,7 +252,7 @@ const Map = () => {
               const latLng: LatLngTuple = [coordinates[1], coordinates[0]];
 
               const pointLayer = L.circleMarker(latLng, {
-                radius: 5,
+                radius: 12,
                 fillColor: data.properties?.leyenda?.color || "#3388ff",
                 color: "#000",
                 weight: 1,
@@ -443,6 +446,7 @@ const Map = () => {
           handleProgramSelection={handleProgramSelection}
           selectedProgram={selectedProgram}
           townsData={townsData}
+          programsInfo={programsInfo}
           handleDistrictSelection={handleDistrictSelection}
           selectedTown={selectedTown}
           selectedProvince={selectedProvince}

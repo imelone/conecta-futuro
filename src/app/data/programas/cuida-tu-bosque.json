@@ -1,217 +1,236 @@
 [
   {
-    "comunidad": "Andalucía",
-    "provincias": [
+    "descripcion": [
+      "Cobertura arbórea",
+      "CO2 capturado",
+      "Captación de agua",
+      "Prevención de incendios",
+      "Desbroce de material orgánico",
+      "Control de plagas",
+      "Reposición de especies"
+    ]
+  },
+  {
+    "distritos": [
       {
-        "provincia": "Jaén",
-        "municipios": [
+        "comunidad": "Andalucía",
+        "provincias": [
           {
-            "municipio": "Chiclana de Segura",
-            "parcelas": [
+            "provincia": "Jaén",
+            "municipios": [
               {
-                "type": "Feature",
-                "geometry": {
-                  "type": "Point",
-                  "coordinates": [[[-3.060875, 38.301601]]]
-                },
-                "properties": {
-                  "leyenda": {
-                    "name": "cerroBallestero1",
-                    "label": "Cerro Ballestero 1",
-                    "color": "#C1BE13",
-                    "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
+                "municipio": "Chiclana de Segura",
+
+                "parcelas": [
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[[-3.060875, 38.301601]]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "cerroBallestero1",
+                        "label": "Cerro Ballestero 1",
+                        "color": "#C1BE13",
+                        "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
+                      },
+                      "catastrales": {
+                        "text": "Para",
+                        "image": "cerro-ballestero-1.png",
+                        "refCat": "23029A03000409 LZ",
+                        "poligono": "30",
+                        "parcela": "409",
+                        "coordenadasX": "X:494.684,578560",
+                        "coordenadasY": "Y:4.239.308,101280"
+                      },
+                      "indicadores": {
+                        "superficie": "1,12",
+                        "arboles": "672",
+                        "co2Capturado": "100,80",
+                        "co2PorCapturar": "1.68",
+                        "factorHidrologico": ""
+                      },
+                      "Copernico": {},
+                      "analisis": {
+                        "text": "Para",
+                        "image": ""
+                      }
+                    }
                   },
-                  "catastrales": {
-                    "text": "Para",
-                    "image": "cerro-ballestero-1.png",
-                    "refCat": "23029A03000409 LZ",
-                    "poligono": "30",
-                    "parcela": "409",
-                    "coordenadasX": "X:494.684,578560",
-                    "coordenadasY": "Y:4.239.308,101280"
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[[-3.063968, 38.302948]]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "cerroBallestero2",
+                        "label": "Cerro Ballestero 2",
+                        "color": "#736BA9",
+                        "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
+                      },
+                      "catastrales": {
+                        "text": "Para",
+                        "image": "cerro-ballestero-2.png",
+                        "refCat": "23029A03000437 LI",
+                        "poligono": "30",
+                        "parcela": "437",
+                        "coordenadasX": "X:495.108,670890",
+                        "coordenadasY": "Y:4.239.477,276590"
+                      },
+                      "indicadores": {
+                        "superficie": "3,11",
+                        "arboles": "187",
+                        "co2Capturado": "27,09",
+                        "co2PorCapturar": "0,47",
+                        "factorHidrologico": ""
+                      },
+                      "analisis": {
+                        "text": "Para",
+                        "image": ""
+                      }
+                    }
                   },
-                  "indicadores": {
-                    "superficie": "1,12",
-                    "arboles": "672",
-                    "co2Capturado": "100,80",
-                    "co2PorCapturar": "1.68",
-                    "factorHidrologico": ""
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Polygon",
+                      "coordinates": [
+                        [
+                          [-2.924985, 38.471293],
+                          [-2.9346, 38.450854],
+                          [-2.937347, 38.427179],
+                          [-2.916744, 38.412648],
+                          [-2.889959, 38.425027],
+                          [-2.891333, 38.448702],
+                          [-2.883778, 38.454619],
+                          [-2.899574, 38.463764],
+                          [-2.907129, 38.470218],
+                          [-2.924985, 38.471293]
+                        ]
+                      ]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "elCorcho",
+                        "label": "El Corcho",
+                        "color": "#EE20B3",
+                        "text": "En el marco de dicho acuerdo y en muestra de un total compromiso con el programa” “Conecta cuida tu Bosque”, hemos asumido de forma exclusiva el patrocinio del bosque El Corcho. Ya se han iniciado las labores de análisis de impacto para evaluar exactamente la cantidad de CO2 almacenado y el desarrollo del plan de mantenimiento. Adicionalmente, en el marco de los festejos del Día de la Tierra, a celebrarse el próximo 22 de abril, se efectuará una jornada lúdico-festiva, donde se iniciará la fase I del plan de reforestación de la parcela, plantando 100 nuevos árboles. Dicha actividad se realizará en el marco del programa “Conecta nuevos Bosques”, que prevé en las dos fases siguientes la plantación de 150 árboles en cada una, completando un total de 400 nuevos árboles en la parcela. De esta forma, El Corcho se constituye en la primera parcela en la provincia de Jaén que combina ambos programas. Una vez finalizada la plantación de la fase I, será lanzado el programa \"Conecta apadrina un árbol\" como otra alternativa de participación de diferentes colectivos en la lucha contra el cambio climático y la reducción de la huella de CO2. El programa estará orientado a la ciudadanía, establecimientos educativos y pequeñas empresas, las que por su participación, recibirán un certificado de apadrinamiento personalizado."
+                      },
+                      "catastrales": {
+                        "text": "Para",
+                        "image": "el-corcho-parcela.png",
+                        "refCat": "23029A03000201 LP",
+                        "poligono": "30",
+                        "parcela": "201",
+                        "coordenadasX": "X:-",
+                        "coordenadasY": "Y:-"
+                      },
+                      "indicadores": {
+                        "superficie": "0,70",
+                        "arboles": "77",
+                        "co2Capturado": "11,58",
+                        "co2PorCapturar": "0,19",
+                        "factorHidrologico": ""
+                      },
+                      "analisis": {
+                        "text": "Para",
+                        "image": ""
+                      }
+                    }
                   },
-                  "Copernico": {},
-                  "analisis": {
-                    "text": "Para",
-                    "image": ""
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[[-3.053377, 38.302802]]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "laHerencia",
+                        "label": "La Herencia",
+                        "color": "#EE2045",
+                        "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
+                      },
+                      "catastrales": {
+                        "text": "Para",
+                        "image": "la-herencia-parcela.png",
+                        "refCat": "23029A03000429 LO",
+                        "poligono": "30",
+                        "parcela": "429",
+                        "coordenadasX": "X:495.338,822140",
+                        "coordenadasY": "Y:4.239.393,692370"
+                      },
+                      "indicadores": {
+                        "superficie": "3,27",
+                        "arboles": "1472",
+                        "co2Capturado": "220,73",
+                        "co2PorCapturar": "3,68",
+                        "factorHidrologico": ""
+                      },
+                      "analisis": {
+                        "text": "Para",
+                        "image": ""
+                      }
+                    }
+                  },
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[[-3.062473, 38.302069]]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "losCarrizales",
+                        "label": "Los Carrizales",
+                        "color": "#3C20EE",
+                        "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
+                      },
+                      "catastrales": {
+                        "text": "Para",
+                        "image": "los-carrizales-parcela.png",
+                        "refCat": "23029A03000408 LS",
+                        "poligono": "30",
+                        "parcela": "408",
+                        "coordenadasX": "X:-",
+                        "coordenadasY": "Y:-"
+                      },
+                      "indicadores": {
+                        "superficie": "4,87",
+                        "arboles": "1364",
+                        "co2Capturado": "204,54",
+                        "co2PorCapturar": "3,41",
+                        "factorHidrologico": ""
+                      },
+                      "analisis": {
+                        "text": "Para",
+                        "image": ""
+                      }
+                    }
                   }
-                }
-              },
-              {
-                "type": "Feature",
-                "geometry": {
-                  "type": "Point",
-                  "coordinates": [[[-3.063968, 38.302948]]]
-                },
-                "properties": {
-                  "leyenda": {
-                    "name": "cerroBallestero2",
-                    "label": "Cerro Ballestero 2",
-                    "color": "#736BA9",
-                    "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
-                  },
-                  "catastrales": {
-                    "text": "Para",
-                    "image": "cerro-ballestero-2.png",
-                    "refCat": "23029A03000437 LI",
-                    "poligono": "30",
-                    "parcela": "437",
-                    "coordenadasX": "X:495.108,670890",
-                    "coordenadasY": "Y:4.239.477,276590"
-                  },
-                  "indicadores": {
-                    "superficie": "3,11",
-                    "arboles": "187",
-                    "co2Capturado": "27,09",
-                    "co2PorCapturar": "0,47",
-                    "factorHidrologico": ""
-                  },
-                  "analisis": {
-                    "text": "Para",
-                    "image": ""
-                  }
-                }
-              },
-              {
-                "type": "Feature",
-                "geometry": {
-                  "type": "Polygon",
-                  "coordinates": [
-                    [
-                      [-2.924985, 38.471293],
-                      [-2.9346, 38.450854],
-                      [-2.937347, 38.427179],
-                      [-2.916744, 38.412648],
-                      [-2.889959, 38.425027],
-                      [-2.891333, 38.448702],
-                      [-2.883778, 38.454619],
-                      [-2.899574, 38.463764],
-                      [-2.907129, 38.470218],
-                      [-2.924985, 38.471293]
-                    ]
-                  ]
-                },
-                "properties": {
-                  "leyenda": {
-                    "name": "elCorcho",
-                    "label": "El Corcho",
-                    "color": "#EE20B3",
-                    "text": "En el marco de dicho acuerdo y en muestra de un total compromiso con el programa” “Conecta cuida tu Bosque”, hemos asumido de forma exclusiva el patrocinio del bosque El Corcho. Ya se han iniciado las labores de análisis de impacto para evaluar exactamente la cantidad de CO2 almacenado y el desarrollo del plan de mantenimiento. Adicionalmente, en el marco de los festejos del Día de la Tierra, a celebrarse el próximo 22 de abril, se efectuará una jornada lúdico-festiva, donde se iniciará la fase I del plan de reforestación de la parcela, plantando 100 nuevos árboles. Dicha actividad se realizará en el marco del programa “Conecta nuevos Bosques”, que prevé en las dos fases siguientes la plantación de 150 árboles en cada una, completando un total de 400 nuevos árboles en la parcela. De esta forma, El Corcho se constituye en la primera parcela en la provincia de Jaén que combina ambos programas. Una vez finalizada la plantación de la fase I, será lanzado el programa \"Conecta apadrina un árbol\" como otra alternativa de participación de diferentes colectivos en la lucha contra el cambio climático y la reducción de la huella de CO2. El programa estará orientado a la ciudadanía, establecimientos educativos y pequeñas empresas, las que por su participación, recibirán un certificado de apadrinamiento personalizado."
-                  },
-                  "catastrales": {
-                    "text": "Para",
-                    "image": "el-corcho-parcela.png",
-                    "refCat": "23029A03000201 LP",
-                    "poligono": "30",
-                    "parcela": "201",
-                    "coordenadasX": "X:-",
-                    "coordenadasY": "Y:-"
-                  },
-                  "indicadores": {
-                    "superficie": "0,70",
-                    "arboles": "77",
-                    "co2Capturado": "11,58",
-                    "co2PorCapturar": "0,19",
-                    "factorHidrologico": ""
-                  },
-                  "analisis": {
-                    "text": "Para",
-                    "image": ""
-                  }
-                }
-              },
-              {
-                "type": "Feature",
-                "geometry": {
-                  "type": "Point",
-                  "coordinates": [[[-3.053377, 38.302802]]]
-                },
-                "properties": {
-                  "leyenda": {
-                    "name": "laHerencia",
-                    "label": "La Herencia",
-                    "color": "#EE2045",
-                    "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
-                  },
-                  "catastrales": {
-                    "text": "Para",
-                    "image": "la-herencia-parcela.png",
-                    "refCat": "23029A03000429 LO",
-                    "poligono": "30",
-                    "parcela": "429",
-                    "coordenadasX": "X:495.338,822140",
-                    "coordenadasY": "Y:4.239.393,692370"
-                  },
-                  "indicadores": {
-                    "superficie": "3,27",
-                    "arboles": "1472",
-                    "co2Capturado": "220,73",
-                    "co2PorCapturar": "3,68",
-                    "factorHidrologico": ""
-                  },
-                  "analisis": {
-                    "text": "Para",
-                    "image": ""
-                  }
-                }
-              },
-              {
-                "type": "Feature",
-                "geometry": {
-                  "type": "Point",
-                  "coordinates": [[[-3.062473, 38.302069]]]
-                },
-                "properties": {
-                  "leyenda": {
-                    "name": "losCarrizales",
-                    "label": "Los Carrizales",
-                    "color": "#3C20EE",
-                    "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
-                  },
-                  "catastrales": {
-                    "text": "Para",
-                    "image": "los-carrizales-parcela.png",
-                    "refCat": "23029A03000408 LS",
-                    "poligono": "30",
-                    "parcela": "408",
-                    "coordenadasX": "X:-",
-                    "coordenadasY": "Y:-"
-                  },
-                  "indicadores": {
-                    "superficie": "4,87",
-                    "arboles": "1364",
-                    "co2Capturado": "204,54",
-                    "co2PorCapturar": "3,41",
-                    "factorHidrologico": ""
-                  },
-                  "analisis": {
-                    "text": "Para",
-                    "image": ""
-                  }
-                }
+                ]
               }
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "comunidad": "Cataluña",
-    "provincias": [
+      },
       {
-        "provincia": "Barcelona",
-        "municipios": [
+        "comunidad": "Cataluña",
+        "provincias": [
           {
-            "municipio": "Barcelona",
-            "parcelas": [{ "parcela": "Parcela 1" }, { "parcela": "Parcela 2" }]
+            "provincia": "Barcelona",
+            "municipios": [
+              {
+                "municipio": "Barcelona",
+                "parcelas": [
+                  { "parcela": "Parcela 1" },
+                  { "parcela": "Parcela 2" }
+                ]
+              }
+            ]
           }
         ]
       }

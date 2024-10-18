@@ -41,6 +41,7 @@ interface SidebarViewModelProps {
   handleProvinceSelection: any;
   handleTownSelection: any;
   handleOptionClick: any;
+  programsInfo: any;
   handleDistrictSelection?: (district: string) => void; // <-- Make this optional
 }
 
@@ -60,6 +61,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
     handleProgramSelection,
     selectedProgram,
     townsData,
+    programsInfo,
     selectedProvince,
     selectedDistrict,
     handleProvinceSelection,
@@ -221,6 +223,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
           ) : (
             <TownList
               communitiesData={townsData}
+              programsInfo={programsInfo}
               onParcelClick={handleTownSelection}
               handleToggleClick={handleToggleClick}
               activeToggles={activeToggles}
