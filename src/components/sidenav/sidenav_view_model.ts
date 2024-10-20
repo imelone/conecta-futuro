@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 interface SidebarViewModelProps {
-  programsData: any;
+  programsList: any;
   onToggle: (toggleName: string, isActive: boolean) => void;
   handleTownClick: (town: string) => void;
+  handleMunicipioToggleClick: (municipio: string) => void;
   setIsDataAnalysisMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleToggleClick: (toggleName: string) => void;
   activeToggles: {
@@ -31,11 +32,12 @@ interface SidebarViewModelProps {
 }
 
 export const useSidebarViewModel = ({
-  programsData,
+  programsList,
   onToggle,
   handleTownClick,
   setIsDataAnalysisMenuOpen,
   handleToggleClick,
+  handleMunicipioToggleClick,
   activeToggles,
   handleProvinceClick,
   handleDistrictClick, // Add the new handlers to the props
@@ -52,40 +54,8 @@ export const useSidebarViewModel = ({
   handleProvinceSelection, // Expose province selection handler
   handleDistrictSelection,
 }: SidebarViewModelProps) => {
-  // const [optionOpen, setOptionOpen] = useState<string | null>(null);
-  // const [selectedTown, setSelectedTown] = useState<string | null>(null);
-  // const [selectedProvince, setSelectedProvince] = useState<string | null>(null); // State for the selected province
-  // const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null); // State for the selected district
-
-  // const handleOptionClick = (optionName: string) => {
-  //   setOptionOpen((prevOption) =>
-  //     optionName === prevOption ? null : optionName
-  //   );
-  //   setSelectedTown(null); // Reset selected town when switching options
-  //   setSelectedProvince(null); // Reset selected province
-  //   setSelectedDistrict(null); // Reset selected district
-  // };
-
-  // const handleTownSelection = (town: string) => {
-  //   setSelectedTown(town);
-  //   handleTownClick(town);
-  // };
-
-  // const handleProvinceSelection = (province: string) => {
-  //   setSelectedProvince(province);
-  //   handleProvinceClick(province);
-  //   setSelectedDistrict(null); // Reset district selection when province changes
-  //   setSelectedTown(null); // Reset town selection when province changes
-  // };
-
-  // const handleDistrictSelection = (district: string) => {
-  //   setSelectedDistrict(district);
-  //   handleDistrictClick(district);
-  //   setSelectedTown(null); // Reset town when district changes
-  // };
-
   return {
-    programsData,
+    programsList,
     optionOpen,
     selectedTown,
     selectedProvince, // Expose province state
@@ -95,6 +65,7 @@ export const useSidebarViewModel = ({
     handleProvinceSelection, // Expose province selection handler
     handleDistrictSelection, // Expose district selection handler
     handleToggleClick,
+    handleMunicipioToggleClick,
     activeToggles,
     handleProgramSelection,
     selectedProgram,

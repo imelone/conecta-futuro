@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./sidenav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,14 +9,14 @@ import {
   faMap,
 } from "@fortawesome/free-solid-svg-icons";
 import TownList from "../ui-components/regions/page";
-import chiclanaLogo from "../../../public/images/icons/chiclana-logo.png";
+//import chiclanaLogo from "../../../public/images/icons/chiclana-logo.png";
 import styled from "@emotion/styled";
 import { useSidebarViewModel } from "./sidenav_view_model";
 import Image from "next/image";
 //import programsData from "../ui-components/regions/programs.json";
 
 interface SidebarViewModelProps {
-  programsData: any;
+  programsList: any;
   onToggle: (toggleName: string, isActive: boolean) => void;
   handleTownClick: (town: string) => void;
   setIsDataAnalysisMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,6 +35,7 @@ interface SidebarViewModelProps {
   selectedProgram: any;
   townsData: any;
   selectedTown: any;
+  handleMunicipioToggleClick: any;
   selectedProvince: any;
   selectedDistrict: any;
   optionOpen: any;
@@ -51,46 +52,19 @@ const CustomIcon = styled(FontAwesomeIcon)`
 
 const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
   const {
-    programsData,
+    programsList,
     optionOpen,
     selectedTown,
     handleOptionClick,
     handleTownSelection,
     handleToggleClick,
+    handleMunicipioToggleClick,
     activeToggles,
     handleProgramSelection,
     selectedProgram,
     townsData,
     programsInfo,
-    selectedProvince,
-    selectedDistrict,
-    handleProvinceSelection,
   } = useSidebarViewModel(props);
-  // const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
-  // const [townsData, setTownsData] = useState<any>(null);
-
-  // useEffect(() => {
-  //   if (selectedProgram) {
-  //     loadTownsData(selectedProgram);
-  //   }
-  // }, [selectedProgram]);
-
-  // const loadTownsData = async (comunidadArchivo: string) => {
-  //   console.log("comunidadArchivo: ", comunidadArchivo);
-  //   try {
-  //     const towns = await import(`../../app/data/${comunidadArchivo}.json`);
-  //     setTownsData(towns.default); // Access the default export from the JSON file
-  //   } catch (error) {
-  //     console.error("Error loading towns data:", error);
-  //     setTownsData(null); // Reset towns data on error
-  //   }
-  // };
-
-  // const handleProgramSelection = (comunidadArchivo: string) => {
-  //   setSelectedProgram(comunidadArchivo);
-  //   // Hide the district pane and show the towns pane
-  //   handleOptionClick("towns");
-  // };
 
   return (
     <div
@@ -182,32 +156,48 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
           }`}
           id="district"
         >
+          <h2 style={{ marginBottom: "1rem" }}>PROGRAMAS</h2>
+
           <ul>
-            {programsData.map((program: any) => (
+            {programsList.map((program: any) => (
               <li key={program.comunidadArchivo}>
-                <a
-                  href="#"
+                <button
                   onClick={() =>
                     handleProgramSelection(program.comunidadArchivo)
                   }
+                  style={{
+                    background: "none",
+                    border: "none",
+                    padding: 0,
+                    margin: 0,
+                    color: "black",
+                    textDecoration: "none",
+                    cursor: "pointer",
+                    width: "100%", // Ensures the button takes up full width
+                    display: "flex", // Flexbox to center content
+                    justifyContent: "center", // Centers horizontally
+                    alignItems: "center", // Centers vertically
+                  }}
                 >
                   <h3
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      marginBottom: "1rem",
+                      marginBottom: "1rem", // Preserves margin for spacing
+                      margin: 0, // Reset margin on h3 for more control
+                      textAlign: "center", // Ensures h3 content is centered
                     }}
                   >
                     {program.programa}
                   </h3>
-                </a>
+                </button>
               </li>
             ))}
           </ul>
         </div>
         <div
-          className={`sidebar-pane ${optionOpen === "towns" ? "active" : ""}`}
-          id="towns"
+          className={`sidebar-pane ${
+            optionOpen === "districts" ? "active" : ""
+          }`}
+          id="districts"
         >
           {selectedTown || !townsData ? (
             <div>
@@ -226,6 +216,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
               programsInfo={programsInfo}
               onParcelClick={handleTownSelection}
               handleToggleClick={handleToggleClick}
+              handleMunicipioToggleClick={handleMunicipioToggleClick}
               activeToggles={activeToggles}
               selectedProgram={selectedProgram}
             />

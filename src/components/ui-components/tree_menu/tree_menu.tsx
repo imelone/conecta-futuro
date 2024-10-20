@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 interface AccordionProps {
-  title: string;
+  title: any;
   children: React.ReactNode;
   level?: number;
   selectedProgram?: string;

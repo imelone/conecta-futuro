@@ -1,13 +1,15 @@
-export const cityData = {
-  type: "FeatureCollection",
-  features: [
+{
+  "type": "FeatureCollection",
+  "features": [
     {
-      type: "Feature",
-      id: "01",
-      properties: { name: "chiclana de segura" },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
+      "type": "Feature",
+      "id": "01",
+      "properties": {
+        "name": "chiclana de segura"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
           [
             [-2.8814901, 38.4526449],
             [-2.886633, 38.4545516],
@@ -697,12 +699,10 @@ export const cityData = {
             [-2.8844593, 38.4520801],
             [-2.8841268, 38.4521879],
             [-2.8819488, 38.4524651],
-            [-2.8814901, 38.4526449],
-          ],
-        ],
-      },
-    },
-  ],
-};
-
-export default cityData;
+            [-2.8814901, 38.4526449]
+          ]
+        ]
+      }
+    }
+  ]
+}

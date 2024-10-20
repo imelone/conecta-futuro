@@ -27,6 +27,7 @@ interface TownListProps {
   communitiesData: any[];
   onParcelClick: (parcel: string) => void;
   handleToggleClick: (leyendaName: string) => void;
+  handleMunicipioToggleClick: (munucipio: string) => void;
   activeToggles: any;
   selectedProgram: any;
   programsInfo: any;
@@ -36,12 +37,12 @@ const TownList: React.FC<TownListProps> = ({
   communitiesData,
   onParcelClick,
   handleToggleClick,
+  handleMunicipioToggleClick,
   activeToggles,
   selectedProgram,
   programsInfo,
 }) => {
   const [selectedProgramName, setSelectedProgamName] = useState("");
-  const [districtsArray, setDistrictsArray] = useState([]);
   const loadTownsData = async (selectedProgram: string) => {
     try {
       const data = await import(
@@ -98,7 +99,7 @@ const TownList: React.FC<TownListProps> = ({
         >
           <ul>
             {programsInfo &&
-              programsInfo?.map((item: any, idx: any) => (
+              programsInfo.map((item: any, idx: any) => (
                 <li key={idx}>{item}</li>
               ))}
           </ul>
@@ -113,47 +114,71 @@ const TownList: React.FC<TownListProps> = ({
           {communityData.provincias.map((province: any) => (
             <TreeMenu key={province.provincia} title={province.provincia}>
               <ul className={styles.menu}>
-                {province.municipios.map((municipio: any) => (
-                  <TreeMenu
-                    key={municipio.municipio}
-                    title={municipio.municipio}
-                  >
-                    <ul className={styles.parcelList}>
-                      {municipio.parcelas.map((parcel: any) => {
-                        // Check if leyenda exists before rendering its values
-                        const leyenda = parcel.properties?.leyenda;
-                        const isChecked =
-                          activeToggles[leyenda?.name || ""] || false;
-                        return (
-                          <li key={leyenda?.name || parcel.parcela}>
-                            <label className={styles.toggleSwitch}>
-                              <input
-                                type="checkbox"
-                                checked={
-                                  activeToggles[leyenda?.name || ""] || false
-                                }
-                                onChange={() =>
-                                  leyenda && handleToggleClick(leyenda.name)
-                                }
-                              />
-                              <span
-                                className={styles.slider}
-                                style={{
-                                  backgroundColor: isChecked
-                                    ? leyenda?.color
-                                    : "#ccc", // Use leyenda color when checked, otherwise gray
-                                }}
-                              ></span>
-                              <span className={styles.label}>
-                                {leyenda?.label || "Unnamed Parcel"}
-                              </span>
-                            </label>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </TreeMenu>
-                ))}
+                {province.municipios.map((municipio: any) => {
+                  const municipioChecked =
+                    activeToggles[municipio.municipio] || false;
+                  return (
+                    <TreeMenu
+                      key={municipio.municipio}
+                      title={
+                        <div className={styles.municipioWrapper}>
+                          <label className={styles.toggleSwitch}>
+                            <input
+                              type="checkbox"
+                              checked={municipioChecked}
+                              onChange={() =>
+                                handleMunicipioToggleClick(municipio.municipio)
+                              }
+                            />
+                            <span
+                              className={styles.slider}
+                              style={{
+                                backgroundColor: municipioChecked
+                                  ? "#4CAF50"
+                                  : "#ccc",
+                              }}
+                            ></span>
+                            <span className={styles.label}>
+                              {municipio.municipio}
+                            </span>
+                          </label>
+                        </div>
+                      }
+                    >
+                      <ul className={styles.parcelList}>
+                        {municipio.parcelas.map((parcel: any) => {
+                          const leyenda = parcel.properties?.leyenda;
+                          const isChecked =
+                            activeToggles[leyenda?.name || ""] || false;
+                          return (
+                            <li key={leyenda?.name || parcel.parcela}>
+                              <label className={styles.toggleSwitch}>
+                                <input
+                                  type="checkbox"
+                                  checked={isChecked}
+                                  onChange={() =>
+                                    leyenda && handleToggleClick(leyenda.name)
+                                  }
+                                />
+                                <span
+                                  className={styles.slider}
+                                  style={{
+                                    backgroundColor: isChecked
+                                      ? leyenda?.color
+                                      : "#ccc",
+                                  }}
+                                ></span>
+                                <span className={styles.label}>
+                                  {leyenda?.label || "Unnamed Parcel"}
+                                </span>
+                              </label>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </TreeMenu>
+                  );
+                })}
               </ul>
             </TreeMenu>
           ))}

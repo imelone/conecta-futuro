@@ -38,15 +38,6 @@
 }
 
 .leaflet-sidebar .leaflet-sidebar-tabs li a {
-  text-align: center;
-  padding: 1px 0;
-  display: flex;
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  width: 100%;
-}
-
-.leaflet-sidebar .leaflet-sidebar-tabs li a {
   display: flex;
   align-items: center; /* Center vertically */
   justify-content: center; /* Center horizontally */
@@ -232,7 +223,6 @@ input:checked + .slider:before {
 
 .info {
   color: #007BFF; /* Change to your desired color */
-  margin-top: 5px; /* Add some space above the info text */
   display: inline-block; /* Centering block element */
   width: 100%; /* Ensure it takes full width */
   text-align: center; /* Center the text inside */
