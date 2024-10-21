@@ -1,0 +1,83 @@
+.cMapMain  {
+    position: absolute;
+    left: 26.4rem;
+    top: 0.1rem;
+    z-index: 2000;
+  }
+  .imageContainer{
+    margin:1rem;
+  }
+  .dataAnalysisMenu {
+    display: flex;
+    flex-flow: column;
+    max-height: calc(100vh - 70px);
+    width: 30.125rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .25);
+    background: #fff;
+    transition: transform .3s linear;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .tabHeader {
+    display: flex;
+    background: #333;
+  }
+  
+  .tabLink {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    color: black;
+    background: #7a7a7a;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .tabLink.active {
+    background: #FFFFFF;
+  }
+  
+  .tabContent {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .tabPane {
+    display: none;
+  }
+  
+  .tabPane.active {
+    display: block;
+  }
+  
+  .chartContainer {
+    text-align: center;
+    margin: 1rem 0;
+  }
+  .gridContainer {
+    .MuiDataGrid-root {
+      border: 1px solid #ddd;
+    }
+    .MuiDataGrid-cell {
+      border-bottom: 1px solid #ddd;
+    }
+    .MuiDataGrid-columnSeparator {
+      display: none; /* Hide the column separator */
+    }
+  }
+  
+  .gridContainer {
+    height: 100%; /* Ensure the container takes up 100% of its parent */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dataGrid {
+    flex: 1; /* Allow DataGrid to grow and fill the container */
+    height: 100%;
+  }
+  .coordenadas-cell {
+    white-space: pre-line; /* Ensures line breaks are respected */
+  }

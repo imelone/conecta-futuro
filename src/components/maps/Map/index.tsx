@@ -25,6 +25,7 @@ import { FeatureCollection } from "geojson";
 //import Image from "next/image";
 import DataAnalysisMenuCuidaTuBosque from "@/components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
 import DataAnalysisMenuNuevosBosques from "@/components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
+import DataAnalysisSostenbilidad from "@/components/data_analisis_sostenibilidad/data_analisis_sostenibilidad_screen";
 import programsList from "../../../app/data/listado_de_programas/programs.json";
 //import comunidades from "../../../app/data/cuida-tu-bosque.json";
 
@@ -63,9 +64,6 @@ const Map = () => {
     setSelectedOption(option);
   };
   useEffect(() => {
-    console.log("selectedProgram: ", selectedProgram);
-
-    // Cleanup function to remove all circleMarkers from the map
     if (mapRef.current) {
       geoJsonLayers.forEach((geoJsonLayer) => {
         if (geoJsonLayer.layer instanceof L.CircleMarker) {
@@ -73,11 +71,7 @@ const Map = () => {
         }
       });
     }
-
-    // Reset the geoJsonLayers state without affecting the map
     setGeoJsonLayers([]);
-
-    // Reset other related states
     setSelectedTown(null);
     setSelectedProvince(null);
     setSelectedDistrict(null);
@@ -106,32 +100,53 @@ const Map = () => {
 
   const handleProgramSelection = (comunidadArchivo: string) => {
     setSelectedProgram(comunidadArchivo);
-
+    setSelectedTown(null);
+    setSelectedProvince(null);
+    setSelectedDistrict(null);
     // Remove all layers from the map
     if (mapRef.current) {
       geoJsonLayers.forEach((layerObj) => {
         mapRef.current.removeLayer(layerObj.layer);
       });
 
-      // Reset GeoJSON layers state
-      setGeoJsonLayers([]);
-
-      // Optionally reset the map view to its initial state (e.g., default center and zoom)
       mapRef.current.setView([40.4637, -3.7492], 6); // Set initialLat, initialLng, and initialZoom accordingly
     }
 
-    // Hide the district pane and show the towns pane
     handleOptionClick("districts");
   };
 
   const handleOptionClick = (optionName: string) => {
-    setOptionOpen((prevOption) =>
-      optionName === prevOption ? null : optionName
-    );
+    console.log("pasa");
 
+    setIsDataAnalysisMenuOpen(false);
     setSelectedTown(null); // Reset selected town when switching options
     setSelectedProvince(null); // Reset selected province
     setSelectedDistrict(null); // Reset selected district
+
+    // Reset all active toggles to false
+    setActiveToggles((prevToggles) => {
+      const newToggles = Object.keys(prevToggles).reduce((acc, key) => {
+        acc[key] = false; // Reset each toggle to false
+        return acc;
+      }, {} as Record<string, boolean>);
+
+      // Remove all layers from the map corresponding to the toggles
+      if (mapRef.current) {
+        geoJsonLayers.forEach((geoJsonLayer) => {
+          if (geoJsonLayer.layer) {
+            mapRef.current.removeLayer(geoJsonLayer.layer);
+          }
+        });
+        setGeoJsonLayers([]); // Clear the geoJsonLayers array
+      }
+
+      return newToggles;
+    });
+    setDataForest([]);
+    // Handle option change logic
+    setOptionOpen((prevOption) =>
+      optionName === prevOption ? null : optionName
+    );
     setSideBarSelectedOption(optionName);
   };
 
@@ -332,7 +347,7 @@ const Map = () => {
       return `
         <div class="image-container">
           <h3>${title}</h3>
-          <img src="/images/maps/${image}" alt="Catastrales image" class="popup-image" />
+          <img src="/assets/images/maps/${image}" alt="Catastrales image" class="popup-image" />
         </div>
       `;
     }
@@ -491,15 +506,21 @@ const Map = () => {
       // Convert town to camelCase to match the file name format
       const camelCaseTown = toCamelCase(town);
 
-      // Check if the layer for the town already exists
-      const existingLayer = geoJsonLayers.find(
+      // Check if the layer for the town already exists in the municipios group
+      const existingMunicipioLayer = geoJsonLayers.find(
         (layer) => layer.toggleName === camelCaseTown
       );
 
-      const isActive = !existingLayer; // Determine if this toggle should be active or inactive
+      const isActive = !existingMunicipioLayer; // Determine if this toggle should be active or inactive
 
       // Call the handleToggle function with the town and its active state
       await handleToggle(camelCaseTown, isActive);
+
+      // Update active toggles state
+      setActiveToggles((prev) => ({
+        ...prev,
+        [town]: isActive,
+      }));
 
       if (isActive) {
         // Dynamically fetch the GeoJSON file based on the town's camelCase name
@@ -507,18 +528,19 @@ const Map = () => {
           `../../../app/data/coordenadas_municipios/${camelCaseTown}.json`
         );
 
-        // The response is an object containing the JSON data directly
         const cityData = response; // Use the response directly as cityData
 
-        // Create a new GeoJSON layer
-        const newLayer = L.geoJSON(cityData as FeatureCollection<any>);
-        if (mapRef.current) {
-          mapRef.current.addLayer(newLayer);
+        // Create a new GeoJSON layer for the municipality
+        const newMunicipioLayer = L.geoJSON(cityData as FeatureCollection<any>);
 
-          // Update state with the new layer
+        if (mapRef.current) {
+          // Add the new municipality layer to the map
+          mapRef.current.addLayer(newMunicipioLayer);
+
+          // Update state with the new municipality layer
           setGeoJsonLayers((prevLayers) => [
             ...prevLayers,
-            { toggleName: camelCaseTown, layer: newLayer },
+            { toggleName: camelCaseTown, layer: newMunicipioLayer },
           ]);
 
           // Calculate the center of the town shape coordinates
@@ -530,14 +552,25 @@ const Map = () => {
             townShape.reduce((sum, coord) => sum + coord[0], 0) /
             townShape.length;
 
-          // Center the map on the town
+          // Center the map on the municipality
           mapRef.current.setView([centerLat, centerLng], 11); // Adjust the zoom level as needed
+        }
+      } else {
+        // If the toggle is inactive, remove the layer from the map and state
+        if (existingMunicipioLayer && mapRef.current) {
+          mapRef.current.removeLayer(existingMunicipioLayer.layer);
+
+          // Update state to remove the layer
+          setGeoJsonLayers((prevLayers) =>
+            prevLayers.filter((layer) => layer.toggleName !== camelCaseTown)
+          );
         }
       }
     } catch (error) {
       console.error(`Error creating GeoJSON layer for ${town}:`, error);
     }
   };
+
   return (
     <div>
       <div style={{ display: "flex" }}>
@@ -561,6 +594,7 @@ const Map = () => {
           handleProvinceSelection={handleProvinceSelection}
           handleTownSelection={handleTownSelection}
           handleOptionClick={handleOptionClick}
+          sideBarSelectedOption={sideBarSelectedOption}
         />
 
         <div style={{ flex: 1 }}>
@@ -591,22 +625,7 @@ const Map = () => {
               {endPoint && (
                 <RoutingMachine startPoint={coord} endPoint={endPoint} />
               )}
-              <FeatureGroup>
-                {/* <EditControl
-                  position="topright"
-                  onCreated={handleCreated}
-                  onEdited={handleEdited}
-                  onDeleted={handleDeleted}
-                  draw={{
-                    rectangle: true,
-                    polygon: true,
-                    circle: true,
-                    polyline: false,
-                    marker: false,
-                    circlemarker: false,
-                  }}
-                /> */}
-              </FeatureGroup>
+              <FeatureGroup></FeatureGroup>
               <Layers apiKey={""} />
               <ScaleControl position="bottomright" />
             </MapContainer>
@@ -625,8 +644,17 @@ const Map = () => {
               activeToggles={activeToggles}
             />
           )}
-          {["nuevos-bosques", "sostenibilidad"].includes(selectedProgram) && (
+          {selectedProgram === "nuevos-bosques" && (
             <DataAnalysisMenuNuevosBosques
+              isOpen={isDataAnalysisMenuOpen}
+              dataForest={dataForest}
+              removeForestItem={removeForestItem}
+              handleToggleClick={handleToggleClick}
+              activeToggles={activeToggles}
+            />
+          )}
+          {selectedProgram === "sostenibilidad" && (
+            <DataAnalysisSostenbilidad
               isOpen={isDataAnalysisMenuOpen}
               dataForest={dataForest}
               removeForestItem={removeForestItem}

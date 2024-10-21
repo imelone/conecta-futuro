@@ -29,6 +29,7 @@ interface SidebarViewModelProps {
   selectedDistrict: any;
   handleDistrictSelection?: any;
   programsInfo: any;
+  sideBarSelectedOption: any;
 }
 
 export const useSidebarViewModel = ({
@@ -53,6 +54,7 @@ export const useSidebarViewModel = ({
   handleTownSelection,
   handleProvinceSelection, // Expose province selection handler
   handleDistrictSelection,
+  sideBarSelectedOption,
 }: SidebarViewModelProps) => {
   return {
     programsList,
@@ -71,5 +73,6 @@ export const useSidebarViewModel = ({
     selectedProgram,
     townsData,
     programsInfo,
+    sideBarSelectedOption,
   };
 };

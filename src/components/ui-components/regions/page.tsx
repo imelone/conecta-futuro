@@ -27,10 +27,11 @@ interface TownListProps {
   communitiesData: any[];
   onParcelClick: (parcel: string) => void;
   handleToggleClick: (leyendaName: string) => void;
-  handleMunicipioToggleClick: (munucipio: string) => void;
+  handleMunicipioToggleClick: (municipio: string) => void; // Updated parameter name
   activeToggles: any;
   selectedProgram: any;
   programsInfo: any;
+  sideBarSelectedOption: any;
 }
 
 const TownList: React.FC<TownListProps> = ({
@@ -41,26 +42,23 @@ const TownList: React.FC<TownListProps> = ({
   activeToggles,
   selectedProgram,
   programsInfo,
+  sideBarSelectedOption,
 }) => {
-  const [selectedProgramName, setSelectedProgamName] = useState("");
+  const [selectedProgramName, setSelectedProgramName] = useState("");
+
   const loadTownsData = async (selectedProgram: string) => {
     try {
       const data = await import(
         `../../../app/data/listado_de_programas/programs.json`
       );
-      console.log("communitiesData:", communitiesData);
-      // Check if the imported data is an object with a 'default' array
       const programData = data.default || data;
 
-      // Find the program that matches the selectedProgram (comunidadArchivo)
       const selectedProgramData = programData.find(
         (program: any) => program.comunidadArchivo === selectedProgram
       );
 
       if (selectedProgramData) {
-        setSelectedProgamName(selectedProgramData.programa);
-
-        // You can now use selectedProgramData.programa where needed
+        setSelectedProgramName(selectedProgramData.programa);
       } else {
         console.log("No matching program found for:", selectedProgram);
       }
@@ -70,7 +68,6 @@ const TownList: React.FC<TownListProps> = ({
   };
 
   useEffect(() => {
-    console.log("programsInfo: ", programsInfo);
     if (selectedProgram) {
       loadTownsData(selectedProgram);
     }
@@ -110,15 +107,27 @@ const TownList: React.FC<TownListProps> = ({
           key={index}
           title={communityData.comunidad}
           selectedProgram={selectedProgram}
+          sideBarSelectedOption={sideBarSelectedOption}
         >
           {communityData.provincias.map((province: any) => (
-            <TreeMenu key={province.provincia} title={province.provincia}>
+            <TreeMenu
+              key={province.provincia}
+              title={province.provincia}
+              sideBarSelectedOption={sideBarSelectedOption}
+            >
               <ul className={styles.menu}>
                 {province.municipios.map((municipio: any) => {
                   const municipioChecked =
                     activeToggles[municipio.municipio] || false;
+
+                  // Handle municipio toggle
+                  const handleMunicipioClick = () => {
+                    handleMunicipioToggleClick(municipio.municipio);
+                  };
+
                   return (
                     <TreeMenu
+                      sideBarSelectedOption={sideBarSelectedOption}
                       key={municipio.municipio}
                       title={
                         <div className={styles.municipioWrapper}>
@@ -126,9 +135,7 @@ const TownList: React.FC<TownListProps> = ({
                             <input
                               type="checkbox"
                               checked={municipioChecked}
-                              onChange={() =>
-                                handleMunicipioToggleClick(municipio.municipio)
-                              }
+                              onChange={handleMunicipioClick}
                             />
                             <span
                               className={styles.slider}

@@ -43,7 +43,8 @@ interface SidebarViewModelProps {
   handleTownSelection: any;
   handleOptionClick: any;
   programsInfo: any;
-  handleDistrictSelection?: (district: string) => void; // <-- Make this optional
+  handleDistrictSelection?: (district: string) => void;
+  sideBarSelectedOption: any;
 }
 
 const CustomIcon = styled(FontAwesomeIcon)`
@@ -64,12 +65,15 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
     selectedProgram,
     townsData,
     programsInfo,
+    sideBarSelectedOption,
   } = useSidebarViewModel(props);
 
   return (
     <div
       id="sidebar"
-      className={`leaflet-sidebar ${optionOpen ? "expanded" : "collapsed"}`}
+      className={`leaflet-sidebar ${
+        optionOpen && optionOpen !== "home" ? "expanded" : "collapsed"
+      }`}
     >
       <div className="leaflet-sidebar-tabs">
         <ul role="tablist">
@@ -135,14 +139,8 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
           </li>
         </ul>
       </div>
+
       <div className="sidebar-content">
-        <div
-          className={`sidebar-pane ${optionOpen === "home" ? "active" : ""}`}
-          id="home"
-        >
-          <h1 className="sidebar-header">Home</h1>
-          <p>Home content goes here.</p>
-        </div>
         <div
           className={`sidebar-pane ${optionOpen === "profile" ? "active" : ""}`}
           id="profile"
@@ -219,6 +217,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
               handleMunicipioToggleClick={handleMunicipioToggleClick}
               activeToggles={activeToggles}
               selectedProgram={selectedProgram}
+              sideBarSelectedOption={sideBarSelectedOption}
             />
           )}
         </div>

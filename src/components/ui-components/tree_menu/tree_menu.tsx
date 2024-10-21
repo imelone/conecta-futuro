@@ -8,6 +8,7 @@ interface AccordionProps {
   children: React.ReactNode;
   level?: number;
   selectedProgram?: string;
+  sideBarSelectedOption: string;
 }
 
 export const TreeMenu: React.FC<AccordionProps> = ({
@@ -15,12 +16,12 @@ export const TreeMenu: React.FC<AccordionProps> = ({
   children,
   level = 0,
   selectedProgram,
+  sideBarSelectedOption,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
-    // console.log("children: ", children);
     setIsOpen(false);
-  }, [selectedProgram]);
+  }, [selectedProgram, sideBarSelectedOption]);
 
   const toggleContent = () => {
     setIsOpen((prev) => !prev);
