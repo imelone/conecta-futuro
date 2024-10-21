@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TreeMenu } from "../tree_menu/tree_menu"; // Adjust the import path
-import styles from "./region.module.css";
+import styles from "./styles.module.css";
 
 interface Parcel {
   parcela: string;
@@ -34,7 +34,7 @@ interface TownListProps {
   sideBarSelectedOption: any;
 }
 
-const TownList: React.FC<TownListProps> = ({
+const TownTreeMenu: React.FC<TownListProps> = ({
   communitiesData,
   onParcelClick,
   handleToggleClick,
@@ -195,4 +195,4 @@ const TownList: React.FC<TownListProps> = ({
   );
 };
 
-export default TownList;
+export default TownTreeMenu;

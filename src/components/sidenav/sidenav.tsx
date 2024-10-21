@@ -8,7 +8,7 @@ import {
   faCog,
   faMap,
 } from "@fortawesome/free-solid-svg-icons";
-import TownList from "../ui-components/regions/page";
+import TownList from "../ui-components/town_tree_menu/town_tree_menu_screen";
 //import chiclanaLogo from "../../../public/images/icons/chiclana-logo.png";
 import styled from "@emotion/styled";
 import { useSidebarViewModel } from "./sidenav_view_model";
@@ -50,6 +50,26 @@ interface SidebarViewModelProps {
 const CustomIcon = styled(FontAwesomeIcon)`
   font-size: 1.5rem; /* Adjust the size here as needed */
 `;
+const levelConfig = [
+  {
+    name: "Comunidad",
+    hasToggle: false,
+    key: "comunidad",
+    childrenKey: "provincias",
+  },
+  {
+    name: "Provincia",
+    hasToggle: false,
+    key: "provincia",
+    childrenKey: "municipios",
+  },
+  {
+    name: "Municipio",
+    hasToggle: true,
+    key: "municipio",
+    childrenKey: "parcelas",
+  },
+];
 
 const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
   const {
@@ -218,6 +238,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
               activeToggles={activeToggles}
               selectedProgram={selectedProgram}
               sideBarSelectedOption={sideBarSelectedOption}
+              //   levels={levelConfig} // Pass the level configuration here
             />
           )}
         </div>

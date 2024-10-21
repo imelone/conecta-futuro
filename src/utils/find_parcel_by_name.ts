@@ -1,36 +1,37 @@
-const findParcelaInMunicipios = (toggleName: string, municipios: any[]) => {
-  for (const municipio of municipios) {
-    const foundParcela = municipio.parcelas.find(
+const findParcelaInLevels = (
+  toggleName: string,
+  items: any[],
+  levels: string[]
+): any | null => {
+  for (const item of items) {
+    // Check for parcelas at the current level
+    const foundParcela = item.parcelas?.find(
       (parcela: { properties: { leyenda: { name: string } } }) =>
         parcela.properties?.leyenda?.name === toggleName
     );
-    if (foundParcela) return foundParcela;
+
+    if (foundParcela) {
+      return foundParcela; // Return if found
+    }
+
+    // If there are more levels to check
+    if (levels.length > 0) {
+      const nextLevelKey = levels[0]; // Get the next level key
+      const foundInNested = findParcelaInLevels(
+        toggleName,
+        item[nextLevelKey],
+        levels.slice(1)
+      );
+      if (foundInNested) return foundInNested; // Return if found in nested levels
+    }
   }
-  return null;
+  return null; // Return null if not found in any levels
 };
 
-const findParcelaInProvincias = (toggleName: string, provincias: any[]) => {
-  for (const provincia of provincias) {
-    const foundParcela = findParcelaInMunicipios(
-      toggleName,
-      provincia.municipios
-    );
-    if (foundParcela) return foundParcela;
-  }
-  return null;
-};
-
-const findParcelaInComunidades = (toggleName: string, comunidades: any[]) => {
-  for (const comunidad of comunidades) {
-    const foundParcela = findParcelaInProvincias(
-      toggleName,
-      comunidad.provincias
-    );
-    if (foundParcela) return foundParcela;
-  }
-  return null;
-};
-
-export const findParcelaByName = (toggleName: string, townsList: any[]) => {
-  return findParcelaInComunidades(toggleName, townsList);
+export const findParcelaByName = (
+  toggleName: string,
+  townsList: any[],
+  levels: string[]
+) => {
+  return findParcelaInLevels(toggleName, townsList, levels);
 };

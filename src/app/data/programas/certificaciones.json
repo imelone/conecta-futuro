@@ -1,0 +1,43 @@
+[
+  {
+    "descripcion": ["Calcular", "Reducir", "Compensar"]
+  },
+  {
+    "certificaciones": [
+      {
+        "title": "ISO 14001",
+        "items": [
+          "Norma para la implementación de un sistema de gestión ambiental",
+          "Requisitos auditables",
+          "Gestión de los riesgos medioambientales asociados a la actividad desarrollada",
+          "Reducción del impacto ambiental procedente de su actividad",
+          "Proyección imagen sostenible",
+          "Conformidad legal",
+          "Necesidades socioeconómica",
+          "Mejora contínua de la gestión ambiental"
+        ]
+      },
+      {
+        "title": "SICTED",
+        "items": [
+          "Mejora de calidad en destinos turísticos",
+          "Nivel de calidad homogéneo",
+          "Metodología y herramientas de mejora",
+          "Buenas prácticas diferenciadas",
+          "Asistencia Técnica",
+          "Evaluación de los estándares de calidad",
+          "Compromiso de calidad Turística"
+        ]
+      },
+      {
+        "title": "NORMA CAAE",
+        "items": [
+          "Conservación de los ciclos naturales y la biodiversidad",
+          "Preservación y mejora de la salud del suelo y protección de la biodiversidad",
+          "Uso responsable de energía, agua, suelo, materias orgánicas y aire",
+          "Bienestar animal y comportamiento de cada especie"
+        ]
+      }
+    ]
+  }
+]

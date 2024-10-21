@@ -116,7 +116,7 @@ const Map = () => {
     // Reset all active toggles to false
     setActiveToggles((prevToggles) => {
       const newToggles = Object.keys(prevToggles).reduce((acc, key) => {
-        acc[key] = false; // Reset each toggle to false
+        acc[key] = false; // Reset each toggbyle to false
         return acc;
       }, {} as Record<string, boolean>);
 
@@ -246,11 +246,9 @@ const Map = () => {
 
   const handleToggleOn = async (toggleName: string) => {
     try {
-      console.log("toggleName: ", toggleName);
-      const foundParcela = findParcelaByName(toggleName, townsData);
-
+      const levels = ["provincias", "municipios", "parcelas"];
+      const foundParcela = findParcelaByName(toggleName, townsData, levels);
       console.log("foundParcela: ", foundParcela);
-
       if (foundParcela) {
         if (foundParcela.geometry.type === "Point") {
           await addPointLayer(foundParcela);
