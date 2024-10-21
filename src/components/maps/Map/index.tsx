@@ -12,7 +12,7 @@ import {
   FeatureGroup,
   ZoomControl,
 } from "react-leaflet";
-import { EditControl } from "react-leaflet-draw";
+
 import "leaflet-draw/dist/leaflet.draw.css";
 import { MapContextProvider } from "../mapContext";
 import RoutingMachine from "../RoutingMachine";
@@ -27,6 +27,8 @@ import DataAnalysisMenuCuidaTuBosque from "@/components/data_analisis_cuida_tu_b
 import DataAnalysisMenuNuevosBosques from "@/components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
 import DataAnalysisSostenbilidad from "@/components/data_analisis_sostenibilidad/data_analisis_sostenibilidad_screen";
 import programsList from "../../../app/data/listado_de_programas/programs.json";
+import useGeoJsonLayersCleanup from "../../../hooks/use_geoJson_cleanup_layers";
+import { findParcelaByName } from "@/utils/find_parcel_by_name";
 //import comunidades from "../../../app/data/cuida-tu-bosque.json";
 
 interface GeoJsonLayer {
@@ -42,7 +44,7 @@ const Map = () => {
   const [coord] = useState<[number, number]>([40.4637, -3.7492]);
   const [endPoint] = useState<{ lat: number; lng: number } | null>(null);
   const [geoJsonLayers, setGeoJsonLayers] = useState<GeoJsonLayer[]>([]);
-  const mapRef = useRef<L.Map | null>(null);
+  // const mapRef = useRef<L.Map | null>(null);
   const sidebarRef = useRef<L.Control.Sidebar | null>(null);
   //const { setMap } = useMapContext();
   const [dataForest, setDataForest] = useState([]);
@@ -60,27 +62,6 @@ const Map = () => {
     {}
   );
   const [sideBarSelectedOption, setSideBarSelectedOption] = useState("home");
-  const handleSideBarSelectedOptionClick = (option) => {
-    setSelectedOption(option);
-  };
-  useEffect(() => {
-    if (mapRef.current) {
-      geoJsonLayers.forEach((geoJsonLayer) => {
-        if (geoJsonLayer.layer instanceof L.CircleMarker) {
-          mapRef.current.removeLayer(geoJsonLayer.layer);
-        }
-      });
-    }
-    setGeoJsonLayers([]);
-    setSelectedTown(null);
-    setSelectedProvince(null);
-    setSelectedDistrict(null);
-
-    if (selectedProgram) {
-      loadTownsData(selectedProgram);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedProgram]);
 
   const loadTownsData = async (selectedProgram: string) => {
     console.log("comunidadArchivo: ", selectedProgram);
@@ -97,6 +78,15 @@ const Map = () => {
       setTownsData(null); // Reset towns data on error
     }
   };
+  const { mapRef } = useGeoJsonLayersCleanup({
+    geoJsonLayers,
+    setGeoJsonLayers,
+    setSelectedTown,
+    setSelectedProvince,
+    setSelectedDistrict,
+    selectedProgram,
+    loadTownsData,
+  });
 
   const handleProgramSelection = (comunidadArchivo: string) => {
     setSelectedProgram(comunidadArchivo);
@@ -202,6 +192,7 @@ const Map = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const hasActiveToggles = useCallback(() => {
+    console.log("activeToggles:", activeToggles);
     const result = Object.values(activeToggles).some((value) => value === true);
     console.log("Active Toggles:", result);
     return result;
@@ -222,30 +213,6 @@ const Map = () => {
       sidebarRef.current.addTo(mapRef.current);
     }
   }, [mapRef]);
-
-  const handleCreated = (e: any) => {
-    const layer = e.layer;
-    const shape = layer.toGeoJSON();
-    console.log("Shape created:", shape);
-    // Save shape to your state or send to your backend here
-  };
-
-  const handleEdited = (e: any) => {
-    const layers = e.layers;
-    layers.eachLayer((layer: any) => {
-      const shape = layer.toGeoJSON();
-      console.log("Shape edited:", shape);
-      // Update shape in your state or send to your backend here
-    });
-  };
-
-  const handleDeleted = (e: any) => {
-    const layers = e.layers;
-    layers.eachLayer((layer: any) => {
-      console.log("Shape deleted:", layer);
-      // Remove shape from your state or inform your backend here
-    });
-  };
 
   const handleToggleClick = async (toggleName: keyof typeof activeToggles) => {
     setIsDataAnalysisMenuOpen(true); // Toggle the menu visibility
@@ -297,21 +264,6 @@ const Map = () => {
     } catch (error) {
       console.error("Error processing data:", error);
     }
-  };
-
-  const findParcelaByName = (toggleName: string, townsList) => {
-    return townsList.reduce((acc, comunidad) => {
-      if (acc) return acc; // If found, skip further searching
-      return comunidad.provincias.reduce((accProv, provincia) => {
-        if (accProv) return accProv; // If found, skip further searching
-        return provincia.municipios.reduce((accMun, municipio) => {
-          if (accMun) return accMun; // If found, skip further searching
-          return municipio.parcelas.find(
-            (parcela) => parcela.properties?.leyenda?.name === toggleName
-          );
-        }, null);
-      }, null);
-    }, null);
   };
 
   const addPointLayer = async (data) => {
@@ -449,48 +401,48 @@ const Map = () => {
     });
   };
 
-  const handleTownClick = async (town: string) => {
-    if (town === "Chiclana de Segura") {
-      try {
-        // Check if the layer for Chiclana de Segura already exists
-        const existingLayer = geoJsonLayers.find(
-          (layer) => layer.toggleName === town
-        );
-        if (existingLayer) {
-          return;
-        }
+  // const handleTownClick = async (town: string) => {
+  //   if (town === "Chiclana de Segura") {
+  //     try {
+  //       // Check if the layer for Chiclana de Segura already exists
+  //       const existingLayer = geoJsonLayers.find(
+  //         (layer) => layer.toggleName === town
+  //       );
+  //       if (existingLayer) {
+  //         return;
+  //       }
 
-        // Create new GeoJSON layer
-        const newLayer = L.geoJSON(cityData as FeatureCollection<any>);
-        if (mapRef.current) {
-          mapRef.current.addLayer(newLayer);
+  //       // Create new GeoJSON layer
+  //       const newLayer = L.geoJSON(cityData as FeatureCollection<any>);
+  //       if (mapRef.current) {
+  //         mapRef.current.addLayer(newLayer);
 
-          // Update state with new layer
-          setGeoJsonLayers((prevLayers) => [
-            ...prevLayers,
-            { toggleName: town, layer: newLayer },
-          ]);
+  //         // Update state with new layer
+  //         setGeoJsonLayers((prevLayers) => [
+  //           ...prevLayers,
+  //           { toggleName: town, layer: newLayer },
+  //         ]);
 
-          // Calculate the center of the town shape coordinates
-          const townShape = cityData.features[0].geometry.coordinates[0];
-          const centerLat =
-            townShape.reduce((sum, coord) => sum + coord[1], 0) /
-            townShape.length;
-          const centerLng =
-            townShape.reduce((sum, coord) => sum + coord[0], 0) /
-            townShape.length;
+  //         // Calculate the center of the town shape coordinates
+  //         const townShape = cityData.features[0].geometry.coordinates[0];
+  //         const centerLat =
+  //           townShape.reduce((sum, coord) => sum + coord[1], 0) /
+  //           townShape.length;
+  //         const centerLng =
+  //           townShape.reduce((sum, coord) => sum + coord[0], 0) /
+  //           townShape.length;
 
-          // Center the map on Chiclana de Segura
-          mapRef.current.setView([centerLat, centerLng], 11); // Adjust the zoom level as needed
-        }
-      } catch (error) {
-        console.error(
-          "Error creating GeoJSON layer for Chiclana de Segura:",
-          error
-        );
-      }
-    }
-  };
+  //         // Center the map on Chiclana de Segura
+  //         mapRef.current.setView([centerLat - 0.02, centerLng - 0.02], 11); // Adjust the zoom level as needed
+  //       }
+  //     } catch (error) {
+  //       console.error(
+  //         "Error creating GeoJSON layer for Chiclana de Segura:",
+  //         error
+  //       );
+  //     }
+  //   }
+  // };
 
   const toCamelCase = (str) => {
     return str
@@ -536,7 +488,7 @@ const Map = () => {
         if (mapRef.current) {
           // Add the new municipality layer to the map
           mapRef.current.addLayer(newMunicipioLayer);
-
+          newMunicipioLayer.bringToBack();
           // Update state with the new municipality layer
           setGeoJsonLayers((prevLayers) => [
             ...prevLayers,
@@ -553,7 +505,7 @@ const Map = () => {
             townShape.length;
 
           // Center the map on the municipality
-          mapRef.current.setView([centerLat, centerLng], 11); // Adjust the zoom level as needed
+          mapRef.current.setView([centerLat, centerLng - 0.3], 11); // Adjust the zoom level as needed
         }
       } else {
         // If the toggle is inactive, remove the layer from the map and state
@@ -577,7 +529,7 @@ const Map = () => {
         <Sidebar
           programsList={programsList}
           onToggle={handleToggle}
-          handleTownClick={handleTownClick}
+          //   handleTownClick={handleTownClick}
           setIsDataAnalysisMenuOpen={setIsDataAnalysisMenuOpen}
           handleToggleClick={handleToggleClick}
           handleMunicipioToggleClick={handleMunicipioToggleClick}
@@ -626,7 +578,8 @@ const Map = () => {
                 <RoutingMachine startPoint={coord} endPoint={endPoint} />
               )}
               <FeatureGroup></FeatureGroup>
-              <Layers apiKey={""} />
+              <Layers />
+
               <ScaleControl position="bottomright" />
             </MapContainer>
           )}

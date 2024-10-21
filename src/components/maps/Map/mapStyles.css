@@ -24,6 +24,13 @@
    margin-right: 0;
   padding-right: 0;
 }
+.leaflet-interactive {
+  pointer-events: none; /* Disable click events */
+}
+
+.leaflet-interactive.point-layer {
+  pointer-events: auto; /* Enable click events for point layers */
+}
 .image-container {
   width: 100%;
   max-height: 500px; /* Adjust as needed */
