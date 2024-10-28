@@ -182,7 +182,7 @@ const Map = () => {
 
   const extractToggleNames = (data) => {
     return data.flatMap((comunidad) =>
-      comunidad.provincias.flatMap((provincia) =>
+      comunidad?.provincias?.flatMap((provincia) =>
         extractMunicipioNames(provincia.municipios)
       )
     );

@@ -103,9 +103,27 @@ const TownTreeMenu: React.FC<TownListProps> = ({
           />
         </div>
         <ul>
-          {programsInfo.map((item, idx) => (
-            <li key={idx}>{item}</li>
-          ))}
+          {programsInfo.map(
+            (
+              item:
+                | string
+                | number
+                | bigint
+                | boolean
+                | React.ReactElement<
+                    any,
+                    string | React.JSXElementConstructor<any>
+                  >
+                | Iterable<React.ReactNode>
+                | React.ReactPortal
+                | Promise<React.AwaitedReactNode>
+                | null
+                | undefined,
+              idx: React.Key | null | undefined
+            ) => (
+              <li key={idx}>{item}</li>
+            )
+          )}
         </ul>
       </div>
 
@@ -116,14 +134,14 @@ const TownTreeMenu: React.FC<TownListProps> = ({
           selectedProgram={selectedProgram}
           sideBarSelectedOption={sideBarSelectedOption}
         >
-          {communityData.provincias.map((province: any) => (
+          {communityData?.provincias?.map((province: any) => (
             <TreeMenu
               key={province.provincia}
               title={province.provincia}
               sideBarSelectedOption={sideBarSelectedOption}
             >
               <ul className={styles.menu}>
-                {province.municipios.map((municipio: any) => {
+                {province?.municipios?.map((municipio: any) => {
                   const municipioChecked =
                     activeToggles[municipio.municipio] || false;
 
