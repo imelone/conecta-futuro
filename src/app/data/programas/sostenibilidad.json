@@ -208,23 +208,6 @@
             ]
           }
         ]
-      },
-      {
-        "comunidad": "Cataluña",
-        "provincias": [
-          {
-            "provincia": "Barcelona",
-            "municipios": [
-              {
-                "municipio": "Barcelona",
-                "parcelas": [
-                  { "parcela": "Parcela 1" },
-                  { "parcela": "Parcela 2" }
-                ]
-              }
-            ]
-          }
-        ]
       }
     ]
   }

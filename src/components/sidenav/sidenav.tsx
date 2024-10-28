@@ -8,12 +8,11 @@ import {
   faCog,
   faMap,
 } from "@fortawesome/free-solid-svg-icons";
-import TownList from "../ui-components/town_tree_menu/town_tree_menu_screen";
-//import chiclanaLogo from "../../../public/images/icons/chiclana-logo.png";
+import TownList from "../app_components/town_tree_menu/town_tree_menu_screen";
+import TreeListMenu from "../app_components/tree_list_menu/tree_list_menu_screen"; // Import your TreeListMenu component
 import styled from "@emotion/styled";
 import { useSidebarViewModel } from "./sidenav_view_model";
 import Image from "next/image";
-//import programsData from "../ui-components/regions/programs.json";
 
 interface SidebarViewModelProps {
   programsList: any;
@@ -29,6 +28,7 @@ interface SidebarViewModelProps {
     cerroBallestero2: boolean;
     laHerencia: boolean;
   };
+  sectionMainImg: any;
   handleProvinceClick: (province: string) => void;
   handleDistrictClick: (district: string) => void;
   handleProgramSelection: any;
@@ -50,32 +50,13 @@ interface SidebarViewModelProps {
 const CustomIcon = styled(FontAwesomeIcon)`
   font-size: 1.5rem; /* Adjust the size here as needed */
 `;
-const levelConfig = [
-  {
-    name: "Comunidad",
-    hasToggle: false,
-    key: "comunidad",
-    childrenKey: "provincias",
-  },
-  {
-    name: "Provincia",
-    hasToggle: false,
-    key: "provincia",
-    childrenKey: "municipios",
-  },
-  {
-    name: "Municipio",
-    hasToggle: true,
-    key: "municipio",
-    childrenKey: "parcelas",
-  },
-];
 
 const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
   const {
     programsList,
     optionOpen,
     selectedTown,
+    sectionMainImg,
     handleOptionClick,
     handleTownSelection,
     handleToggleClick,
@@ -87,6 +68,40 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
     programsInfo,
     sideBarSelectedOption,
   } = useSidebarViewModel(props);
+
+  console.log({
+    programsList,
+    optionOpen,
+    selectedTown,
+    sideBarSelectedOption,
+    activeToggles,
+    selectedProgram,
+    sectionMainImg,
+    townsData,
+    programsInfo,
+  });
+
+  // Extract the content logic for the district pane
+  let districtContent;
+  if (selectedProgram == "certificaciones") {
+    districtContent = <TreeListMenu data={townsData} />;
+  } else if (selectedTown || !townsData) {
+    districtContent = <div>{/* Handle selected town content here */}</div>;
+  } else {
+    districtContent = (
+      <TownList
+        sectionMainImg={sectionMainImg}
+        communitiesData={townsData}
+        programsInfo={programsInfo}
+        onParcelClick={handleTownSelection}
+        handleToggleClick={handleToggleClick}
+        handleMunicipioToggleClick={handleMunicipioToggleClick}
+        activeToggles={activeToggles}
+        selectedProgram={selectedProgram}
+        sideBarSelectedOption={sideBarSelectedOption}
+      />
+    );
+  }
 
   return (
     <div
@@ -102,9 +117,9 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
               src="/images/icons/logo.png"
               alt="Logo"
               className="sidebar-logo-image"
-              layout="intrinsic" // Layout for the image
-              width={100} // Width of the image
-              height={100} // Height of the image
+              layout="intrinsic"
+              width={100}
+              height={100}
             />
           </div>
           <li>
@@ -162,20 +177,12 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
 
       <div className="sidebar-content">
         <div
-          className={`sidebar-pane ${optionOpen === "profile" ? "active" : ""}`}
-          id="profile"
-        >
-          <h1 className="sidebar-header">Profile</h1>
-          <p>Profile content goes here.</p>
-        </div>
-        <div
           className={`sidebar-pane ${
             optionOpen === "district" ? "active" : ""
           }`}
           id="district"
         >
           <h2 style={{ marginBottom: "1rem" }}>PROGRAMAS</h2>
-
           <ul>
             {programsList.map((program: any) => (
               <li key={program.comunidadArchivo}>
@@ -191,17 +198,17 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
                     color: "black",
                     textDecoration: "none",
                     cursor: "pointer",
-                    width: "100%", // Ensures the button takes up full width
-                    display: "flex", // Flexbox to center content
-                    justifyContent: "center", // Centers horizontally
-                    alignItems: "center", // Centers vertically
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
                   <h3
                     style={{
-                      marginBottom: "1rem", // Preserves margin for spacing
-                      margin: 0, // Reset margin on h3 for more control
-                      textAlign: "center", // Ensures h3 content is centered
+                      marginBottom: "1rem",
+                      margin: 0,
+                      textAlign: "center",
                     }}
                   >
                     {program.programa}
@@ -211,37 +218,16 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
             ))}
           </ul>
         </div>
+
         <div
           className={`sidebar-pane ${
             optionOpen === "districts" ? "active" : ""
           }`}
           id="districts"
         >
-          {selectedTown || !townsData ? (
-            <div>
-              {/* Handle selected town content here */}
-              {/* <h2>{selectedTown}</h2>
-              <Image
-                src={chiclanaLogo}
-                alt="Chiclana de Segura"
-                className="town-image"
-              /> */}
-              {/* Additional town details here */}
-            </div>
-          ) : (
-            <TownList
-              communitiesData={townsData}
-              programsInfo={programsInfo}
-              onParcelClick={handleTownSelection}
-              handleToggleClick={handleToggleClick}
-              handleMunicipioToggleClick={handleMunicipioToggleClick}
-              activeToggles={activeToggles}
-              selectedProgram={selectedProgram}
-              sideBarSelectedOption={sideBarSelectedOption}
-              //   levels={levelConfig} // Pass the level configuration here
-            />
-          )}
+          {districtContent}
         </div>
+
         <div
           className={`sidebar-pane ${
             optionOpen === "sustainability" ? "active" : ""

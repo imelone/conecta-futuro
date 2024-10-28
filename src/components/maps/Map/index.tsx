@@ -23,9 +23,9 @@ import Sidebar from "../../sidenav/sidenav";
 //import { cityData } from "../../../app/data/coordenadas_municipios/chiclanaDeSegura.js";
 import { FeatureCollection } from "geojson";
 //import Image from "next/image";
-import DataAnalysisMenuCuidaTuBosque from "@/components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
-import DataAnalysisMenuNuevosBosques from "@/components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
-import DataAnalysisSostenbilidad from "@/components/data_analisis_sostenibilidad/data_analisis_sostenibilidad_screen";
+import DataAnalysisMenuCuidaTuBosque from "@/components/app_components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
+import DataAnalysisMenuNuevosBosques from "@/components/app_components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
+import DataAnalysisSostenbilidad from "@/components/app_components/data_analisis_sostenibilidad/data_analisis_sostenibilidad_screen";
 import programsList from "../../../app/data/listado_de_programas/programs.json";
 import useGeoJsonLayersCleanup from "../../../hooks/use_geoJson_cleanup_layers";
 import { findParcelaByName } from "@/utils/find_parcel_by_name";
@@ -62,6 +62,7 @@ const Map = () => {
     {}
   );
   const [sideBarSelectedOption, setSideBarSelectedOption] = useState("home");
+  const [sectionMainImg, setSectionMainImg] = useState("");
 
   const loadTownsData = async (selectedProgram: string) => {
     console.log("comunidadArchivo: ", selectedProgram);
@@ -71,8 +72,18 @@ const Map = () => {
       const towns = await import(
         `../../../app/data/programas/${selectedProgram}.json`
       );
-      setTownsData(towns[1].distritos);
+      console.log("towns[1].certificaciones: ", towns[1]);
+      if (selectedProgram === "certificaciones") {
+        console.log("selectedProgram: ", selectedProgram);
+        console.log("towns[1].certificaciones: ", towns[1].certificaciones);
+        setTownsData(towns[1].certificaciones);
+      } else {
+        setTownsData(towns[1].distritos);
+      }
+
       setProgramsInfo(towns[0].descripcion); // Access the default export from the JSON file
+      console.log("towns[0].image: ", towns[0].image);
+      setSectionMainImg(towns[0].image);
     } catch (error) {
       console.error("Error loading towns data:", error);
       setTownsData(null); // Reset towns data on error
@@ -159,7 +170,7 @@ const Map = () => {
   };
 
   useEffect(() => {
-    if (townsData) {
+    if (townsData && selectedProgram !== "certificaciones") {
       const toggleNames = extractToggleNames(townsData);
 
       // Update activeToggles based on toggleNames
@@ -399,49 +410,6 @@ const Map = () => {
     });
   };
 
-  // const handleTownClick = async (town: string) => {
-  //   if (town === "Chiclana de Segura") {
-  //     try {
-  //       // Check if the layer for Chiclana de Segura already exists
-  //       const existingLayer = geoJsonLayers.find(
-  //         (layer) => layer.toggleName === town
-  //       );
-  //       if (existingLayer) {
-  //         return;
-  //       }
-
-  //       // Create new GeoJSON layer
-  //       const newLayer = L.geoJSON(cityData as FeatureCollection<any>);
-  //       if (mapRef.current) {
-  //         mapRef.current.addLayer(newLayer);
-
-  //         // Update state with new layer
-  //         setGeoJsonLayers((prevLayers) => [
-  //           ...prevLayers,
-  //           { toggleName: town, layer: newLayer },
-  //         ]);
-
-  //         // Calculate the center of the town shape coordinates
-  //         const townShape = cityData.features[0].geometry.coordinates[0];
-  //         const centerLat =
-  //           townShape.reduce((sum, coord) => sum + coord[1], 0) /
-  //           townShape.length;
-  //         const centerLng =
-  //           townShape.reduce((sum, coord) => sum + coord[0], 0) /
-  //           townShape.length;
-
-  //         // Center the map on Chiclana de Segura
-  //         mapRef.current.setView([centerLat - 0.02, centerLng - 0.02], 11); // Adjust the zoom level as needed
-  //       }
-  //     } catch (error) {
-  //       console.error(
-  //         "Error creating GeoJSON layer for Chiclana de Segura:",
-  //         error
-  //       );
-  //     }
-  //   }
-  // };
-
   const toCamelCase = (str) => {
     return str
       .toLowerCase()
@@ -527,6 +495,7 @@ const Map = () => {
         <Sidebar
           programsList={programsList}
           onToggle={handleToggle}
+          sectionMainImg={sectionMainImg}
           //   handleTownClick={handleTownClick}
           setIsDataAnalysisMenuOpen={setIsDataAnalysisMenuOpen}
           handleToggleClick={handleToggleClick}

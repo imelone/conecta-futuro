@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { TreeMenu } from "../tree_menu/tree_menu"; // Adjust the import path
+import { TreeMenu } from "../../ui-components/tree_menu/tree_menu"; // Adjust the import path
 import styles from "./styles.module.css";
+import Image from "next/image";
 
 interface Parcel {
   parcela: string;
@@ -24,6 +25,7 @@ interface Community {
 }
 
 interface TownListProps {
+  sectionMainImg: string;
   communitiesData: any[];
   onParcelClick: (parcel: string) => void;
   handleToggleClick: (leyendaName: string) => void;
@@ -35,6 +37,7 @@ interface TownListProps {
 }
 
 const TownTreeMenu: React.FC<TownListProps> = ({
+  sectionMainImg,
   communitiesData,
   onParcelClick,
   handleToggleClick,
@@ -71,6 +74,8 @@ const TownTreeMenu: React.FC<TownListProps> = ({
     if (selectedProgram) {
       loadTownsData(selectedProgram);
     }
+
+    console.log("communitiesData:", communitiesData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedProgram]);
 
@@ -87,21 +92,23 @@ const TownTreeMenu: React.FC<TownListProps> = ({
           {selectedProgramName}
         </h3>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "1rem 0",
-          }}
-        >
-          <ul>
-            {programsInfo &&
-              programsInfo.map((item: any, idx: any) => (
-                <li key={idx}>{item}</li>
-              ))}
-          </ul>
+        <div className={styles.logoContainer}>
+          <Image
+            src={`/assets/images/sections_menu_main/${sectionMainImg}.png`}
+            alt="Logo"
+            className="sidebar-logo-image"
+            layout="intrinsic" // Or other layout options as necessary
+            width={300}
+            height={300}
+          />
         </div>
+        <ul>
+          {programsInfo.map((item, idx) => (
+            <li key={idx}>{item}</li>
+          ))}
+        </ul>
       </div>
+
       {communitiesData.map((communityData: any, index: any) => (
         <TreeMenu
           key={index}

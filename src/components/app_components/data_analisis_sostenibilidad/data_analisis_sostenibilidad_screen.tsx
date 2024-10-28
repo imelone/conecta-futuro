@@ -10,8 +10,8 @@ import {
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 //import Draggable from "react-draggable";
 import dynamic from "next/dynamic";
-import AreaInfoComponent from "../base_components/dataAreaInfo";
-import DraggableModal from "../base_components/draggable_modal/draggable_modal";
+import AreaInfoComponent from "../../base_components/dataAreaInfo";
+import DraggableModal from "../../base_components/draggable_modal/draggable_modal";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 interface DataAnalysisMenuProps {

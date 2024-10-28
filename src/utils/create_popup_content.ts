@@ -1,4 +1,4 @@
-export const createPopupContent = (data: {
+export const PopupContent = (data: {
   properties: { catastrales: { image: any }; leyenda: { label: any } };
 }) => {
   const image = data.properties?.catastrales?.image;

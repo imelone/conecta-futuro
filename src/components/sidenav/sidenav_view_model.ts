@@ -1,6 +1,5 @@
-import { useState } from "react";
-
 interface SidebarViewModelProps {
+  sectionMainImg: any;
   programsList: any;
   onToggle: (toggleName: string, isActive: boolean) => void;
   handleTownClick: (town: string) => void;
@@ -33,6 +32,7 @@ interface SidebarViewModelProps {
 }
 
 export const useSidebarViewModel = ({
+  sectionMainImg,
   programsList,
   onToggle,
   handleTownClick,
@@ -74,5 +74,6 @@ export const useSidebarViewModel = ({
     townsData,
     programsInfo,
     sideBarSelectedOption,
+    sectionMainImg,
   };
 };
