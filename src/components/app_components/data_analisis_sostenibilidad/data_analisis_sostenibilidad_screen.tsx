@@ -1,30 +1,27 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import styles from "./styles.module.css";
 
-import {
-  AreaData,
-  useDataAnalysisSostenibilidadViewModel,
-} from "./data_analisis_sostenibilidad_view_model"; // Adjust the import path as necessary
+import { useDataAnalysisSostenibilidadViewModel } from "./data_analisis_sostenibilidad_view_model"; // Adjust the import path as necessary
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-//import Draggable from "react-draggable";
 import dynamic from "next/dynamic";
-import AreaInfoComponent from "../../base_components/dataAreaInfo";
+
 import DraggableModal from "../../base_components/draggable_modal/draggable_modal";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 interface DataAnalysisMenuProps {
   isOpen: boolean;
-  dataForest: any;
+  data: any;
+  metas: string[]; // Change type to string[] for clarity
+  pilares: string[]; // Change type to string[] for clarity
+  actuaciones: string[]; // Change type to string[] for clarity
   removeForestItem: any;
   handleToggleClick: any;
   activeToggles: Record<string, boolean>;
 }
-const Draggable = dynamic(() => import("react-draggable"), { ssr: false });
+
 const DataAnalysisSostenibilidad: React.FC<DataAnalysisMenuProps> = ({
   isOpen,
-  dataForest,
+  data,
   removeForestItem,
   handleToggleClick,
 }) => {
@@ -32,83 +29,96 @@ const DataAnalysisSostenibilidad: React.FC<DataAnalysisMenuProps> = ({
     activeTab,
     handleTabClick,
     handleClose,
-    rowsCatastrales,
-    rowsIndicadores,
     isMinimized,
+    metas,
+    pilares,
+    actuaciones,
     setIsMinimized,
   } = useDataAnalysisSostenibilidadViewModel(
     isOpen,
-    dataForest,
+    data,
     handleToggleClick,
     removeForestItem
   );
-
+  console.log(
+    "metas: ",
+    metas,
+    "pilares: ",
+    pilares,
+    "actuaciones:",
+    actuaciones
+  );
   if (!isOpen) return null;
 
   return (
     <DraggableModal isMinimized={isMinimized} setIsMinimized={setIsMinimized}>
-      <div className={styles.tabHeader}>
-        <button
-          className={`${styles.tabLink} ${
-            activeTab === "PILARES" ? styles.active : ""
-          }`}
-          onClick={() => handleTabClick("PILARES")}
-        >
-          <p style={{ fontWeight: "700", fontSize: "14px" }}>PILARES</p>
-        </button>
-        <button
-          className={`${styles.tabLink} ${
-            activeTab === "indicadores" ? styles.active : ""
-          }`}
-          onClick={() => handleTabClick("indicadores")}
-        >
-          <p style={{ fontWeight: "700", fontSize: "14px" }}>INDICADORES</p>
-        </button>
-        <button
-          className={`${styles.tabLink} ${
-            activeTab === "datos_catastrales" ? styles.active : ""
-          }`}
-          onClick={() => handleTabClick("datos_catastrales")}
-        >
-          <p style={{ fontWeight: "700", fontSize: "14px" }}>
-            DATOS CATASTRALES
-          </p>
-        </button>
-      </div>
-      <div className={styles.tabContent}>
-        <div
-          id="PILARES"
-          className={`${styles.tabPane} ${
-            activeTab === "PILARES" ? styles.active : ""
-          }`}
-        >
-          {dataForest?.map((areaData: AreaData, index: any) => (
-            <AreaInfoComponent
-              key={index}
-              areaLabel={areaData.properties.leyenda.label}
-              areaName={areaData.properties.leyenda.name}
-              areaText={areaData.properties.leyenda.text}
-              areaColor={areaData.properties.leyenda.color}
-              onClose={handleClose}
-              removeForestItem={removeForestItem}
-              toggleName={areaData.properties.leyenda.name}
-              handleToggleClick={handleToggleClick} // Pass the handleToggleClick function
-            />
-          ))}
+      <div className={styles.dataAnalysisMenu}>
+        <div className={styles.tabHeader}>
+          <button
+            className={`${styles.tabLink} ${
+              activeTab === "metas" ? styles.active : ""
+            }`}
+            onClick={() => handleTabClick("metas")}
+          >
+            <p style={{ fontWeight: "700", fontSize: "14px" }}>METAS</p>
+          </button>
+          <button
+            className={`${styles.tabLink} ${
+              activeTab === "pilares" ? styles.active : ""
+            }`}
+            onClick={() => handleTabClick("pilares")}
+          >
+            <p style={{ fontWeight: "700", fontSize: "14px" }}>PILARES</p>
+          </button>
+          <button
+            className={`${styles.tabLink} ${
+              activeTab === "actuaciones" ? styles.active : ""
+            }`}
+            onClick={() => handleTabClick("actuaciones")}
+          >
+            <p style={{ fontWeight: "700", fontSize: "14px" }}>ACTUACIONES</p>
+          </button>
         </div>
+        <div className={styles.tabContent}>
+          <div
+            id="metas"
+            className={`${styles.tabPane} ${
+              activeTab === "metas" ? styles.active : ""
+            }`}
+          >
+            <ul>
+              {metas.map((meta, index) => (
+                <li key={index}>{meta}</li>
+              ))}
+            </ul>
+          </div>
 
-        <div
-          id="indicadores"
-          className={`${styles.tabPane} ${
-            activeTab === "indicadores" ? styles.active : ""
-          }`}
-        ></div>
-        <div
-          id="datos_catastrales"
-          className={`${styles.tabPane} ${
-            activeTab === "datos_catastrales" ? styles.active : ""
-          }`}
-        ></div>
+          <div
+            id="pilares"
+            className={`${styles.tabPane} ${
+              activeTab === "pilares" ? styles.active : ""
+            }`}
+          >
+            <ul>
+              {pilares.map((pilar, index) => (
+                <li key={index}>{pilar}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div
+            id="actuaciones"
+            className={`${styles.tabPane} ${
+              activeTab === "actuaciones" ? styles.active : ""
+            }`}
+          >
+            <ul>
+              {actuaciones.map((actuacion, index) => (
+                <li key={index}>{actuacion}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </DraggableModal>
   );

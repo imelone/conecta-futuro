@@ -1,12 +1,24 @@
 // TreeListMenu.jsx
 import React from "react";
 import TreeMenu from "../../ui-components/tree_menu/tree_menu";
-
-const TreeListMenu = ({ data }: any) => {
-  console.log("dataMenuTree:", data);
-
+import Image from "next/image";
+import styles from "./styles.module.css";
+const CertificacionesSideNav: React.FC<any> = ({ data, sectionMainImg }) => {
   return (
     <div>
+      <h3 style={{ marginBottom: "1rem", textAlign: "center" }}>
+        CERTIFICACIONES
+      </h3>
+      <div className={styles.logoContainer}>
+        <Image
+          src={`/assets/images/sections_menu_main/${sectionMainImg}.png`}
+          alt="Logo"
+          className="sidebar-logo-image"
+          layout="intrinsic" // Or other layout options as necessary
+          width={300}
+          height={300}
+        />
+      </div>
       {data?.map((cert: { title: any; items: any[] }, certIndex: any) => (
         <TreeMenu
           key={`cert-${certIndex}`}
@@ -25,4 +37,4 @@ const TreeListMenu = ({ data }: any) => {
   );
 };
 
-export default TreeListMenu;
+export default CertificacionesSideNav;

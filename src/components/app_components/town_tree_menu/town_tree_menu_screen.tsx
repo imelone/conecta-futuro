@@ -97,13 +97,13 @@ const TownTreeMenu: React.FC<TownListProps> = ({
             src={`/assets/images/sections_menu_main/${sectionMainImg}.png`}
             alt="Logo"
             className="sidebar-logo-image"
-            layout="intrinsic" // Or other layout options as necessary
+            layout="intrinsic"
             width={300}
             height={300}
           />
         </div>
         <ul>
-          {programsInfo.map(
+          {programsInfo?.map(
             (
               item:
                 | string
@@ -127,10 +127,10 @@ const TownTreeMenu: React.FC<TownListProps> = ({
         </ul>
       </div>
 
-      {communitiesData.map((communityData: any, index: any) => (
+      {communitiesData?.map((communityData: any, index: any) => (
         <TreeMenu
           key={index}
-          title={communityData.comunidad}
+          title={communityData?.comunidad}
           selectedProgram={selectedProgram}
           sideBarSelectedOption={sideBarSelectedOption}
         >

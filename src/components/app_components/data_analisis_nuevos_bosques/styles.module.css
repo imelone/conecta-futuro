@@ -50,6 +50,7 @@
 
 .tabPane.active {
   display: block;
+  background-color: white; /* Set background color to white for active tab */
 }
 
 .chartContainer {

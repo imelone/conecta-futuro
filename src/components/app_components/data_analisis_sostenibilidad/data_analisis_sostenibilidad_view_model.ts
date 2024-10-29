@@ -38,13 +38,22 @@ export interface AreaData {
     };
   };
 }
+
 export const useDataAnalysisSostenibilidadViewModel = (
   isOpen: any,
-  dataForest: AreaData[],
+  data: AreaData[],
   handleToggleClick: any,
   removeForestItem: (areaName: string) => void
 ) => {
-  const [activeTab, setActiveTab] = useState("Tab1");
+  // Log all the props received
+  console.log("Props received:", {
+    isOpen,
+    data,
+    handleToggleClick,
+    removeForestItem,
+  });
+
+  const [activeTab, setActiveTab] = useState("metas");
   const [isMinimized, setIsMinimized] = useState(false);
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
@@ -54,55 +63,30 @@ export const useDataAnalysisSostenibilidadViewModel = (
     removeForestItem(areaName);
   };
 
-  // Prepare pie chart data
-  const pieData1 = {
-    labels: ["Alcornoque", "Roble", "Algarrobo"],
-    datasets: [
-      {
-        data: [73, 7, 20],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-      },
-    ],
-  };
+  // Initialize arrays to hold the values
+  const metas: string[] = [];
+  const pilares: string[] = [];
+  const actuaciones: string[] = [];
 
-  const pieData2 = {
-    labels: ["Algarrobo", "Roble", "Durillo"],
-    datasets: [
-      {
-        data: [58, 3, 39],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-      },
-    ],
-  };
-
-  // Extract rows from dataForest
-  // Extract rows from dataForest
-  const rowsCatastrales =
-    dataForest?.map((areaData: AreaData, index: number) => ({
-      id: index + 1,
-      bosque: areaData.properties.leyenda.label,
-      refCat: areaData.properties.catastrales.refCat,
-      poligono: areaData.properties.catastrales.poligono,
-      parcela: areaData.properties.catastrales.parcela,
-      //  coordenadas: `${areaData.properties.catastrales.coordenadasX} ${areaData.properties.catastrales.coordenadasY}`,
-    })) || [];
-
-  const rowsIndicadores =
-    dataForest?.map((areaData: any, index: number) => ({
-      id: index + 1,
-      bosque: areaData.properties.leyenda.label,
-      superficie: areaData.properties.indicadores.superficie,
-      arboles_nuevos: areaData.properties.indicadores.arbolesNuevos,
-      co2PorCapturar: areaData.properties.indicadores.co2PorCapturar,
-    })) || [];
+  // Access metas, pilares, and actuaciones directly
+  data.forEach((item: any) => {
+    // Check if properties exist
+    if (item.properties) {
+      metas.push(...(item.properties.metas || []));
+      pilares.push(...(item.properties.pilares || []));
+      actuaciones.push(...(item.properties.actuaciones || []));
+    }
+  });
 
   return {
     activeTab,
     handleTabClick,
     handleClose,
-    rowsCatastrales,
-    rowsIndicadores,
     handleToggleClick,
+    data,
+    metas,
+    pilares,
+    actuaciones,
     removeForestItem,
     isMinimized,
     setIsMinimized,

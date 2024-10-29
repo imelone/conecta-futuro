@@ -42,6 +42,12 @@ export const useDataAnalysisCuidaTuBosqueViewModel = (
   handleToggleClick: any,
   removeForestItem: (areaName: string) => void
 ) => {
+  console.log("DataAnalysisSostenibilidad props:", {
+    isOpen,
+    dataForest,
+    removeForestItem,
+    handleToggleClick,
+  });
   const [activeTab, setActiveTab] = useState("descripcion");
   const [isMinimized, setIsMinimized] = useState(false);
 

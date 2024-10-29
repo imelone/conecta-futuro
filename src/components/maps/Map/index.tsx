@@ -73,15 +73,19 @@ const Map = () => {
         `../../../app/data/programas/${selectedProgram}.json`
       );
       console.log("towns[1].certificaciones: ", towns[1]);
-      if (selectedProgram === "certificaciones") {
+      if (
+        selectedProgram === "certificaciones" ||
+        selectedProgram === "aula-verde"
+      ) {
         console.log("selectedProgram: ", selectedProgram);
         console.log("towns[1].certificaciones: ", towns[1].certificaciones);
         setTownsData(towns[1].certificaciones);
+        setSectionMainImg(towns[0].image);
       } else {
         setTownsData(towns[1].distritos);
       }
 
-      setProgramsInfo(towns[0].descripcion); // Access the default export from the JSON file
+      setProgramsInfo(towns[0].descripcion);
       console.log("towns[0].image: ", towns[0].image);
       setSectionMainImg(towns[0].image);
     } catch (error) {
@@ -170,7 +174,11 @@ const Map = () => {
   };
 
   useEffect(() => {
-    if (townsData && selectedProgram !== "certificaciones") {
+    if (
+      townsData &&
+      selectedProgram !== "certificaciones" &&
+      selectedProgram === "aula-verde"
+    ) {
       const toggleNames = extractToggleNames(townsData);
 
       // Update activeToggles based on toggleNames
@@ -255,17 +263,45 @@ const Map = () => {
     [geoJsonLayers, townsData]
   );
 
+  // const handleToggleOn = async (toggleName: string) => {
+  //   try {
+  //     const levels = ["provincias", "municipios", "parcelas"];
+  //     const foundParcela = findParcelaByName(toggleName, townsData, levels);
+  //     console.log("foundParcela: ", foundParcela);
+  //     if (foundParcela) {
+  //       if (foundParcela.geometry.type === "Point") {
+  //         await addPointLayer(foundParcela);
+  //       } else if (foundParcela.geometry.type === "Polygon") {
+  //         await addPolygonLayer(foundParcela, toggleName);
+  //       }
+  //       addDataToForest(foundParcela);
+  //     } else {
+  //       console.warn(`No parcel found for toggleName: ${toggleName}`);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error processing data:", error);
+  //   }
+  // };
   const handleToggleOn = async (toggleName: string) => {
     try {
       const levels = ["provincias", "municipios", "parcelas"];
       const foundParcela = findParcelaByName(toggleName, townsData, levels);
       console.log("foundParcela: ", foundParcela);
+
       if (foundParcela) {
-        if (foundParcela.geometry.type === "Point") {
-          await addPointLayer(foundParcela);
-        } else if (foundParcela.geometry.type === "Polygon") {
-          await addPolygonLayer(foundParcela, toggleName);
+        // Check if coordinates are present
+        const coordinates = foundParcela.geometry?.coordinates;
+        if (coordinates && coordinates.length > 0) {
+          if (foundParcela.geometry.type === "Point") {
+            await addPointLayer(foundParcela);
+          } else if (foundParcela.geometry.type === "Polygon") {
+            await addPolygonLayer(foundParcela, toggleName);
+          }
+        } else {
+          console.warn(`No coordinates found for toggleName: ${toggleName}`);
         }
+        // Always add data to the forest regardless of coordinates
+        console.log("foundParcela: ", foundParcela);
         addDataToForest(foundParcela);
       } else {
         console.warn(`No parcel found for toggleName: ${toggleName}`);
@@ -276,18 +312,17 @@ const Map = () => {
   };
 
   const addPointLayer = async (data) => {
-    const coordinates = data.geometry.coordinates[0][0];
+    const coordinates = data?.geometry?.coordinates[0][0];
     const latLng: LatLngTuple = [coordinates[1], coordinates[0]];
 
     const pointLayer = L.circleMarker(latLng, {
       radius: 12,
-      fillColor: data.properties?.leyenda?.color || "#3388ff",
+      fillColor: data?.properties?.leyenda?.color || "#3388ff",
       color: "#000",
       weight: 1,
-      opacity: 1,
+      opacity: coordinates ? 1 : 0, // Fully opaque if coordinates exist, transparent otherwise
       fillOpacity: 0.8,
     });
-
     let popupContent = createPopupContent(data);
     pointLayer.bindPopup(popupContent);
     pointLayer.addTo(mapRef.current);
@@ -296,8 +331,9 @@ const Map = () => {
       ...prevLayers,
       { toggleName: data.properties?.leyenda?.name, layer: pointLayer },
     ]);
-
-    mapRef.current.setView([latLng[0], latLng[1] - 0.02], 15);
+    if (!(coordinates[1] === 0, coordinates[0] === 0)) {
+      mapRef.current.setView([latLng[0], latLng[1] - 0.02], 15);
+    }
   };
 
   const createPopupContent = (data) => {
@@ -396,7 +432,6 @@ const Map = () => {
 
   const addDataToForest = (data: any) => {
     setDataForest((prevDataForest: any) => {
-      // Check if the data already exists in dataForest
       const isDataExists = prevDataForest.some(
         (item: any) =>
           item.properties.leyenda.name === data.properties.leyenda.name
@@ -576,7 +611,7 @@ const Map = () => {
           {selectedProgram === "sostenibilidad" && (
             <DataAnalysisSostenbilidad
               isOpen={isDataAnalysisMenuOpen}
-              dataForest={dataForest}
+              data={dataForest}
               removeForestItem={removeForestItem}
               handleToggleClick={handleToggleClick}
               activeToggles={activeToggles}

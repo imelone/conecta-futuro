@@ -1,6 +1,7 @@
 [
   {
-    "descripcion": ["Calcular", "Reducir", "Compensar"]
+    "descripcion": ["Calcular", "Reducir", "Compensar"],
+    "image": "certificaciones_main"
   },
   {
     "certificaciones": [

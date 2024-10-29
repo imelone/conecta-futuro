@@ -9,11 +9,11 @@ import {
   faMap,
 } from "@fortawesome/free-solid-svg-icons";
 import TownList from "../app_components/town_tree_menu/town_tree_menu_screen";
-import TreeListMenu from "../app_components/tree_list_menu/tree_list_menu_screen"; // Import your TreeListMenu component
 import styled from "@emotion/styled";
 import { useSidebarViewModel } from "./sidenav_view_model";
 import Image from "next/image";
-
+import CertificacionesSidenav from "../app_components/certificaciones_sidenav/certificaciones_sidenav_screen";
+import AulaVerdeSidenav from "../app_components/aula_verde_sidenav/aula_verde_sidenav_screen";
 interface SidebarViewModelProps {
   programsList: any;
   onToggle: (toggleName: string, isActive: boolean) => void;
@@ -83,24 +83,58 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
 
   // Extract the content logic for the district pane
   let districtContent;
-  if (selectedProgram == "certificaciones") {
-    districtContent = <TreeListMenu data={townsData} />;
-  } else if (selectedTown || !townsData) {
-    districtContent = <div>{/* Handle selected town content here */}</div>;
-  } else {
-    districtContent = (
-      <TownList
-        sectionMainImg={sectionMainImg}
-        communitiesData={townsData}
-        programsInfo={programsInfo}
-        onParcelClick={handleTownSelection}
-        handleToggleClick={handleToggleClick}
-        handleMunicipioToggleClick={handleMunicipioToggleClick}
-        activeToggles={activeToggles}
-        selectedProgram={selectedProgram}
-        sideBarSelectedOption={sideBarSelectedOption}
-      />
-    );
+  switch (selectedProgram) {
+    case "certificaciones":
+      districtContent = (
+        <CertificacionesSidenav
+          data={townsData}
+          sectionMainImg={sectionMainImg}
+        />
+      );
+      break;
+
+    case "aula-verde":
+      districtContent = (
+        <AulaVerdeSidenav data={townsData} sectionMainImg={sectionMainImg} />
+      );
+      break;
+
+    case "nuevos-bosques":
+    case "cuida-tu-bosque":
+      districtContent = (
+        <TownList
+          sectionMainImg={sectionMainImg}
+          communitiesData={townsData}
+          programsInfo={programsInfo}
+          onParcelClick={handleTownSelection}
+          handleToggleClick={handleToggleClick}
+          handleMunicipioToggleClick={handleMunicipioToggleClick}
+          activeToggles={activeToggles}
+          selectedProgram={selectedProgram}
+          sideBarSelectedOption={sideBarSelectedOption}
+        />
+      );
+      break;
+
+    default:
+      if (selectedTown || !townsData) {
+        districtContent = <div>{/* Handle selected town content here */}</div>;
+      } else {
+        districtContent = (
+          <TownList
+            sectionMainImg={sectionMainImg}
+            communitiesData={townsData}
+            programsInfo={programsInfo}
+            onParcelClick={handleTownSelection}
+            handleToggleClick={handleToggleClick}
+            handleMunicipioToggleClick={handleMunicipioToggleClick}
+            activeToggles={activeToggles}
+            selectedProgram={selectedProgram}
+            sideBarSelectedOption={sideBarSelectedOption}
+          />
+        );
+      }
+      break;
   }
 
   return (
@@ -182,7 +216,9 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
           }`}
           id="district"
         >
-          <h2 style={{ marginBottom: "1rem" }}>PROGRAMAS</h2>
+          <h2 style={{ marginBottom: "1rem", textAlign: "center" }}>
+            PROGRAMAS
+          </h2>
           <ul>
             {programsList.map((program: any) => (
               <li key={program.comunidadArchivo}>
