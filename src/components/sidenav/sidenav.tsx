@@ -148,7 +148,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
         <ul role="tablist">
           <div className="sidebar-logo">
             <Image
-              src="/images/icons/logo.png"
+              src="/assets/images/icons/logo.png"
               alt="Logo"
               className="sidebar-logo-image"
               layout="intrinsic"
