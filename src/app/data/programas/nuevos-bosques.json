@@ -27,7 +27,7 @@
                     "type": "Feature",
                     "geometry": {
                       "type": "Point",
-                      "coordinates": [[[-3.062473, 38.302069]]]
+                      "coordinates": [[]]
                     },
                     "properties": {
                       "leyenda": {

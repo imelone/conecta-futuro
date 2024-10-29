@@ -166,7 +166,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
               <CustomIcon icon={faHouse} size="2x" />
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               href="#profile"
               role="tab"
@@ -175,7 +175,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
             >
               <CustomIcon icon={faRecycle} size="2x" />
             </a>
-          </li>
+          </li> */}
           <li>
             <a
               href="#district"
@@ -186,7 +186,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
               <CustomIcon icon={faMap} size="2x" />
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               href="#sustainability"
               role="tab"
@@ -195,7 +195,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
             >
               <CustomIcon icon={faUser} size="2x" />
             </a>
-          </li>
+          </li> */}
           <li>
             <a
               href="#settings"
@@ -279,8 +279,8 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
           }`}
           id="settings"
         >
-          <h1 className="sidebar-header">Settings</h1>
-          <p>Settings content goes here.</p>
+          <h1 className="sidebar-header">Configuración</h1>
+          <p>Contenido de configuración</p>
         </div>
       </div>
     </div>
