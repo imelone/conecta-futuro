@@ -86,9 +86,11 @@ const DataAnalysisSostenibilidad: React.FC<DataAnalysisMenuProps> = ({
               activeTab === "metas" ? styles.active : ""
             }`}
           >
-            <ul>
+            <ul style={{ listStyleType: "none", padding: 0 }}>
               {metas.map((meta, index) => (
-                <li key={index}>{meta}</li>
+                <li style={{ fontSize: "1.2rem" }} key={index}>
+                  {meta}
+                </li>
               ))}
             </ul>
           </div>
@@ -99,9 +101,11 @@ const DataAnalysisSostenibilidad: React.FC<DataAnalysisMenuProps> = ({
               activeTab === "pilares" ? styles.active : ""
             }`}
           >
-            <ul>
+            <ul style={{ listStyleType: "none", padding: 0 }}>
               {pilares.map((pilar, index) => (
-                <li key={index}>{pilar}</li>
+                <li style={{ fontSize: "1.2rem" }} key={index}>
+                  {pilar}
+                </li>
               ))}
             </ul>
           </div>
@@ -112,9 +116,11 @@ const DataAnalysisSostenibilidad: React.FC<DataAnalysisMenuProps> = ({
               activeTab === "actuaciones" ? styles.active : ""
             }`}
           >
-            <ul>
+            <ul style={{ listStyleType: "none", padding: 0 }}>
               {actuaciones.map((actuacion, index) => (
-                <li key={index}>{actuacion}</li>
+                <li style={{ fontSize: "1.2rem" }} key={index}>
+                  {actuacion}
+                </li>
               ))}
             </ul>
           </div>
