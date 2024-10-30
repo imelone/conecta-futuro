@@ -6,15 +6,42 @@
     "certificaciones": [
       {
         "title": "SOSTENIBILIDAD EN EL TURISMO",
-        "items": []
+        "items": [
+          {
+            "label": "Documento 1",
+            "pdfUrl": "/data/pdfs/file1.pdf"
+          },
+          {
+            "label": "Documento 2",
+            "pdfUrl": "/data/pdfs/file2.pdf"
+          }
+        ]
       },
       {
         "title": "CERTIFICACIÓN ESPACIOS VERDES",
-        "items": []
+        "items": [
+          {
+            "label": "Documento 1",
+            "pdfUrl": "/data/pdfs/file1.pdf"
+          },
+          {
+            "label": "Documento 2",
+            "pdfUrl": "/data/pdfs/file2.pdf"
+          }
+        ]
       },
       {
         "title": "CERTIFICACIÓN HOTEL ECOLÓGICO",
-        "items": []
+        "items": [
+          {
+            "label": "Documento 1",
+            "pdfUrl": "/data/pdfs/file1.pdf"
+          },
+          {
+            "label": "Documento 2",
+            "pdfUrl": "/data/pdfs/file2.pdf"
+          }
+        ]
       }
     ]
   }
