@@ -9,11 +9,11 @@
         "items": [
           {
             "label": "Documento 1",
-            "pdfUrl": "/pdfs/file1.pdf"
+            "pdfUrl": "/pdfs/documento1.pdf"
           },
           {
             "label": "Documento 2",
-            "pdfUrl": "/pdfs/file2.pdf"
+            "pdfUrl": "/pdfs/documento2.pdf"
           }
         ]
       },
@@ -22,11 +22,11 @@
         "items": [
           {
             "label": "Documento 1",
-            "pdfUrl": "/pdfs/file1.pdf"
+            "pdfUrl": "/pdfs/documento1.pdf"
           },
           {
             "label": "Documento 2",
-            "pdfUrl": "/pdfs/file2.pdf"
+            "pdfUrl": "/pdfs/documento2.pdf"
           }
         ]
       },
@@ -35,11 +35,11 @@
         "items": [
           {
             "label": "Documento 1",
-            "pdfUrl": "/pdfs/file1.pdf"
+            "pdfUrl": "/pdfs/documento1.pdf"
           },
           {
             "label": "Documento 2",
-            "pdfUrl": "/pdfs/file2.pdf"
+            "pdfUrl": "/pdfs/documento2.pdf"
           }
         ]
       }
