@@ -10,14 +10,16 @@ const CertificacionesSideNav: React.FC<any> = ({ data, sectionMainImg }) => {
         CERTIFICACIONES
       </h3>
       <div className={styles.logoContainer}>
-        <Image
-          src={`/assets/images/sections_menu_main/${sectionMainImg}.png`}
-          alt="Logo"
-          className="sidebar-logo-image"
-          layout="intrinsic" // Or other layout options as necessary
-          width={300}
-          height={300}
-        />
+        {sectionMainImg && (
+          <Image
+            src={`/assets/images/sections_menu_main/${sectionMainImg}.png`}
+            alt="Logo"
+            className="sidebar-logo-image"
+            layout="intrinsic" // Or other layout options as necessary
+            width={300}
+            height={300}
+          />
+        )}
       </div>
       {data?.map((cert: { title: any; items: any[] }, certIndex: any) => (
         <TreeMenu

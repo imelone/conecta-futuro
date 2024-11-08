@@ -48,7 +48,7 @@ export const useDataAnalysisCuidaTuBosqueViewModel = (
     removeForestItem,
     handleToggleClick,
   });
-  const [activeTab, setActiveTab] = useState("descripcion");
+  const [activeTab, setActiveTab] = useState("datos_catastrales");
   const [isMinimized, setIsMinimized] = useState(false);
 
   const handleTabClick = (tabName: string) => {

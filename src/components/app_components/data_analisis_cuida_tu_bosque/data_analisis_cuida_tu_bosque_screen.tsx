@@ -20,8 +20,8 @@ interface DataAnalysisMenuProps {
   removeForestItem: any;
   handleToggleClick: any;
   activeToggles: Record<string, boolean>;
-  setIsMinimized: any;
-  sMinimized: boolean;
+  // setIsMinimized: any;
+  // sMinimized: boolean;
 }
 
 const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
@@ -73,14 +73,14 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
     <DraggableModal isMinimized={isMinimized} setIsMinimized={setIsMinimized}>
       <div className={styles.dataAnalysisMenu}>
         <div className={styles.tabHeader}>
-          <button
+          {/* <button
             className={`${styles.tabLink} ${
               activeTab === "descripcion" ? styles.active : ""
             }`}
             onClick={() => handleTabClick("descripcion")}
           >
             <p style={{ fontWeight: "700", fontSize: "14px" }}>DESCRIPCION</p>
-          </button>
+          </button> */}
           <button
             className={`${styles.tabLink} ${
               activeTab === "datos_catastrales" ? styles.active : ""
@@ -102,7 +102,7 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
         </div>
 
         <div className={styles.tabContent}>
-          <div
+          {/* <div
             id="descripcion"
             className={`${styles.tabPane} ${
               activeTab === "descripcion" ? styles.active : ""
@@ -121,7 +121,7 @@ const DataAnalysisMenu: React.FC<DataAnalysisMenuProps> = ({
                 handleToggleClick={handleToggleClick}
               />
             ))}
-          </div>
+          </div> */}
 
           <div
             id="datos_catastrales"

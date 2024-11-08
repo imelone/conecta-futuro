@@ -93,14 +93,16 @@ const TownTreeMenu: React.FC<TownListProps> = ({
         </h3>
 
         <div className={styles.logoContainer}>
-          <Image
-            src={`/assets/images/sections_menu_main/${sectionMainImg}.png`}
-            alt="Logo"
-            className="sidebar-logo-image"
-            layout="intrinsic"
-            width={300}
-            height={300}
-          />
+          {sectionMainImg && (
+            <Image
+              src={`/assets/images/sections_menu_main/${sectionMainImg}.png`}
+              alt="Logo"
+              className="sidebar-logo-image"
+              layout="intrinsic"
+              width={300}
+              height={300}
+            />
+          )}
         </div>
         <ul>
           {programsInfo?.map(

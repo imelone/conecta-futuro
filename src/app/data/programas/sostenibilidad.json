@@ -9,7 +9,7 @@
       "Control de plagas",
       "Reposición de especies"
     ],
-    "image": "cuida_tu_bosque_main_sin_marco"
+    "image": "sostenibilidad_main"
   },
   {
     "distritos": [
@@ -22,6 +22,74 @@
               {
                 "municipio": "Chiclana de Segura",
 
+                "parcelas": [
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[[0, 0]]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "descripcion",
+                        "label": "descripción",
+                        "color": "#C1BE13",
+                        "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
+                      },
+                      "metas": ["Calcular", "Reducir", "Compensar"],
+                      "pilares": [
+                        "Físico-biológico",
+                        "Socioeconómico",
+                        "Procesos y sistemas"
+                      ],
+                      "actuaciones": [
+                        "Alcances",
+                        "Recursos disponibles",
+                        "¿Cómo y Cuándo?",
+                        "Revisión de procesos",
+                        "Indicadores de gestión",
+                        "Mejora contínua"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "municipio": "Santa Elena",
+                "parcelas": [
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[[0, 0]]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "descripcion",
+                        "label": "descripción",
+                        "color": "#C1BE13",
+                        "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
+                      },
+                      "metas": ["Calcular", "Reducir", "Compensar"],
+                      "pilares": [
+                        "Físico-biológico",
+                        "Socioeconómico",
+                        "Procesos y sistemas"
+                      ],
+                      "actuaciones": [
+                        "Alcances",
+                        "Recursos disponibles",
+                        "¿Cómo y Cuándo?",
+                        "Revisión de procesos",
+                        "Indicadores de gestión",
+                        "Mejora contínua"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "municipio": "Carboneros",
                 "parcelas": [
                   {
                     "type": "Feature",
