@@ -27,6 +27,39 @@
                     "type": "Feature",
                     "geometry": {
                       "type": "Point",
+                      "coordinates": [[[]]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "laHerencia",
+                        "label": "La Herencia",
+                        "color": "#736BA9",
+                        "text": ""
+                      },
+                      "catastrales": {
+                        "text": "",
+                        "image": "",
+                        "refCat": "23029A03000201 LP",
+                        "poligono": "",
+                        "parcela": "",
+                        "coordenadasX": "",
+                        "coordenadasY": ""
+                      },
+                      "indicadores": {
+                        "superficie": "",
+                        "arbolesNuevos": "625",
+                        "co2PorCapturar": "46,86"
+                      },
+                      "analisis": {
+                        "text": "",
+                        "image": ""
+                      }
+                    }
+                  },
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
                       "coordinates": [[]]
                     },
                     "properties": {
@@ -37,7 +70,7 @@
                         "text": ""
                       },
                       "catastrales": {
-                        "text": "Para",
+                        "text": "",
                         "image": "",
                         "refCat": "23029A05500059 LU",
                         "poligono": "55",
@@ -51,44 +84,12 @@
                         "co2PorCapturar": "1711,50"
                       },
                       "analisis": {
-                        "text": "Para",
+                        "text": "",
                         "image": ""
                       }
                     }
                   },
-                  {
-                    "type": "Feature",
-                    "geometry": {
-                      "type": "Point",
-                      "coordinates": [[[]]]
-                    },
-                    "properties": {
-                      "leyenda": {
-                        "name": "miteco",
-                        "label": "MITECO",
-                        "color": "#736BA9",
-                        "text": ""
-                      },
-                      "catastrales": {
-                        "text": "Para",
-                        "image": "",
-                        "refCat": "23029A03200022LY",
-                        "poligono": "32",
-                        "parcela": "22",
-                        "coordenadasX": "",
-                        "coordenadasY": ""
-                      },
-                      "indicadores": {
-                        "superficie": "20,82",
-                        "arbolesNuevos": "20000",
-                        "co2PorCapturar": "37002,44"
-                      },
-                      "analisis": {
-                        "text": "Para",
-                        "image": ""
-                      }
-                    }
-                  },
+
                   {
                     "type": "Feature",
                     "geometry": {
@@ -110,27 +111,65 @@
                     },
                     "properties": {
                       "leyenda": {
-                        "name": "elCorcho",
-                        "label": "El Corcho",
+                        "name": "Loscarrizales",
+                        "label": "Los Carrizales",
                         "color": "#EE20B3",
                         "text": ""
                       },
                       "catastrales": {
-                        "text": "Para",
-                        "image": "el-corcho-parcela.png",
-                        "refCat": "23029A03000201 LP",
-                        "poligono": "30",
-                        "parcela": "201",
-                        "coordenadasX": "X:-",
-                        "coordenadasY": "Y:-"
+                        "text": "",
+                        "image": "",
+                        "refCat": "23029A03200022LY",
+                        "poligono": "",
+                        "parcela": "",
+                        "coordenadasX": "",
+                        "coordenadasY": ""
                       },
                       "indicadores": {
-                        "superficie": "0,70",
-                        "arbolesNuevos": "625",
-                        "co2PorCapturar": "46,86"
+                        "superficie": "",
+                        "arbolesNuevos": "20000",
+                        "co2PorCapturar": "37002,44"
                       },
                       "analisis": {
-                        "text": "Para",
+                        "text": "",
+                        "image": ""
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "municipio": "Santa Elena",
+                "parcelas": [
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "laAliseda",
+                        "label": "La Aliseda",
+                        "color": "#C1BE13",
+                        "text": ""
+                      },
+                      "catastrales": {
+                        "text": "",
+                        "image": "",
+                        "refCat": "",
+                        "poligono": "",
+                        "parcela": "",
+                        "coordenadasX": "",
+                        "coordenadasY": ""
+                      },
+                      "indicadores": {
+                        "superficie": "",
+                        "arbolesNuevos": "3000",
+                        "co2PorCapturar": "230"
+                      },
+                      "analisis": {
+                        "text": "",
                         "image": ""
                       }
                     }

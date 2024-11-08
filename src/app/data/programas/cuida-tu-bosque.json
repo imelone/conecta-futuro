@@ -1,6 +1,9 @@
 [
   {
     "descripcion": [
+      "Protección cobertura arbórea",
+      "Cuidado del CO2 capturado",
+      "Aumento de captación de agua",
       "Cobertura arbórea",
       "CO2 capturado",
       "Captación de agua",
@@ -195,6 +198,48 @@
                       },
                       "analisis": {
                         "text": "Para",
+                        "image": ""
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "municipio": "Santa Elena",
+
+                "parcelas": [
+                  {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [[]]
+                    },
+                    "properties": {
+                      "leyenda": {
+                        "name": "MuseoDeLaBatallaDeLasNavasDeTolosa",
+                        "label": "Museo de la batalla de las Navas de Tolosa",
+                        "color": "#C1BE13",
+                        "text": ""
+                      },
+                      "catastrales": {
+                        "text": "",
+                        "image": "",
+                        "refCat": "23004000867183",
+                        "poligono": "",
+                        "parcela": "",
+                        "coordenadasX": "",
+                        "coordenadasY": ""
+                      },
+                      "indicadores": {
+                        "superficie": "7,00",
+                        "arboles": "7000",
+                        "co2Capturado": "",
+                        "co2PorCapturar": "",
+                        "factorHidrologico": ""
+                      },
+                      "Copernico": {},
+                      "analisis": {
+                        "text": "",
                         "image": ""
                       }
                     }

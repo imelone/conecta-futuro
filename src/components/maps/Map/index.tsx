@@ -19,17 +19,14 @@ import RoutingMachine from "../RoutingMachine";
 import "./mapStyles.css";
 import { Layers } from "./Layers";
 import Sidebar from "../../sidenav/sidenav";
-//import TownList from "../../ui-components/regions/page"; // Corrected import path
-//import { cityData } from "../../../app/data/coordenadas_municipios/chiclanaDeSegura.js";
 import { FeatureCollection } from "geojson";
-//import Image from "next/image";
 import DataAnalysisMenuCuidaTuBosque from "@/components/app_components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
 import DataAnalysisMenuNuevosBosques from "@/components/app_components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
 import DataAnalysisSostenbilidad from "@/components/app_components/data_analisis_sostenibilidad/data_analisis_sostenibilidad_screen";
 import programsList from "../../../app/data/listado_de_programas/programs.json";
 import useGeoJsonLayersCleanup from "../../../hooks/use_geoJson_cleanup_layers";
+import { useGetTownsData } from "../../../hooks/use_get_town_data";
 import { findParcelaByName } from "@/utils/find_parcel_by_name";
-//import comunidades from "../../../app/data/cuida-tu-bosque.json";
 
 interface GeoJsonLayer {
   toggleName: string;
@@ -44,9 +41,7 @@ const Map = () => {
   const [coord] = useState<[number, number]>([40.4637, -3.7492]);
   const [endPoint] = useState<{ lat: number; lng: number } | null>(null);
   const [geoJsonLayers, setGeoJsonLayers] = useState<GeoJsonLayer[]>([]);
-  // const mapRef = useRef<L.Map | null>(null);
   const sidebarRef = useRef<L.Control.Sidebar | null>(null);
-  //const { setMap } = useMapContext();
   const [dataForest, setDataForest] = useState([]);
   const [analysisData, setAnalysisData] = useState<{ [key: string]: any }>({});
   const [isDataAnalysisMenuOpen, setIsDataAnalysisMenuOpen] = useState(false);
@@ -63,36 +58,13 @@ const Map = () => {
   );
   const [sideBarSelectedOption, setSideBarSelectedOption] = useState("home");
   const [sectionMainImg, setSectionMainImg] = useState("");
+  const { loadTownsData } = useGetTownsData(
+    selectedProgram,
+    setTownsData,
+    setProgramsInfo,
+    setSectionMainImg
+  );
 
-  const loadTownsData = async (selectedProgram: string) => {
-    console.log("comunidadArchivo: ", selectedProgram);
-
-    setDataForest([]);
-    try {
-      const towns = await import(
-        `../../../app/data/programas/${selectedProgram}.json`
-      );
-      console.log("towns[1].certificaciones: ", towns[1]);
-      if (
-        selectedProgram === "certificaciones" ||
-        selectedProgram === "aula-verde"
-      ) {
-        console.log("selectedProgram: ", selectedProgram);
-        console.log("towns[1].certificaciones: ", towns[1].certificaciones);
-        setTownsData(towns[1].certificaciones);
-        setSectionMainImg(towns[0].image);
-      } else {
-        setTownsData(towns[1].distritos);
-      }
-
-      setProgramsInfo(towns[0].descripcion);
-      console.log("towns[0].image: ", towns[0].image);
-      setSectionMainImg(towns[0].image);
-    } catch (error) {
-      console.error("Error loading towns data:", error);
-      setTownsData(null); // Reset towns data on error
-    }
-  };
   const { mapRef } = useGeoJsonLayersCleanup({
     geoJsonLayers,
     setGeoJsonLayers,
@@ -121,8 +93,6 @@ const Map = () => {
   };
 
   const handleOptionClick = (optionName: string) => {
-    console.log("pasa");
-
     setIsDataAnalysisMenuOpen(false);
     setSelectedTown(null); // Reset selected town when switching options
     setSelectedProvince(null); // Reset selected province
@@ -263,25 +233,6 @@ const Map = () => {
     [geoJsonLayers, townsData]
   );
 
-  // const handleToggleOn = async (toggleName: string) => {
-  //   try {
-  //     const levels = ["provincias", "municipios", "parcelas"];
-  //     const foundParcela = findParcelaByName(toggleName, townsData, levels);
-  //     console.log("foundParcela: ", foundParcela);
-  //     if (foundParcela) {
-  //       if (foundParcela.geometry.type === "Point") {
-  //         await addPointLayer(foundParcela);
-  //       } else if (foundParcela.geometry.type === "Polygon") {
-  //         await addPolygonLayer(foundParcela, toggleName);
-  //       }
-  //       addDataToForest(foundParcela);
-  //     } else {
-  //       console.warn(`No parcel found for toggleName: ${toggleName}`);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error processing data:", error);
-  //   }
-  // };
   const handleToggleOn = async (toggleName: string) => {
     try {
       const levels = ["provincias", "municipios", "parcelas"];
@@ -290,6 +241,7 @@ const Map = () => {
 
       if (foundParcela) {
         // Check if coordinates are present
+        addDataToForest(foundParcela);
         const coordinates = foundParcela.geometry?.coordinates;
         if (coordinates && coordinates.length > 0) {
           if (foundParcela.geometry.type === "Point") {
@@ -302,7 +254,7 @@ const Map = () => {
         }
         // Always add data to the forest regardless of coordinates
         console.log("foundParcela: ", foundParcela);
-        addDataToForest(foundParcela);
+        // addDataToForest(foundParcela);
       } else {
         console.warn(`No parcel found for toggleName: ${toggleName}`);
       }

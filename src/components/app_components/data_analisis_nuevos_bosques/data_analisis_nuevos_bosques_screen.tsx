@@ -48,12 +48,12 @@ const DataAnalysisNuevosBosquesMenu: React.FC<DataAnalysisMenuProps> = ({
   const columnsDatosCatastrales: GridColDef[] = [
     { field: "bosque", headerName: "BOSQUE", width: 150 },
     { field: "refCat", headerName: "REF. CATASTRAL", width: 150 },
-    { field: "poligono", headerName: "POLÍGONO", width: 150 },
-    { field: "parcela", headerName: "PARCELA", width: 150 },
+    // { field: "poligono", headerName: "POLÍGONO", width: 150 },
+    // { field: "parcela", headerName: "PARCELA", width: 150 },
   ];
   const columnsIndicadores: GridColDef[] = [
     { field: "bosque", headerName: "BOSQUE", width: 150 },
-    { field: "superficie", headerName: "SUPERFICIE", width: 20 },
+    // { field: "superficie", headerName: "SUPERFICIE", width: 20 },
     { field: "arboles_nuevos", headerName: "ÁRBOLES NUEVOS", width: 20 },
     { field: "co2PorCapturar", headerName: "CO2 X CAPTURAR (t.)", width: 20 },
   ];
@@ -63,7 +63,7 @@ const DataAnalysisNuevosBosquesMenu: React.FC<DataAnalysisMenuProps> = ({
   return (
     <DraggableModal isMinimized={isMinimized} setIsMinimized={setIsMinimized}>
       <div className={styles.tabHeader}>
-        <button
+        {/* <button
           className={`${styles.tabLink} ${
             activeTab === "Tab1" ? styles.active : ""
           }`}
@@ -72,7 +72,7 @@ const DataAnalysisNuevosBosquesMenu: React.FC<DataAnalysisMenuProps> = ({
           <p style={{ fontWeight: "700", fontSize: "14px" }}>
             PROGRAMA CUIDA TU BOSQUE
           </p>
-        </button>
+        </button> */}
         <button
           className={`${styles.tabLink} ${
             activeTab === "indicadores" ? styles.active : ""

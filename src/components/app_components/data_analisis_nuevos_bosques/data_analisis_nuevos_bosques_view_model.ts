@@ -44,7 +44,7 @@ export const useDataAnalysisNuevosBosquesViewModel = (
   handleToggleClick: any,
   removeForestItem: (areaName: string) => void
 ) => {
-  const [activeTab, setActiveTab] = useState("Tab1");
+  const [activeTab, setActiveTab] = useState("indicadores");
   const [isMinimized, setIsMinimized] = useState(false);
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
@@ -54,28 +54,6 @@ export const useDataAnalysisNuevosBosquesViewModel = (
     removeForestItem(areaName);
   };
 
-  // Prepare pie chart data
-  const pieData1 = {
-    labels: ["Alcornoque", "Roble", "Algarrobo"],
-    datasets: [
-      {
-        data: [73, 7, 20],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-      },
-    ],
-  };
-
-  const pieData2 = {
-    labels: ["Algarrobo", "Roble", "Durillo"],
-    datasets: [
-      {
-        data: [58, 3, 39],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-      },
-    ],
-  };
-
-  // Extract rows from dataForest
   // Extract rows from dataForest
   const rowsCatastrales =
     dataForest?.map((areaData: AreaData, index: number) => ({

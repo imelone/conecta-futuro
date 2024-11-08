@@ -1,13 +1,7 @@
 import React from "react";
 import "./sidenav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHouse,
-  faRecycle,
-  faUser,
-  faCog,
-  faMap,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faCog, faMap } from "@fortawesome/free-solid-svg-icons";
 import TownList from "../app_components/town_tree_menu/town_tree_menu_screen";
 import styled from "@emotion/styled";
 import { useSidebarViewModel } from "./sidenav_view_model";
@@ -217,7 +211,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
           id="district"
         >
           <h2 style={{ marginBottom: "1rem", textAlign: "center" }}>
-            PROGRAMAS
+            ACTUACIONES
           </h2>
           <ul>
             {programsList.map((program: any) => (
