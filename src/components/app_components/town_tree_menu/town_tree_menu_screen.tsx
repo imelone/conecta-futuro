@@ -164,14 +164,14 @@ const TownTreeMenu: React.FC<TownListProps> = ({
                               checked={municipioChecked}
                               onChange={handleMunicipioClick}
                             />
-                            <span
+                            {/* <span
                               className={styles.slider}
                               style={{
                                 backgroundColor: municipioChecked
                                   ? "#4CAF50"
                                   : "#ccc",
                               }}
-                            ></span>
+                            ></span> */}
                             <span className={styles.label}>
                               {municipio.municipio}
                             </span>

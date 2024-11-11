@@ -18,14 +18,14 @@ import { MapContextProvider } from "../mapContext";
 import RoutingMachine from "../RoutingMachine";
 import "./mapStyles.css";
 import { Layers } from "./Layers";
-import Sidebar from "../../sidenav/sidenav";
+import Sidebar from "../../../sidenav/sidenav";
 import { FeatureCollection } from "geojson";
 import DataAnalysisMenuCuidaTuBosque from "@/components/app_components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
 import DataAnalysisMenuNuevosBosques from "@/components/app_components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
 import DataAnalysisSostenbilidad from "@/components/app_components/data_analisis_sostenibilidad/data_analisis_sostenibilidad_screen";
-import programsList from "../../../app/data/listado_de_programas/programs.json";
-import useGeoJsonLayersCleanup from "../../../hooks/use_geoJson_cleanup_layers";
-import { useGetTownsData } from "../../../hooks/use_get_town_data";
+import programsList from "../../../../app/data/listado_de_programas/programs.json";
+import useGeoJsonLayersCleanup from "../../../../hooks/use_geoJson_cleanup_layers";
+import { useGetTownsData } from "../../../../hooks/use_get_town_data";
 import { findParcelaByName } from "@/utils/find_parcel_by_name";
 
 interface GeoJsonLayer {
@@ -409,17 +409,17 @@ const Map = () => {
   const handleMunicipioToggleClick = async (town: string) => {
     try {
       // Convert town to camelCase to match the file name format
-      const camelCaseTown = toCamelCase(town);
+      const normalizedDistrict = toCamelCase(town);
 
       // Check if the layer for the town already exists in the municipios group
       const existingMunicipioLayer = geoJsonLayers.find(
-        (layer) => layer.toggleName === camelCaseTown
+        (layer) => layer.toggleName === normalizedDistrict
       );
 
       const isActive = !existingMunicipioLayer; // Determine if this toggle should be active or inactive
 
       // Call the handleToggle function with the town and its active state
-      await handleToggle(camelCaseTown, isActive);
+      await handleToggle(normalizedDistrict, isActive);
 
       // Update active toggles state
       setActiveToggles((prev) => ({
@@ -430,7 +430,7 @@ const Map = () => {
       if (isActive) {
         // Dynamically fetch the GeoJSON file based on the town's camelCase name
         const response = await import(
-          `../../../app/data/coordenadas_municipios/${camelCaseTown}.json`
+          `../../../../app/data/coordenadas_municipios/${normalizedDistrict}.json`
         );
 
         const cityData = response; // Use the response directly as cityData
@@ -445,7 +445,7 @@ const Map = () => {
           // Update state with the new municipality layer
           setGeoJsonLayers((prevLayers) => [
             ...prevLayers,
-            { toggleName: camelCaseTown, layer: newMunicipioLayer },
+            { toggleName: normalizedDistrict, layer: newMunicipioLayer },
           ]);
 
           // Calculate the center of the town shape coordinates
@@ -467,7 +467,9 @@ const Map = () => {
 
           // Update state to remove the layer
           setGeoJsonLayers((prevLayers) =>
-            prevLayers.filter((layer) => layer.toggleName !== camelCaseTown)
+            prevLayers.filter(
+              (layer) => layer.toggleName !== normalizedDistrict
+            )
           );
         }
       }
