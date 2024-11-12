@@ -95,6 +95,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
 
     case "nuevos-bosques":
     case "cuida-tu-bosque":
+    case "sostenibilidad":
       districtContent = (
         <TownList
           sectionMainImg={sectionMainImg}
@@ -112,7 +113,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
 
     default:
       if (selectedTown || !townsData) {
-        districtContent = <div>{/* Handle selected town content here */}</div>;
+        // districtContent = <div>{/* Handle selected town content here */}</div>;
       } else {
         districtContent = (
           <TownList

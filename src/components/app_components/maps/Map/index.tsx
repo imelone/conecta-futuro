@@ -23,6 +23,7 @@ import { FeatureCollection } from "geojson";
 import DataAnalysisMenuCuidaTuBosque from "@/components/app_components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
 import DataAnalysisMenuNuevosBosques from "@/components/app_components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
 import DataAnalysisSostenbilidad from "@/components/app_components/data_analisis_sostenibilidad/data_analisis_sostenibilidad_screen";
+import DataAnalysisCertificaciones from "@/components/app_components/data_analisis_certificaciones/data_analisis_cetificaciones_screen";
 import programsList from "../../../../app/data/listado_de_programas/programs.json";
 import useGeoJsonLayersCleanup from "../../../../hooks/use_geoJson_cleanup_layers";
 import { useGetTownsData } from "../../../../hooks/use_get_town_data";
@@ -48,6 +49,7 @@ const Map = () => {
   const [anyActiveToggle, setAnyActiveToggle] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
   const [townsData, setTownsData] = useState<any>(null);
+  const [certificacionesData, setCertificacionesData] = useState<any>(null);
   const [programsInfo, setProgramsInfo] = useState<any>(null);
   const [optionOpen, setOptionOpen] = useState<string | null>(null);
   const [selectedTown, setSelectedTown] = useState<string | null>(null);
@@ -62,7 +64,8 @@ const Map = () => {
     selectedProgram,
     setTownsData,
     setProgramsInfo,
-    setSectionMainImg
+    setSectionMainImg,
+    setCertificacionesData
   );
 
   const { mapRef } = useGeoJsonLayersCleanup({
@@ -572,6 +575,9 @@ const Map = () => {
             />
           )}
         </>
+      )}
+      {selectedProgram === "certificaciones" && (
+        <DataAnalysisCertificaciones isOpen={true} data={certificacionesData} />
       )}
     </div>
   );

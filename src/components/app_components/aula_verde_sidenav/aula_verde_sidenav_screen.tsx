@@ -2,7 +2,7 @@
 import React from "react";
 import TreeMenu from "../../ui-components/tree_menu/tree_menu";
 
-const CertificacionesSideNav = ({ data }: any) => {
+const AulaVerdeSideNav = ({ data }: any) => {
   return (
     <div>
       <h3 style={{ marginBottom: "1rem", textAlign: "center" }}>AULA VERDE</h3>
@@ -20,8 +20,8 @@ const CertificacionesSideNav = ({ data }: any) => {
             <ul>
               {cert?.items?.map((item, itemIndex) => (
                 <li key={itemIndex}>
-                  <a href={item.pdfUrl} download>
-                    {item.label}
+                  <a href={item?.pdfUrl} download>
+                    {item?.label}
                   </a>
                 </li> // Each item displayed as a list item with a download link
               ))}
@@ -33,4 +33,4 @@ const CertificacionesSideNav = ({ data }: any) => {
   );
 };
 
-export default CertificacionesSideNav;
+export default AulaVerdeSideNav;

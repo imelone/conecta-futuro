@@ -21,7 +21,16 @@ const CertificacionesSideNav: React.FC<any> = ({ data, sectionMainImg }) => {
           />
         )}
       </div>
-      {data?.map((cert: { title: any; items: any[] }, certIndex: any) => (
+      {/* <ul>
+        {console.log("data: ", data)}
+        {data &&
+          data?.descripcion?.map(
+            (item: any, idx: React.Key | null | undefined) => (
+              <li key={idx}>{item}</li>
+            )
+          )}
+      </ul> */}
+      {/* {data?.map((cert: { title: any; items: any[] }, certIndex: any) => (
         <TreeMenu
           key={`cert-${certIndex}`}
           title={cert.title} // Each certification title directly at the top level
@@ -33,8 +42,8 @@ const CertificacionesSideNav: React.FC<any> = ({ data, sectionMainImg }) => {
               <li key={itemIndex}>{item}</li> // Each item displayed as a list item
             ))}
           </ul>
-        </TreeMenu>
-      ))}
+        </TreeMenu> 
+      ))}*/}
     </div>
   );
 };

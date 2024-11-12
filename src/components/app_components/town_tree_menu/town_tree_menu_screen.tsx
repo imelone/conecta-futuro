@@ -159,11 +159,11 @@ const TownTreeMenu: React.FC<TownListProps> = ({
                       title={
                         <div className={styles.municipioWrapper}>
                           <label className={styles.toggleSwitch}>
-                            <input
+                            {/* <input
                               type="checkbox"
                               checked={municipioChecked}
                               onChange={handleMunicipioClick}
-                            />
+                            /> */}
                             {/* <span
                               className={styles.slider}
                               style={{
