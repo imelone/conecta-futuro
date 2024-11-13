@@ -1,14 +1,5 @@
 [
   {
-    "descripcion": [
-      "Cobertura arbórea",
-      "CO2 capturado",
-      "Captación de agua",
-      "Prevención de incendios",
-      "Desbroce de material orgánico",
-      "Control de plagas",
-      "Reposición de especies"
-    ],
     "image": "sostenibilidad_main"
   },
   {
@@ -31,22 +22,17 @@
                     },
                     "properties": {
                       "leyenda": {
-                        "name": "metas",
-                        "label": "metas",
+                        "name": "Chiclana de Segura",
+                        "label": "iniciativas",
                         "color": "#C1BE13",
                         "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
                       },
-                      "metas": ["Calcular", "Reducir", "Compensar"],
-                      "pilares": [
-                        "Físico-biológico",
-                        "Socioeconómico",
-                        "Procesos y sistemas"
-                      ],
+                      "metas": ["Calcular / reducir"],
+                      "pilares": ["Fisico biológico"],
                       "actuaciones": [
                         "Alcances",
                         "Recursos disponibles",
                         "¿Cómo y Cuándo?",
-                        "Revisión de procesos",
                         "Indicadores de gestión",
                         "Mejora contínua"
                       ]
@@ -65,22 +51,17 @@
                     },
                     "properties": {
                       "leyenda": {
-                        "name": "metas",
-                        "label": "metas",
+                        "name": "Santa Elena",
+                        "label": "iniciativas",
                         "color": "#C1BE13",
                         "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
                       },
-                      "metas": ["Calcular", "Reducir", "Compensar"],
-                      "pilares": [
-                        "Físico-biológico",
-                        "Socioeconómico",
-                        "Procesos y sistemas"
-                      ],
+                      "metas": ["Calcular", "Reducir"],
+                      "pilares": ["Físico-biológico", "Socioeconómico"],
                       "actuaciones": [
                         "Alcances",
                         "Recursos disponibles",
                         "¿Cómo y Cuándo?",
-                        "Revisión de procesos",
                         "Indicadores de gestión",
                         "Mejora contínua"
                       ]
@@ -99,8 +80,8 @@
                     },
                     "properties": {
                       "leyenda": {
-                        "name": "metas",
-                        "label": "metas",
+                        "name": "Carboneros",
+                        "label": "iniciativas",
                         "color": "#C1BE13",
                         "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
                       },

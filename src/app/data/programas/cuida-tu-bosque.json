@@ -100,8 +100,8 @@
                   {
                     "type": "Feature",
                     "geometry": {
-                      "type": "Polygon",
-                      "coordinates": [[]]
+                      "type": "Point",
+                      "coordinates": [[[-3.06261247, 38.30420823]]]
                     },
                     "properties": {
                       "leyenda": {

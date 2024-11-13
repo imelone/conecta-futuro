@@ -1,22 +1,14 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-import { useDataAnalysisSostenibilidadViewModel } from "./data_analisis_sostenibilidad_view_model"; // Adjust the import path as necessary
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import dynamic from "next/dynamic";
-
+import { useDataAnalysisSostenibilidadViewModel } from "./data_analisis_sostenibilidad_view_model";
 import DraggableModal from "../../base_components/draggable_modal/draggable_modal";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
 interface DataAnalysisMenuProps {
   isOpen: boolean;
   data: any;
-  metas: string[]; // Change type to string[] for clarity
-  pilares: string[]; // Change type to string[] for clarity
-  actuaciones: string[]; // Change type to string[] for clarity
   removeForestItem: any;
   handleToggleClick: any;
-  activeToggles: Record<string, boolean>;
 }
 
 const DataAnalysisSostenibilidad: React.FC<DataAnalysisMenuProps> = ({
@@ -30,9 +22,7 @@ const DataAnalysisSostenibilidad: React.FC<DataAnalysisMenuProps> = ({
     handleTabClick,
     handleClose,
     isMinimized,
-    metas,
-    pilares,
-    actuaciones,
+    data: municipioData,
     setIsMinimized,
   } = useDataAnalysisSostenibilidadViewModel(
     isOpen,
@@ -40,14 +30,7 @@ const DataAnalysisSostenibilidad: React.FC<DataAnalysisMenuProps> = ({
     handleToggleClick,
     removeForestItem
   );
-  console.log(
-    "metas: ",
-    metas,
-    "pilares: ",
-    pilares,
-    "actuaciones:",
-    actuaciones
-  );
+
   if (!isOpen) return null;
 
   return (
@@ -79,51 +62,64 @@ const DataAnalysisSostenibilidad: React.FC<DataAnalysisMenuProps> = ({
             <p style={{ fontWeight: "700", fontSize: "14px" }}>ACTUACIONES</p>
           </button>
         </div>
+        {/* {console.log("municipio: ", municipioData)} */}
         <div className={styles.tabContent}>
-          <div
-            id="metas"
-            className={`${styles.tabPane} ${
-              activeTab === "metas" ? styles.active : ""
-            }`}
-          >
-            <ul style={{ listStyleType: "none", padding: 0 }}>
-              {metas.map((meta, index) => (
-                <li style={{ fontSize: "1.2rem" }} key={index}>
-                  {meta}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {municipioData.map((municipio, index) => (
+            <div key={index}>
+              <h2
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: "bold",
+                }}
+              >
+                {municipio.municipio}
+              </h2>
+              <div
+                id="metas"
+                className={`${styles.tabPane} ${
+                  activeTab === "metas" ? styles.active : ""
+                }`}
+              >
+                <ul style={{ listStyleType: "none", padding: 0 }}>
+                  {municipio.metas.map((meta, idx) => (
+                    <li style={{ fontSize: "1rem" }} key={idx}>
+                      {meta}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <div
-            id="pilares"
-            className={`${styles.tabPane} ${
-              activeTab === "pilares" ? styles.active : ""
-            }`}
-          >
-            <ul style={{ listStyleType: "none", padding: 0 }}>
-              {pilares.map((pilar, index) => (
-                <li style={{ fontSize: "1.2rem" }} key={index}>
-                  {pilar}
-                </li>
-              ))}
-            </ul>
-          </div>
+              <div
+                id="pilares"
+                className={`${styles.tabPane} ${
+                  activeTab === "pilares" ? styles.active : ""
+                }`}
+              >
+                <ul style={{ listStyleType: "none", padding: 0 }}>
+                  {municipio.pilares.map((pilar, idx) => (
+                    <li style={{ fontSize: "1rem" }} key={idx}>
+                      {pilar}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <div
-            id="actuaciones"
-            className={`${styles.tabPane} ${
-              activeTab === "actuaciones" ? styles.active : ""
-            }`}
-          >
-            <ul style={{ listStyleType: "none", padding: 0 }}>
-              {actuaciones.map((actuacion, index) => (
-                <li style={{ fontSize: "1.2rem" }} key={index}>
-                  {actuacion}
-                </li>
-              ))}
-            </ul>
-          </div>
+              <div
+                id="actuaciones"
+                className={`${styles.tabPane} ${
+                  activeTab === "actuaciones" ? styles.active : ""
+                }`}
+              >
+                <ul style={{ listStyleType: "none", padding: 0 }}>
+                  {municipio.actuaciones.map((actuacion, idx) => (
+                    <li style={{ fontSize: "1rem" }} key={idx}>
+                      {actuacion}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </DraggableModal>

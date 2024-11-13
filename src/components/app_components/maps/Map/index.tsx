@@ -1,3 +1,4 @@
+//TODO crear parent que sea el index del sitio y migrar logica que no esté relacionada con el componente map
 // @ts-nocheck
 "use client";
 import React, { useState, useRef, useEffect, useCallback } from "react";

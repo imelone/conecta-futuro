@@ -44,11 +44,12 @@
   overflow-y: auto;
   border: none;
   border: 0;
+  margin:1rem;
 }
 
 .tabPane {
   display: none;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .tabPane.active {

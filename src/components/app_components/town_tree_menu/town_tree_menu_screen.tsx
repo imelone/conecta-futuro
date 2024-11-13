@@ -75,7 +75,6 @@ const TownTreeMenu: React.FC<TownListProps> = ({
       loadTownsData(selectedProgram);
     }
 
-    console.log("communitiesData:", communitiesData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedProgram]);
 
