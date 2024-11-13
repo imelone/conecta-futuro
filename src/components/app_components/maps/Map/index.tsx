@@ -105,6 +105,8 @@ const Map = () => {
     setSelectedTown(null); // Reset selected town when switching options
     setSelectedProvince(null); // Reset selected province
     setSelectedDistrict(null); // Reset selected district
+    setCertificacionesData(null);
+    setTownsData(null);
 
     // Reset all active toggles to false
     setActiveToggles((prevToggles) => {
@@ -585,10 +587,10 @@ const Map = () => {
           )}
         </>
       )}
-      {selectedProgram === "certificaciones" && (
+      {selectedProgram === "certificaciones" && certificacionesData && (
         <DataAnalysisCertificaciones isOpen={true} data={certificacionesData} />
       )}
-      {selectedProgram === "aula-verde" && (
+      {selectedProgram === "aula-verde" && townsData && (
         <DataAnalysisAulaVerde isOpen={true} data={townsData} />
       )}
     </div>
