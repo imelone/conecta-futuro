@@ -1,5 +1,6 @@
 interface SidebarViewModelProps {
   sectionMainImg: any;
+  secondaryImage?: any;
   programsList: any;
   onToggle: (toggleName: string, isActive: boolean) => void;
   handleTownClick: (town: string) => void;
@@ -33,6 +34,7 @@ interface SidebarViewModelProps {
 
 export const useSidebarViewModel = ({
   sectionMainImg,
+  secondaryImage,
   programsList,
   onToggle,
   handleTownClick,
@@ -75,5 +77,6 @@ export const useSidebarViewModel = ({
     programsInfo,
     sideBarSelectedOption,
     sectionMainImg,
+    secondaryImage,
   };
 };

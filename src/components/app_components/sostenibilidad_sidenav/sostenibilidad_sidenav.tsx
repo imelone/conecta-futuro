@@ -27,6 +27,7 @@ interface Community {
 interface TownListProps {
   sectionMainImg: string;
   communitiesData: any[];
+  secondaryImage: string;
   onParcelClick: (parcel: string) => void;
   handleToggleClick: (leyendaName: string) => void;
   handleMunicipioToggleClick: (municipio: string) => void; // Updated parameter name
@@ -36,9 +37,10 @@ interface TownListProps {
   sideBarSelectedOption: any;
 }
 
-const TownTreeMenu: React.FC<TownListProps> = ({
+const SostenibilidadSidenav: React.FC<TownListProps> = ({
   sectionMainImg,
   communitiesData,
+  secondaryImage,
   onParcelClick,
   handleToggleClick,
   handleMunicipioToggleClick,
@@ -97,9 +99,19 @@ const TownTreeMenu: React.FC<TownListProps> = ({
               src={`/assets/images/sections_menu_main/${sectionMainImg}.png`}
               alt="Logo"
               className="sidebar-logo-image"
-              layout="intrinsic"
+              //  layout="intrinsic"
               width={300}
               height={300}
+            />
+          )}
+          {secondaryImage && (
+            <Image
+              src={`/assets/images/sections_menu_main/${secondaryImage}`}
+              alt="Logo2"
+              className="sidebar-logo-image"
+              // layout="intrinsic"
+              width={150}
+              height={150}
             />
           )}
         </div>
@@ -222,4 +234,4 @@ const TownTreeMenu: React.FC<TownListProps> = ({
   );
 };
 
-export default TownTreeMenu;
+export default SostenibilidadSidenav;

@@ -5,6 +5,7 @@ export const useGetTownsData = (
   setTownsData: (data: any) => void,
   setProgramsInfo: (info: any) => void,
   setSectionMainImg: (img: string) => void,
+  setSecondaryImage: (img: string) => void,
   setCertificacionesData: any
 ) => {
   const loadTownsData = async () => {
@@ -24,9 +25,15 @@ export const useGetTownsData = (
         case "certificaciones":
           setCertificacionesData(towns[1]?.certificaciones);
           setSectionMainImg(towns[0]?.image);
+          break;
         case "aula-verde":
           setTownsData(towns[1]?.certificaciones);
           setSectionMainImg(towns[0]?.image);
+          break;
+        case "sostenibilidad":
+          setTownsData(towns[1]?.distritos);
+          setSectionMainImg(towns[0]?.image);
+          setSecondaryImage(towns[0]?.secondaryImage);
           break;
 
         default:

@@ -2,13 +2,14 @@ import React from "react";
 import "./sidenav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faCog, faMap } from "@fortawesome/free-solid-svg-icons";
-import TownList from "../app_components/town_tree_menu/town_tree_menu_screen";
+import TownTreeMenu from "../town_tree_menu/town_tree_menu_screen";
 import styled from "@emotion/styled";
 import { useSidebarViewModel } from "./sidenav_view_model";
 import Image from "next/image";
 
-import CertificacionesSidenav from "../app_components/certificaciones_sidenav/certificaciones_sidenav_screen";
-import AulaVerdeSidenav from "../app_components/aula_verde_sidenav/aula_verde_sidenav_screen";
+import CertificacionesSidenav from "../certificaciones_sidenav/certificaciones_sidenav_screen";
+import AulaVerdeSidenav from "../aula_verde_sidenav/aula_verde_sidenav_screen";
+import SostenibilidadSidenav from "../sostenibilidad_sidenav/sostenibilidad_sidenav";
 interface SidebarViewModelProps {
   programsList: any;
   onToggle: (toggleName: string, isActive: boolean) => void;
@@ -24,6 +25,7 @@ interface SidebarViewModelProps {
     laHerencia: boolean;
   };
   sectionMainImg: any;
+  secondaryImage?: any;
   handleProvinceClick: (province: string) => void;
   handleDistrictClick: (district: string) => void;
   handleProgramSelection: any;
@@ -52,6 +54,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
     optionOpen,
     selectedTown,
     sectionMainImg,
+    secondaryImage,
     handleOptionClick,
     handleTownSelection,
     handleToggleClick,
@@ -93,12 +96,28 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
         <AulaVerdeSidenav data={townsData} sectionMainImg={sectionMainImg} />
       );
       break;
+    case "sostenibilidad":
+      districtContent = (
+        <SostenibilidadSidenav
+          sectionMainImg={sectionMainImg}
+          secondaryImage={secondaryImage}
+          communitiesData={townsData}
+          programsInfo={programsInfo}
+          onParcelClick={handleTownSelection}
+          handleToggleClick={handleToggleClick}
+          handleMunicipioToggleClick={handleMunicipioToggleClick}
+          activeToggles={activeToggles}
+          selectedProgram={selectedProgram}
+          sideBarSelectedOption={sideBarSelectedOption}
+        />
+      );
+      break;
 
     case "nuevos-bosques":
     case "cuida-tu-bosque":
-    case "sostenibilidad":
+      // case "sostenibilidad":
       districtContent = (
-        <TownList
+        <TownTreeMenu
           sectionMainImg={sectionMainImg}
           communitiesData={townsData}
           programsInfo={programsInfo}
@@ -113,23 +132,23 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
       break;
 
     default:
-      if (selectedTown || !townsData) {
-        // districtContent = <div>{/* Handle selected town content here */}</div>;
-      } else {
-        districtContent = (
-          <TownList
-            sectionMainImg={sectionMainImg}
-            communitiesData={townsData}
-            programsInfo={programsInfo}
-            onParcelClick={handleTownSelection}
-            handleToggleClick={handleToggleClick}
-            handleMunicipioToggleClick={handleMunicipioToggleClick}
-            activeToggles={activeToggles}
-            selectedProgram={selectedProgram}
-            sideBarSelectedOption={sideBarSelectedOption}
-          />
-        );
-      }
+      // if (selectedTown || !townsData) {
+      //   // districtContent = <div>{/* Handle selected town content here */}</div>;
+      // } else {
+      //   districtContent = (
+      //     <TownTreeMenu
+      //       sectionMainImg={sectionMainImg}
+      //       communitiesData={townsData}
+      //       programsInfo={programsInfo}
+      //       onParcelClick={handleTownSelection}
+      //       handleToggleClick={handleToggleClick}
+      //       handleMunicipioToggleClick={handleMunicipioToggleClick}
+      //       activeToggles={activeToggles}
+      //       selectedProgram={selectedProgram}
+      //       sideBarSelectedOption={sideBarSelectedOption}
+      //     />
+      //   );
+      // }
       break;
   }
 

@@ -27,8 +27,8 @@
     "src/**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/app_components/maps/Map/index.tsx",
-    "src/components/sidenav/sidenav_view_model.ts",
-    "src/components/sidenav/index.tsx_"
+    "src/components/app_components/sidenav/sidenav_view_model.ts",
+    "src/components/app_components/sidenav/index.tsx_"
   ],
   "exclude": ["node_modules"]
 }

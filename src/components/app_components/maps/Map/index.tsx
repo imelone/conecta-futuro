@@ -19,7 +19,7 @@ import { MapContextProvider } from "../mapContext";
 import RoutingMachine from "../RoutingMachine";
 import "./mapStyles.css";
 import { Layers } from "./Layers";
-import Sidebar from "../../../sidenav/sidenav";
+import Sidebar from "../../sidenav/sidenav";
 import { FeatureCollection } from "geojson";
 import DataAnalysisMenuCuidaTuBosque from "@/components/app_components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
 import DataAnalysisMenuNuevosBosques from "@/components/app_components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
@@ -61,11 +61,14 @@ const Map = () => {
   );
   const [sideBarSelectedOption, setSideBarSelectedOption] = useState("home");
   const [sectionMainImg, setSectionMainImg] = useState("");
+  const [secondaryImage, setSecondaryImage] = useState("");
+
   const { loadTownsData } = useGetTownsData(
     selectedProgram,
     setTownsData,
     setProgramsInfo,
     setSectionMainImg,
+    setSecondaryImage,
     setCertificacionesData
   );
 
@@ -492,6 +495,7 @@ const Map = () => {
           programsList={programsList}
           onToggle={handleToggle}
           sectionMainImg={sectionMainImg}
+          secondaryImage={secondaryImage}
           //   handleTownClick={handleTownClick}
           setIsDataAnalysisMenuOpen={setIsDataAnalysisMenuOpen}
           handleToggleClick={handleToggleClick}
