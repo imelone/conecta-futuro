@@ -33,9 +33,9 @@ const DataAnalysisCertificaciones: React.FC<DataAnalysisMenuProps> = ({
 
   //< if (!isOpen) return null;
   const renderItems = (items: string[]) => (
-    <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
+    <ul style={{ listStyleType: "none", paddingLeft: "20px" }}>
       {items?.map((item, index) => (
-        <li key={index} style={{ fontSize: "1.2rem", padding: "0.2rem" }}>
+        <li key={index} style={{ fontSize: "1rem", padding: "0.2rem" }}>
           {item}
         </li>
       ))}
@@ -79,7 +79,7 @@ const DataAnalysisCertificaciones: React.FC<DataAnalysisMenuProps> = ({
             }`}
           >
             <ul style={{ listStyleType: "none", padding: 0 }}>
-              <li style={{ fontSize: "1.2rem" }}>{renderItems(iso?.items)}</li>
+              <li style={{ fontSize: "1rem" }}>{renderItems(iso?.items)}</li>
             </ul>
           </div>
 
@@ -90,9 +90,7 @@ const DataAnalysisCertificaciones: React.FC<DataAnalysisMenuProps> = ({
             }`}
           >
             <ul style={{ listStyleType: "none", padding: 0 }}>
-              <li style={{ fontSize: "1.2rem" }}>
-                {renderItems(sicted?.items)}
-              </li>
+              <li style={{ fontSize: "1rem" }}>{renderItems(sicted?.items)}</li>
             </ul>
           </div>
 
@@ -103,7 +101,7 @@ const DataAnalysisCertificaciones: React.FC<DataAnalysisMenuProps> = ({
             }`}
           >
             <ul style={{ listStyleType: "none", padding: 0 }}>
-              <li style={{ fontSize: "1.2rem" }}>{renderItems(caae?.items)}</li>
+              <li style={{ fontSize: "1rem" }}>{renderItems(caae?.items)}</li>
             </ul>
           </div>
         </div>
