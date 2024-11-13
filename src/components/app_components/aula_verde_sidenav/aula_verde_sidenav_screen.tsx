@@ -6,7 +6,7 @@ const AulaVerdeSideNav = ({ data }: any) => {
   return (
     <div>
       <h3 style={{ marginBottom: "1rem", textAlign: "center" }}>AULA VERDE</h3>
-      {data?.map(
+      {/* {data?.map(
         (
           cert: { title: any; items: { label: string; pdfUrl: string }[] },
           certIndex: any
@@ -28,7 +28,7 @@ const AulaVerdeSideNav = ({ data }: any) => {
             </ul>
           </TreeMenu>
         )
-      )}
+      )} */}
     </div>
   );
 };

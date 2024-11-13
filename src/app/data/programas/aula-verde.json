@@ -21,12 +21,12 @@
         "title": "CERTIFICACIÓN ESPACIOS VERDES",
         "items": [
           {
-            "label": "Documento 1",
-            "pdfUrl": "/pdfs/documento1.pdf"
+            "label": "Documento 3",
+            "pdfUrl": "/pdfs/documento3.pdf"
           },
           {
-            "label": "Documento 2",
-            "pdfUrl": "/pdfs/documento2.pdf"
+            "label": "Documento 4",
+            "pdfUrl": "/pdfs/documento4.pdf"
           }
         ]
       },
@@ -34,12 +34,12 @@
         "title": "CERTIFICACIÓN HOTEL ECOLÓGICO",
         "items": [
           {
-            "label": "Documento 1",
-            "pdfUrl": "/pdfs/documento1.pdf"
+            "label": "Documento 5",
+            "pdfUrl": "/pdfs/documento5.pdf"
           },
           {
-            "label": "Documento 2",
-            "pdfUrl": "/pdfs/documento2.pdf"
+            "label": "Documento 6",
+            "pdfUrl": "/pdfs/documento6.pdf"
           }
         ]
       }

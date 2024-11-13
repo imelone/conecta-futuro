@@ -4,6 +4,10 @@ import TreeMenu from "../../ui-components/tree_menu/tree_menu";
 import Image from "next/image";
 import styles from "./styles.module.css";
 const CertificacionesSideNav: React.FC<any> = ({ data, sectionMainImg }) => {
+  {
+    console.log("sectionMainImg: ", sectionMainImg);
+    console.log("data: ", data);
+  }
   return (
     <div>
       <h3 style={{ marginBottom: "1rem", textAlign: "center" }}>

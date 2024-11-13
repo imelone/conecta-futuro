@@ -29,6 +29,7 @@ import programsList from "../../../../app/data/listado_de_programas/programs.jso
 import useGeoJsonLayersCleanup from "../../../../hooks/use_geoJson_cleanup_layers";
 import { useGetTownsData } from "../../../../hooks/use_get_town_data";
 import { findParcelaByName } from "@/utils/find_parcel_by_name";
+import DataAnalysisAulaVerde from "../../data_analisis_aula_verde/data_analisis_aula_verde_screen";
 
 interface GeoJsonLayer {
   toggleName: string;
@@ -586,6 +587,9 @@ const Map = () => {
       )}
       {selectedProgram === "certificaciones" && (
         <DataAnalysisCertificaciones isOpen={true} data={certificacionesData} />
+      )}
+      {selectedProgram === "aula-verde" && (
+        <DataAnalysisAulaVerde isOpen={true} data={townsData} />
       )}
     </div>
   );

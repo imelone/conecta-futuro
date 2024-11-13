@@ -19,7 +19,6 @@ export const useGetTownsData = (
       const towns = await import(
         `../app/data/programas/${selectedProgram}.json`
       );
-      console.log("selectedProgram: ", selectedProgram);
 
       switch (selectedProgram) {
         case "certificaciones":
