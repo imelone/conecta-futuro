@@ -29,8 +29,8 @@ export const useDataAnalysisCertificacionesViewModel = (
 
   // Initialize arrays to hold the values
   const iso = (data && data[0]) || {};
-  const caae = (data && data[1]) || {};
-  const sicted = (data && data[2]) || {};
+  const sicted = (data && data[1]) || {};
+  const caae = (data && data[2]) || {};
 
   return {
     activeTab,
