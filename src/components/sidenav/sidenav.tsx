@@ -6,6 +6,7 @@ import TownList from "../app_components/town_tree_menu/town_tree_menu_screen";
 import styled from "@emotion/styled";
 import { useSidebarViewModel } from "./sidenav_view_model";
 import Image from "next/image";
+
 import CertificacionesSidenav from "../app_components/certificaciones_sidenav/certificaciones_sidenav_screen";
 import AulaVerdeSidenav from "../app_components/aula_verde_sidenav/aula_verde_sidenav_screen";
 interface SidebarViewModelProps {
@@ -248,6 +249,14 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
               </li>
             ))}
           </ul>
+          <Image
+            src={`/assets/images/sections_menu_main/submenu_main.jpg`}
+            alt="Logo"
+            className="sidebar-logo-image"
+            layout="intrinsic" // Or other layout options as necessary
+            width={300}
+            height={300}
+          />
         </div>
 
         <div

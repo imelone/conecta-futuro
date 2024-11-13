@@ -279,8 +279,11 @@ const Map = () => {
       opacity: coordinates ? 1 : 0, // Fully opaque if coordinates exist, transparent otherwise
       fillOpacity: 0.8,
     });
-    let popupContent = createPopupContent(data);
-    pointLayer.bindPopup(popupContent);
+    if (data.properties?.catastrales?.image) {
+      let popupContent = createPopupContent(data);
+
+      pointLayer.bindPopup(popupContent);
+    }
     pointLayer.addTo(mapRef.current);
 
     setGeoJsonLayers((prevLayers) => [

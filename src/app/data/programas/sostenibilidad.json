@@ -18,7 +18,7 @@
                     "type": "Feature",
                     "geometry": {
                       "type": "Point",
-                      "coordinates": [[[0, 0]]]
+                      "coordinates": [[[-3.042511986037681, 38.31242468301417]]]
                     },
                     "properties": {
                       "leyenda": {
@@ -47,13 +47,15 @@
                     "type": "Feature",
                     "geometry": {
                       "type": "Point",
-                      "coordinates": [[[0, 0]]]
+                      "coordinates": [
+                        [[-3.5392036492616916, 38.339163085807705]]
+                      ]
                     },
                     "properties": {
                       "leyenda": {
                         "name": "Santa Elena",
                         "label": "iniciativas",
-                        "color": "#C1BE13",
+                        "color": "#736BA9",
                         "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
                       },
                       "metas": ["Calcular", "Reducir"],
@@ -76,13 +78,13 @@
                     "type": "Feature",
                     "geometry": {
                       "type": "Point",
-                      "coordinates": [[[0, 0]]]
+                      "coordinates": [[[-3.631380962761004, 38.22969849033364]]]
                     },
                     "properties": {
                       "leyenda": {
                         "name": "Carboneros",
                         "label": "iniciativas",
-                        "color": "#C1BE13",
+                        "color": "#3C20EE",
                         "text": "Para poder desarrollar el programa “Conecta cuida tu Bosque” en los bosques mencionados, invitamos a empresas y entidades comprometidas con el desafío medioambiental a participar en el apadrinamiento del programa. Ambos programas representan una respuesta proactiva y participativa a los retos medioambientales contemporáneos, enmarcada en las directrices de políticas ambientales europeas y globales."
                       },
                       "metas": ["Calcular", "Reducir", "Compensar"],
