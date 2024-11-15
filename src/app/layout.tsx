@@ -1,14 +1,11 @@
+"use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Head from "next/head"; // Ensure this is imported
+import Sidebar from "@/components/app_components/sidenavNew/sidenav";
+import { SidebarProvider } from "@/context/sidebar_context";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Conecta Futuro",
-  description: "Conecta Futuro",
-};
 
 export default function RootLayout({
   children,
@@ -17,7 +14,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className="layout"
+        style={{
+          display: "flex",
+          height: "100vh",
+          flexDirection: "row", // Ensure horizontal layout
+        }}
+      >
+        <div className="layout">
+          <Sidebar />
+          <div className="content">
+            {children} {/* This will render the current page content */}
+          </div>
+        </div>
+      </body>
     </html>
   );
 }

@@ -1,3 +1,5 @@
+import Sidebar from "@/components/app_components/sidenavNew/sidenav";
+import { SidebarProvider } from "@/context/sidebar_context";
 import dynamic from "next/dynamic";
 
 const DynamicMap = dynamic(

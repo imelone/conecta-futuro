@@ -93,12 +93,12 @@ const Map = () => {
   });
 
   const handleProgramSelection = (comunidadArchivo: string) => {
-    setSelectedProgram(comunidadArchivo);
-    setSelectedTown(null);
-    setSelectedProvince(null);
-    setSelectedDistrict(null);
+    console.log("Executing handleProgramSelection for:", comunidadArchivo);
 
-    // Remove all layers from the map
+    // Set the selected program
+    setSelectedProgram(comunidadArchivo);
+
+    // Reset map view and layers
     if (mapRef.current) {
       geoJsonLayers.forEach((layerObj) => {
         mapRef.current.removeLayer(layerObj.layer);
@@ -107,26 +107,26 @@ const Map = () => {
       mapRef.current.setView([40.4637, -3.7492], 6); // Set initialLat, initialLng, and initialZoom accordingly
     }
 
+    // Reset related states
+    setSelectedTown(null);
+    setSelectedProvince(null);
+    setSelectedDistrict(null);
+
+    // Call handleOptionClick to handle option changes
     handleOptionClick("districts");
   };
 
   const handleOptionClick = (optionName: string) => {
-    console.log("pasa handleOptionClick");
+    console.log("Executing handleOptionClick");
     setIsDataAnalysisMenuOpen(false);
-    setSelectedTown(null); // Reset selected town when switching options
-    setSelectedProvince(null); // Reset selected province
-    setSelectedDistrict(null); // Reset selected district
-    setIsDataAnalysisCertificacionesOpen(false);
-    setIsDataAnalysisAulaVerdeOpen(false);
-    //   setSelectedProgram(null)
-    // Reset all active toggles to false
+
+    // Reset active toggles and map layers
     setActiveToggles((prevToggles) => {
       const newToggles = Object.keys(prevToggles).reduce((acc, key) => {
-        acc[key] = false; // Reset each toggbyle to false
+        acc[key] = false; // Reset each toggle to false
         return acc;
       }, {} as Record<string, boolean>);
 
-      // Remove all layers from the map corresponding to the toggles
       if (mapRef.current) {
         geoJsonLayers.forEach((geoJsonLayer) => {
           if (geoJsonLayer.layer) {
@@ -138,8 +138,9 @@ const Map = () => {
 
       return newToggles;
     });
+
+    // Reset specific data and options
     setDataForest([]);
-    // Handle option change logic
     setOptionOpen((prevOption) =>
       optionName === prevOption ? null : optionName
     );
@@ -505,7 +506,7 @@ const Map = () => {
   return (
     <div>
       <div style={{ display: "flex" }}>
-        <Sidebar
+        {/* <Sidebar
           programsList={programsList}
           onToggle={handleToggle}
           sectionMainImg={sectionMainImg}
@@ -528,7 +529,7 @@ const Map = () => {
           handleTownSelection={handleTownSelection}
           handleOptionClick={handleOptionClick}
           sideBarSelectedOption={sideBarSelectedOption}
-        />
+        /> */}
 
         <div style={{ flex: 1 }}>
           {sideBarSelectedOption === "home" ? (
@@ -606,10 +607,12 @@ const Map = () => {
           />
         )}
       {selectedProgram === "aula-verde" && isDataAnalysisAulaVerdeOpen && (
-        <DataAnalysisAulaVerde
-          isOpen={isDataAnalysisAulaVerdeOpen}
-          data={townsData}
-        />
+        <>
+          <DataAnalysisAulaVerde
+            isOpen={isDataAnalysisAulaVerdeOpen}
+            data={townsData}
+          />
+        </>
       )}
     </div>
   );
