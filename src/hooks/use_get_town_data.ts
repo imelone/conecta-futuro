@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export const useGetTownsData = (
   selectedProgram: string | null,
@@ -6,7 +6,9 @@ export const useGetTownsData = (
   setProgramsInfo: (info: any) => void,
   setSectionMainImg: (img: string) => void,
   setSecondaryImage: (img: string) => void,
-  setCertificacionesData: any
+  setCertificacionesData: any,
+  setIsDataAnalysisCertificacionesOpen: any,
+  setIsDataAnalysisAulaVerdeOpen: any
 ) => {
   const loadTownsData = async () => {
     console.log("selectedProgram: ", selectedProgram);
@@ -19,17 +21,20 @@ export const useGetTownsData = (
       const towns = await import(
         `../app/data/programas/${selectedProgram}.json`
       );
-
+      console.log("selectedProgram: ", selectedProgram);
       switch (selectedProgram) {
         case "certificaciones":
           setCertificacionesData(towns[1]?.certificaciones);
           setSectionMainImg(towns[0]?.image);
+          setIsDataAnalysisCertificacionesOpen(true);
           break;
         case "aula-verde":
           setTownsData(towns[1]?.certificaciones);
           setSectionMainImg(towns[0]?.image);
+          setIsDataAnalysisAulaVerdeOpen(true);
           break;
         case "sostenibilidad":
+          console.log("sostenbilidad pasa");
           setTownsData(towns[1]?.distritos);
           setSectionMainImg(towns[0]?.image);
           setSecondaryImage(towns[0]?.secondaryImage);
@@ -50,7 +55,13 @@ export const useGetTownsData = (
 
   useEffect(() => {
     loadTownsData();
-  }, [selectedProgram, setTownsData, setProgramsInfo, setSectionMainImg]);
+  }, [
+    selectedProgram,
+    setTownsData,
+    setProgramsInfo,
+    setSectionMainImg,
+    loadTownsData,
+  ]);
 
   return { loadTownsData };
 };

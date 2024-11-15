@@ -235,6 +235,7 @@ const Sidebar: React.FC<SidebarViewModelProps> = (props) => {
             ACTUACIONES
           </h2>
           <ul>
+            {console.log("program: ", programsList)}
             {programsList.map((program: any) => (
               <li key={program.comunidadArchivo}>
                 <button

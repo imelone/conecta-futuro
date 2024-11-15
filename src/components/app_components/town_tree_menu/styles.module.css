@@ -10,6 +10,8 @@
   overflow-y: auto;
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: #888 #f1f1f1; /* Firefox */
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .scrollContainer::-webkit-scrollbar {
@@ -94,10 +96,12 @@
   flex-direction: column;
   gap: 10px;
   padding-bottom: 1rem;
+  word-wrap: break-word; /* Break long words if necessary */
+  flex-wrap: wrap;
 }
 
 .toggleSwitch {
-  min-width: 20pc;
+ 
   display: flex; /* Use flexbox to align items in a row */
   align-items: center; /* Center items vertically */
   margin-right: 10px; /* Space between toggles */
@@ -107,12 +111,13 @@
   opacity: 0; /* Hide the default checkbox */
   width: 0;
   height: 0;
+  min-width: 20px;
 }
 
 .slider {
   position: relative;
   cursor: pointer;
-  width: 30px; /* Width of the toggle */
+  min-width: 30px; /* Width of the toggle */
   height: 16px; /* Height of the toggle */
   background-color: #ccc;
   border-radius: 34px;
@@ -143,8 +148,22 @@ input:checked + .slider:before {
   font-size: 12px; /* Smaller font for label */
   color: #333; /* Color for label */
   margin-left: 8px; /* Space between the slider and label */
+  word-wrap: break-word; /* Break long words if necessary */
+  flex-wrap: wrap;
 }
 .logoContainer {
   text-align: center;
   margin: 0 auto;
+}
+.textContainer {
+  word-wrap: break-word; /* Break long words to fit within container */
+  white-space: normal; /* Allow text to wrap to the next line */
+  overflow: hidden; /* Prevent overflow beyond container */
+  text-overflow: ellipsis; /* Optional: add ellipsis (...) for truncated text */
+   flex-wrap: wrap;
+}
+
+/* Apply to containers where horizontal scrolling should be disabled */
+.noHorizontalScroll {
+  overflow-x: hidden; /* Disable horizontal scroll */
 }

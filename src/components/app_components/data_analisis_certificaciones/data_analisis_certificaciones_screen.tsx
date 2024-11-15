@@ -30,8 +30,8 @@ const DataAnalysisCertificaciones: React.FC<DataAnalysisMenuProps> = ({
     caae,
     setIsMinimized,
   } = useDataAnalysisCertificacionesViewModel(isOpen, data);
-
-  //< if (!isOpen) return null;
+  console.log("isOpen: ", isOpen);
+  if (!isOpen) return null;
   const renderItems = (items: string[]) => (
     <ul style={{ listStyleType: "none", paddingLeft: "20px" }}>
       {items?.map((item, index) => (

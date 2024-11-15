@@ -36,7 +36,7 @@ const DataAnalysisAulaVerde: React.FC<DataAnalysisMenuProps> = ({
       </li>
     ));
   };
-
+  if (!isOpen) return null;
   return (
     <DraggableModal isMinimized={isMinimized} setIsMinimized={setIsMinimized}>
       <div className={styles.dataAnalysisMenu}>

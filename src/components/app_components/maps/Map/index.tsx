@@ -24,7 +24,7 @@ import { FeatureCollection } from "geojson";
 import DataAnalysisMenuCuidaTuBosque from "@/components/app_components/data_analisis_cuida_tu_bosque/data_analisis_cuida_tu_bosque_screen";
 import DataAnalysisMenuNuevosBosques from "@/components/app_components/data_analisis_nuevos_bosques/data_analisis_nuevos_bosques_screen";
 import DataAnalysisSostenbilidad from "@/components/app_components/data_analisis_sostenibilidad/data_analisis_sostenibilidad_screen";
-import DataAnalysisCertificaciones from "@/components/app_components/data_analisis_certificaciones/data_analisis_cetificaciones_screen";
+import DataAnalysisCertificaciones from "@/components/app_components/data_analisis_certificaciones/data_analisis_certificaciones_screen";
 import programsList from "../../../../app/data/listado_de_programas/programs.json";
 import useGeoJsonLayersCleanup from "../../../../hooks/use_geoJson_cleanup_layers";
 import { useGetTownsData } from "../../../../hooks/use_get_town_data";
@@ -48,6 +48,13 @@ const Map = () => {
   const [dataForest, setDataForest] = useState([]);
   const [analysisData, setAnalysisData] = useState<{ [key: string]: any }>({});
   const [isDataAnalysisMenuOpen, setIsDataAnalysisMenuOpen] = useState(false);
+  const [
+    isDataAnalysisCertificacionesOpen,
+    setIsDataAnalysisCertificacionesOpen,
+  ] = useState(false);
+  const [isDataAnalysisAulaVerdeOpen, setIsDataAnalysisAulaVerdeOpen] =
+    useState(false);
+
   const [anyActiveToggle, setAnyActiveToggle] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
   const [townsData, setTownsData] = useState<any>(null);
@@ -70,7 +77,9 @@ const Map = () => {
     setProgramsInfo,
     setSectionMainImg,
     setSecondaryImage,
-    setCertificacionesData
+    setCertificacionesData,
+    setIsDataAnalysisCertificacionesOpen,
+    setIsDataAnalysisAulaVerdeOpen
   );
 
   const { mapRef } = useGeoJsonLayersCleanup({
@@ -88,6 +97,7 @@ const Map = () => {
     setSelectedTown(null);
     setSelectedProvince(null);
     setSelectedDistrict(null);
+
     // Remove all layers from the map
     if (mapRef.current) {
       geoJsonLayers.forEach((layerObj) => {
@@ -101,13 +111,14 @@ const Map = () => {
   };
 
   const handleOptionClick = (optionName: string) => {
+    console.log("pasa handleOptionClick");
     setIsDataAnalysisMenuOpen(false);
     setSelectedTown(null); // Reset selected town when switching options
     setSelectedProvince(null); // Reset selected province
     setSelectedDistrict(null); // Reset selected district
-    setCertificacionesData(null);
-    setTownsData(null);
-
+    setIsDataAnalysisCertificacionesOpen(false);
+    setIsDataAnalysisAulaVerdeOpen(false);
+    //   setSelectedProgram(null)
     // Reset all active toggles to false
     setActiveToggles((prevToggles) => {
       const newToggles = Object.keys(prevToggles).reduce((acc, key) => {
@@ -587,11 +598,18 @@ const Map = () => {
           )}
         </>
       )}
-      {selectedProgram === "certificaciones" && certificacionesData && (
-        <DataAnalysisCertificaciones isOpen={true} data={certificacionesData} />
-      )}
-      {selectedProgram === "aula-verde" && townsData && (
-        <DataAnalysisAulaVerde isOpen={true} data={townsData} />
+      {selectedProgram === "certificaciones" &&
+        isDataAnalysisCertificacionesOpen && (
+          <DataAnalysisCertificaciones
+            isOpen={isDataAnalysisCertificacionesOpen}
+            data={certificacionesData}
+          />
+        )}
+      {selectedProgram === "aula-verde" && isDataAnalysisAulaVerdeOpen && (
+        <DataAnalysisAulaVerde
+          isOpen={isDataAnalysisAulaVerdeOpen}
+          data={townsData}
+        />
       )}
     </div>
   );

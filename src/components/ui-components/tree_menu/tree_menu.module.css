@@ -1,8 +1,11 @@
 
 .container {
+  overflow-x: hidden;
   margin-bottom: 0.1rem; /* Space between sections */
+  
 }
 .header {
+  overflow-x: hidden;
   display: flex; /* Use flex for horizontal alignment */
   align-items: center; /* Center items vertically */
   cursor: pointer; /* Pointer cursor for clickable header */
@@ -20,10 +23,14 @@
   font-size: 1rem; /* Adjust title font size as needed */
 }
 .content {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   padding: 0.1rem 1rem; /* Padding for the content area */
   border: none; /* Ensure there's no border */
-  margin-left: 1rem; /* Indent content to show hierarchy */
-  display: block; /* Always display the content section */
+  
+  display: block; /* Ensure content is block-level */
+  white-space: normal; /* Allow long content to wrap to the next line */
+  word-wrap: break-word; /* Break long words if necessary */
+  flex-wrap: wrap;
 }
 /* Level Indentation */
 .level-0 {

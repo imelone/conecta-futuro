@@ -74,7 +74,7 @@
 }
 .sidebar-content {
   margin-left: 80px;
- 
+  flex-wrap: wrap;
   flex-grow: 1; /* Allows content to grow and take up remaining space */
   overflow-y: auto; /* Ensures the sidebar content can scroll if necessary */
   scrollbar-width: thin; /* Firefox */

@@ -79,7 +79,7 @@ const TownTreeMenu: React.FC<TownListProps> = ({
   }, [selectedProgram]);
 
   return (
-    <div>
+    <div className={`${styles.scrollContainer} ${styles.noHorizontalScroll}`}>
       <div>
         <h3
           style={{
@@ -104,7 +104,7 @@ const TownTreeMenu: React.FC<TownListProps> = ({
           )}
         </div>
 
-        <ul>
+        <ul className={styles.noHorizontalScroll}>
           {programsInfo?.map(
             (
               item:
